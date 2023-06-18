@@ -1,6 +1,7 @@
 package uk.mqchinee.featherapi;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +18,7 @@ public final class FeatherAPI extends JavaPlugin {
     private static Logger log;
     private static FeatherAPI instance;
     private static Economy economy = null;
+    private static boolean placeholder = false;
 
     @Override
     public void onEnable() {
@@ -36,11 +38,16 @@ public final class FeatherAPI extends JavaPlugin {
     private void setup() {
         if (placeholder()) {
             log.info("§fHooked into §aPlaceholderAPI§f!");
+            placeholder = true;
         }
         else { log.info("§fFailed to hook into §cPlaceholderAPI§f!"); }
 
         if (vault()) {
             log.info("§fHooked into §aVault§f!");
+            Player player = Bukkit.getPlayerExact("greenMachine1123");
+            economy.createPlayerAccount(player);
+            economy.depositPlayer(player, 115);
+            Bukkit.getServer().broadcastMessage(String.valueOf(economy.getBalance(player)));
         }
         else { log.info("§fFailed to hook into §cVault§f!"); }
     }
@@ -73,6 +80,10 @@ public final class FeatherAPI extends JavaPlugin {
 
     public static Logger logger() {
         return log;
+    }
+
+    public static boolean PAPIEnabled() {
+        return placeholder;
     }
 
     public static Economy economy() {
