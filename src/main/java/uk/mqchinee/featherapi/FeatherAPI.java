@@ -62,6 +62,10 @@ public final class FeatherAPI extends JavaPlugin {
         return log;
     }
 
+    public static Economy economy() {
+        return economy;
+    }
+
     public static FeatherAPI get() {
         return instance;
     }
