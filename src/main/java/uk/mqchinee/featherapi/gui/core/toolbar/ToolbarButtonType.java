@@ -17,7 +17,6 @@ public enum ToolbarButtonType {
         new AbstractMap.SimpleImmutableEntry<>(1, PREV_BUTTON),
         new AbstractMap.SimpleImmutableEntry<>(4, CLOSE_BUTTON),
         new AbstractMap.SimpleImmutableEntry<>(7, NEXT_BUTTON),
-dsfsdfsd
         new AbstractMap.SimpleImmutableEntry<>(0, PANE),
         new AbstractMap.SimpleImmutableEntry<>(2, PANE),
         new AbstractMap.SimpleImmutableEntry<>(3, PANE),
