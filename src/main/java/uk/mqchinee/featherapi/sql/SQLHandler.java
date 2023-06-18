@@ -77,14 +77,9 @@ public class SQLHandler {
 		try {
 			connection.close();
 			connection = null;
-			onDisconnect();
 		} catch (final SQLException throwables) {
 			throwables.printStackTrace();
 		}
-	}
-
-	public void onDisconnect() {
-
 	}
 
 	public boolean isConnected() {
