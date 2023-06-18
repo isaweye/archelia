@@ -25,18 +25,30 @@ public final class FeatherAPI extends JavaPlugin {
 
         saveDefaultConfig();
 
-        if (vault()) {
-            log.info("§fHooked into §aVault§f!");
-            economy.createPlayerAccount(Bukkit.getPlayerExact("greenMachine1123"));
-            economy.depositPlayer(Bukkit.getPlayerExact("greenMachine1123"), 115);
-            System.out.println(economy.getBalance(Bukkit.getPlayerExact("greenMachine1123")));
-        }
-        else { log.info("§fFailed to hook into §cVault§f!"); }
+        setup();
 
         log.info("§fFeather§bAPI §fhas been successfully §aloaded §fand is §aready to use§f!");
         update();
 
         getCommand("feather-api").setExecutor(new Command());
+    }
+
+    private void setup() {
+        if (placeholder()) {
+            log.info("§fHooked into §aPlaceholderAPI§f!");
+        }
+        else { log.info("§fFailed to hook into §cPlaceholderAPI§f!"); }
+
+        if (vault()) {
+            log.info("§fHooked into §aVault§f!");
+        }
+        else { log.info("§fFailed to hook into §cVault§f!"); }
+    }
+    private boolean placeholder() {
+        if (Bukkit.getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            return true;
+        }
+        return false;
     }
 
     private boolean vault() {
@@ -46,11 +58,12 @@ public final class FeatherAPI extends JavaPlugin {
                 return false;
             }
             economy = rsp.getProvider();
+            return true;
         }
-        return true;
+        return false;
     }
 
-    public static void update() {
+    private void update() {
         for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
             if (plugin.getDescription().getDepend().contains("FeatherAPI")) {
                 currentlyUsing.add(plugin.getName());
@@ -65,7 +78,6 @@ public final class FeatherAPI extends JavaPlugin {
     public static Economy economy() {
         return economy;
     }
-
     public static FeatherAPI get() {
         return instance;
     }
