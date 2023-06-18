@@ -16,7 +16,7 @@ public class SQLHandler {
 
 	public SQLHandler(final String filePath, boolean debugMode) {
 		this.filePath = filePath;
-		debug = false;
+		debug = debugMode;
 	}
 
 
