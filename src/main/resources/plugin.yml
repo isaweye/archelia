@@ -1,0 +1,14 @@
+name: FeatherAPI
+version: '${project.version}'
+main: uk.mqchinee.featherapi.FeatherAPI
+author: mqchinee
+api-version: 1.18
+softdepend:
+  - PlaceholderAPI
+  - Vault
+permissions:
+  feather-api.info:
+    default: op
+commands:
+  feather-api:
+    permission: feather-api.info
