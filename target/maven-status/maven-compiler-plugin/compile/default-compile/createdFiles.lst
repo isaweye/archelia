@@ -4,8 +4,12 @@ uk\mqchinee\featherapi\enums\ComparingBy.class
 uk\mqchinee\featherapi\utils\RunUtils$1.class
 uk\mqchinee\featherapi\gui\core\buttons\ButtonListener.class
 uk\mqchinee\featherapi\sql\core\SQLUtils.class
+uk\mqchinee\featherapi\raycast\Raycast$RaycastType.class
 uk\mqchinee\featherapi\FeatherAPI.class
+uk\mqchinee\featherapi\raycast\Raycast.class
 uk\mqchinee\featherapi\utils\Experiments.class
+uk\mqchinee\featherapi\colors\patterns\SolidPattern.class
+uk\mqchinee\featherapi\raycast\RaycastMath.class
 uk\mqchinee\featherapi\gui\core\toolbar\ToolbarBuilder.class
 uk\mqchinee\featherapi\utils\DateUtils.class
 uk\mqchinee\featherapi\utils\RunUtils.class
@@ -14,8 +18,11 @@ uk\mqchinee\featherapi\gui\core\buttons\Button.class
 uk\mqchinee\featherapi\gui\core\menu\OpenMenu.class
 uk\mqchinee\featherapi\gui\core\menu\MenuListener.class
 uk\mqchinee\featherapi\gui\core\toolbar\ToolbarButtonType.class
+uk\mqchinee\featherapi\colors\Iridium.class
+uk\mqchinee\featherapi\colors\patterns\GradientPattern.class
 uk\mqchinee\featherapi\sql\core\SQLField.class
 uk\mqchinee\featherapi\utils\TextUtils.class
+uk\mqchinee\featherapi\colors\patterns\RainbowPattern.class
 uk\mqchinee\featherapi\sql\SQLHandler.class
 uk\mqchinee\featherapi\utils\MapSorter.class
 uk\mqchinee\featherapi\utils\MapSorter$1.class
@@ -26,4 +33,5 @@ uk\mqchinee\featherapi\gui\core\ItemBuilder.class
 uk\mqchinee\featherapi\enums\Time.class
 uk\mqchinee\featherapi\utils\ItemUtils.class
 uk\mqchinee\featherapi\sql\core\SQLTable.class
+uk\mqchinee\featherapi\colors\patterns\Pattern.class
 uk\mqchinee\featherapi\commands\AbsCommand.class

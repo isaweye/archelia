@@ -23,8 +23,6 @@ public final class FeatherAPI extends JavaPlugin {
         instance = this;
         log = this.getLogger();
 
-        saveDefaultConfig();
-
         setup();
 
         log.info("§fFeather§bAPI §fhas been successfully §aloaded §fand is §aready to use§f!");

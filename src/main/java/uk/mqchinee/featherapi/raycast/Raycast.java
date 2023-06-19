@@ -7,6 +7,8 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
+import uk.mqchinee.featherapi.enums.Time;
+import uk.mqchinee.featherapi.utils.RunUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -76,6 +78,7 @@ public class Raycast {
     private Location rayCastLocation;
 
     private final RaycastMath math = new RaycastMath();
+    private final RunUtils r = new RunUtils();
 
     public Raycast(Location loc, double size) {
         this(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch(), size);
@@ -92,19 +95,22 @@ public class Raycast {
         this.size = size;
     }
 
-    public boolean compute(RaycastType rayCastType, Particle particle) {
+    public boolean compute(RaycastType rayCastType, Particle particle, int add, int wait, Time type) {
         this.testedLocations.clear();
-        int length = 0;
-        computeLocation(new Vector(0.0D, 0.0D, length + 50.0D));
+        final int[] length = {0};
+        computeLocation(new Vector(0.0D, 0.0D, length[0] + 50.0D));
         if (rayCastType == RaycastType.BLOCK) {
             this.rayCastType = RaycastType.BLOCK;
-            while (this.passthroughMaterials.contains(this.rayCastLocation.getBlock().getType()) && length <= this.size * 100.0D) {
-                this.testedLocations.add(this.rayCastLocation);
-                length++;
-                computeLocation(new Vector(0.0D, 0.0D, length + 50.0D));
-                if (this.showRayCast)
-                    this.world.spawnParticle(particle, this.rayCastLocation.getX(), this.rayCastLocation.getY(), this.rayCastLocation.getZ(), 0, 0.0D, 0.0D, 0.0D);
-            }
+            final int[] finalLength = {length[0]};
+            r.repeating(() -> {
+                if (this.passthroughMaterials.contains(this.rayCastLocation.getBlock().getType()) && finalLength[0] <= this.size * 100.0D) {
+                    this.testedLocations.add(this.rayCastLocation);
+                    length[0] = length[0] + add;
+                    computeLocation(new Vector(0.0D, 0.0D, length[0] + 50.0D));
+                    if (this.showRayCast)
+                        this.world.spawnParticle(particle, this.rayCastLocation.getX(), this.rayCastLocation.getY(), this.rayCastLocation.getZ(), 0, 0.0D, 0.0D, 0.0D);
+                }
+            }, wait, wait, type);
             if (!this.passthroughMaterials.contains(this.rayCastLocation.getBlock().getType())) {
                 this.hurtBlock = this.rayCastLocation.getBlock();
                 this.hurtLocation = this.rayCastLocation;
@@ -112,41 +118,45 @@ public class Raycast {
             }
         } else if (rayCastType == RaycastType.ENTITY) {
             this.rayCastType = RaycastType.ENTITY;
-            Collection<Entity> entities = this.world.getNearbyEntities(this.rayCastLocation, 0.01D, 0.01D, 0.01D);
-            while ((entities.size() <= 0 || entities.contains(this.owner)) && length <= this.size * 100.0D) {
-                this.testedLocations.add(this.rayCastLocation);
-                length++;
-                computeLocation(new Vector(0.0D, 0.0D, length + 50.0D));
-                entities = this.world.getNearbyEntities(this.rayCastLocation, 0.01D, 0.01D, 0.01D);
-                if (this.showRayCast)
-                    this.world.spawnParticle(particle, this.rayCastLocation.getX(), this.rayCastLocation.getY(), this.rayCastLocation.getZ(), 0, 0.0D, 0.0D, 0.0D);
-            }
-            if (entities.size() > 0) {
-                for (Entity entity : entities) {
+            final Collection<Entity>[] entities = new Collection[]{this.world.getNearbyEntities(this.rayCastLocation, 0.01D, 0.01D, 0.01D)};
+            r.repeating(() -> {
+                if ((entities[0].size() <= 0 || entities[0].contains(this.owner)) && length[0] <= this.size * 100.0D) {
+                    this.testedLocations.add(this.rayCastLocation);
+                    length[0]++;
+                    computeLocation(new Vector(0.0D, 0.0D, length[0] + 50.0D));
+                    entities[0] = this.world.getNearbyEntities(this.rayCastLocation, 0.01D, 0.01D, 0.01D);
+                    if (this.showRayCast)
+                        this.world.spawnParticle(particle, this.rayCastLocation.getX(), this.rayCastLocation.getY(), this.rayCastLocation.getZ(), 0, 0.0D, 0.0D, 0.0D);
+                }
+            }, wait, wait, type);
+            if (entities[0].size() > 0) {
+                for (Entity entity : entities[0]) {
                     this.hurtEntity = entity;
                     this.hurtLocation = this.rayCastLocation;
                 }
                 return true;
             }
         } else if (rayCastType == RaycastType.ENTITY_AND_BLOCK) {
-            Collection<Entity> entities = this.world.getNearbyEntities(this.rayCastLocation, 0.01D, 0.01D, 0.01D);
-            while (this.passthroughMaterials.contains(this.rayCastLocation.getBlock().getType()) && (entities.size() <= 0 || entities.contains(this.owner)) && length <= this.size * 100.0D) {
-                this.testedLocations.add(this.rayCastLocation);
-                length++;
-                computeLocation(new Vector(0.0D, 0.0D, length + 50.0D));
-                entities = this.world.getNearbyEntities(this.rayCastLocation, 0.01D, 0.01D, 0.01D);
-                if (this.showRayCast)
-                    this.world.spawnParticle(particle, this.rayCastLocation.getX(), this.rayCastLocation.getY(), this.rayCastLocation.getZ(), 0, 0.0D, 0.0D, 0.0D);
-            }
+            final Collection<Entity>[] entities = new Collection[]{this.world.getNearbyEntities(this.rayCastLocation, 0.01D, 0.01D, 0.01D)};
+            r.repeating(() -> {
+                if (this.passthroughMaterials.contains(this.rayCastLocation.getBlock().getType()) && (entities[0].size() <= 0 || entities[0].contains(this.owner)) && length[0] <= this.size * 100.0D) {
+                    this.testedLocations.add(this.rayCastLocation);
+                    length[0]++;
+                    computeLocation(new Vector(0.0D, 0.0D, length[0] + 50.0D));
+                    entities[0] = this.world.getNearbyEntities(this.rayCastLocation, 0.01D, 0.01D, 0.01D);
+                    if (this.showRayCast)
+                        this.world.spawnParticle(particle, this.rayCastLocation.getX(), this.rayCastLocation.getY(), this.rayCastLocation.getZ(), 0, 0.0D, 0.0D, 0.0D);
+                }
+            }, wait, wait, type);
             if (!this.passthroughMaterials.contains(this.rayCastLocation.getBlock().getType())) {
                 this.rayCastType = RaycastType.BLOCK;
                 this.hurtBlock = this.rayCastLocation.getBlock();
                 this.hurtLocation = this.rayCastLocation;
                 return true;
             }
-            if (entities.size() > 0) {
+            if (entities[0].size() > 0) {
                 this.rayCastType = RaycastType.ENTITY;
-                for (Entity entity : entities) {
+                for (Entity entity : entities[0]) {
                     this.hurtEntity = entity;
                     this.hurtLocation = this.rayCastLocation;
                 }
