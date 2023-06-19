@@ -4,7 +4,6 @@ main: uk.mqchinee.featherapi.FeatherAPI
 author: mqchinee
 api-version: 1.18
 softdepend:
-  - PlaceholderAPI
   - Vault
 permissions:
   feather-api.info:

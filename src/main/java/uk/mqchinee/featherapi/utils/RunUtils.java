@@ -35,6 +35,15 @@ public class RunUtils {
         }
     }
 
+    public void runLaterAsync(Runnable r, int wait, Time type) {
+        switch (type) {
+            case IN_TICKS:
+                scheduler().runTaskLaterAsynchronously(get(), r, wait);
+            case IN_SECONDS:
+                scheduler().runTaskLaterAsynchronously(get(), r, toSeconds(wait));
+        }
+    }
+
     public int repeating(Runnable r, int delay, int period, Time type) {
         switch (type) {
             case IN_TICKS:
