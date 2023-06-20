@@ -100,6 +100,7 @@ public abstract class Bouncy {
         new BukkitRunnable() {
             public void run() {
                 task = this;
+                if(projectile.isDead()) { this.cancel(); }
                 if(!projectile.isOnGround()) {
                     onMove();
                 }
