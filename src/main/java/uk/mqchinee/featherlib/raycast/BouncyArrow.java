@@ -119,6 +119,7 @@ public abstract class BouncyArrow {
                 }
                 else if (projectile.isDead()) {
                     onEntityHit();
+                    this.cancel();
                 }
                 else {
                     doBounce(projectile);
