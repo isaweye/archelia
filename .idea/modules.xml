@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FeatherAPI.iml" filepath="$PROJECT_DIR$/FeatherAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FeatherLib.iml" filepath="$PROJECT_DIR$/FeatherLib.iml" />
     </modules>
   </component>
 </project>

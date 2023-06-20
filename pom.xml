@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.mqchinee</groupId>
-    <artifactId>FeatherAPI</artifactId>
+    <artifactId>FeatherLib</artifactId>
     <version>1.0.1</version>
     <packaging>jar</packaging>
 
-    <name>FeatherAPI</name>
+    <name>FeatherLib</name>
 
     <properties>
         <java.version>1.8</java.version>

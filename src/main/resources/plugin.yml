@@ -1,13 +1,13 @@
-name: FeatherAPI
+name: FeatherLib
 version: '${project.version}'
-main: uk.mqchinee.featherapi.FeatherAPI
+main: uk.mqchinee.featherlib.FeatherLib
 author: mqchinee
 api-version: 1.18
 softdepend:
   - Vault
 permissions:
-  feather-api.info:
+  feather.info:
     default: op
 commands:
   feather-api:
-    permission: feather-api.info
+    permission: feather.info
