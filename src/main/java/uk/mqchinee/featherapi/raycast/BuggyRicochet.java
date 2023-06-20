@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class Ricochet {
+public abstract class BuggyRicochet {
 
     private List<Material> allowedMaterials = new ArrayList<>();
     private Collection<EntityType> allowedEntities = Collections.emptyList();
@@ -45,7 +45,7 @@ public abstract class Ricochet {
     private int now = 0;
     private Block last;
 
-    public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {
+    public BuggyRicochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {
         this.type = type;
         this.lifespan = lifespan;
         this.location = location;
@@ -56,7 +56,7 @@ public abstract class Ricochet {
         else { this.delay = delay*20; }
     }
 
-    public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, LivingEntity shooter) {
+    public BuggyRicochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, LivingEntity shooter) {
         this.type = type;
         this.lifespan = lifespan;
         this.shooter = shooter;
@@ -176,7 +176,6 @@ public abstract class Ricochet {
                 location.add(x, y, z);
                 onMove();
                 if (!allowedMaterials.contains(location.getBlock().getType())) {
-                    direction.multiply(0.2);
                     ricochet();
                     endBlock = location.getBlock();
                     onRicochet();
