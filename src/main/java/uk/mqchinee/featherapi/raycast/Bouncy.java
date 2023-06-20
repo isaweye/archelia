@@ -36,6 +36,7 @@ public abstract class Bouncy {
                 Projectile newProjectile = (Projectile) projectile.getWorld().spawnEntity(projectile.getLocation(), projectile.getType());
                 newProjectile.setVelocity(projectile.getVelocity().subtract(dir).normalize().multiply(getVelocity().length()));
                 newProjectile.setShooter(projectile.getShooter());
+                projectile.remove();
                 setProjectile(newProjectile);
             }
             else { task.cancel(); projectile.remove(); onDestroy(); }
