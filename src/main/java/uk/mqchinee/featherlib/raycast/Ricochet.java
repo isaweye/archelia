@@ -44,7 +44,7 @@ public abstract class Ricochet {
     private int max = 3;
     private int now = 0;
     private Block last;
-    private boolean isInBlock = false;
+    private List<Block> bl = new ArrayList<>();
 
     public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {
         this.type = type;
@@ -184,8 +184,12 @@ public abstract class Ricochet {
                     endBlock = location.getBlock();
                     if (!allowedMaterials.contains(location.getBlock().getType())) {
                         location.add(flip(x), flip(y), flip(z));
+                        if(bl.size() < 3) {
+                            bl.add(location.getBlock());
+                        }
                     }
-                    ricochet(endBlock.getLocation());
+                    ricochet(bl.get(0).getLocation());
+                    bl.clear();
                     onRicochet();
                 }
                 else {
