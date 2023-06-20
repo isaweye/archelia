@@ -35,6 +35,24 @@ public class RunUtils {
         }
     }
 
+    public void runTimer(Runnable r, int wait, Time type) {
+        switch (type) {
+            case IN_TICKS:
+                scheduler().runTaskTimer(get(), r, wait, wait);
+            case IN_SECONDS:
+                scheduler().runTaskTimer(get(), r, toSeconds(wait), toSeconds(wait));
+        }
+    }
+
+    public void runTimerAsync(Runnable r, int wait, Time type) {
+        switch (type) {
+            case IN_TICKS:
+                scheduler().runTaskTimerAsynchronously(get(), r, wait, wait);
+            case IN_SECONDS:
+                scheduler().runTaskTimerAsynchronously(get(), r, toSeconds(wait), toSeconds(wait));
+        }
+    }
+
     public void runLaterAsync(Runnable r, int wait, Time type) {
         switch (type) {
             case IN_TICKS:
