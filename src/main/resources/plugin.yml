@@ -9,5 +9,5 @@ permissions:
   feather.info:
     default: op
 commands:
-  feather-api:
+  feather:
     permission: feather.info
