@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class BuggyRicochet {
+public abstract class Ricochet {
 
     private List<Material> allowedMaterials = new ArrayList<>();
     private Collection<EntityType> allowedEntities = Collections.emptyList();
@@ -44,8 +44,9 @@ public abstract class BuggyRicochet {
     private int max = 3;
     private int now = 0;
     private Block last;
+    private boolean isInBlock = false;
 
-    public BuggyRicochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {
+    public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {
         this.type = type;
         this.lifespan = lifespan;
         this.location = location;
@@ -56,7 +57,7 @@ public abstract class BuggyRicochet {
         else { this.delay = delay*20; }
     }
 
-    public BuggyRicochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, LivingEntity shooter) {
+    public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, LivingEntity shooter) {
         this.type = type;
         this.lifespan = lifespan;
         this.shooter = shooter;
@@ -85,9 +86,8 @@ public abstract class BuggyRicochet {
         this.max = max;
     }
 
-    private void ricochet() {
-        last = location.getBlock();
-        BlockFace blockFace = face();
+    private void ricochet(Location loc) {
+        BlockFace blockFace = face(loc);
         if (blockFace != null) {
             Vector dir = new Vector(blockFace.getModX(), blockFace.getModY(), blockFace.getModZ());
             dir = dir.multiply(direction.dot(dir)).multiply(2.0D);
@@ -99,12 +99,12 @@ public abstract class BuggyRicochet {
         }
     }
 
-    private BlockFace face() {
-        World world = location.getWorld();
+    private BlockFace face(Location loc) {
+        World world = loc.getWorld();
         if (world == null)
             return null;
-        Block block = location.getBlock();
-        BlockIterator blockIterator = new BlockIterator(world, location.toVector(), direction, 0.0D, 8);
+        Block block = loc.getBlock();
+        BlockIterator blockIterator = new BlockIterator(world, loc.toVector(), direction, 0.0D, 8);
         Block previousBlock = block;
         Block nextBlock = blockIterator.next();
         while (blockIterator.hasNext() && (nextBlock.getType() == Material.AIR || nextBlock.isLiquid() || nextBlock.equals(block))) {
@@ -173,12 +173,17 @@ public abstract class BuggyRicochet {
                     y = direction.getY() * a;
                 }
                 double z = direction.getZ() * a;
-                location.add(x, y, z);
-                onMove();
                 if (!allowedMaterials.contains(location.getBlock().getType())) {
-                    ricochet();
                     endBlock = location.getBlock();
+                    if (!allowedMaterials.contains(location.getBlock().getType())) {
+                        location.add(flip(x), flip(y), flip(z));
+                    }
+                    ricochet(endBlock.getLocation());
                     onRicochet();
+                }
+                else {
+                    location.add(x, y, z);
+                    onMove();
                 }
                 Collection<Entity> b = location.getWorld().getNearbyEntities(location, offsetX, offsetY, offsetZ);
                 b.forEach((entity -> {
