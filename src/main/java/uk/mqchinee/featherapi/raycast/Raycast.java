@@ -109,6 +109,9 @@ public abstract class Raycast {
             double a = 0;
             public void run() {
                 task = this;
+                if(location.getY() < -10) {
+                    this.cancel(); onDestroy();
+                }
                 a = a + step;
                 double x = direction.getX() * a;
                 double y;

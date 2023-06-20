@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 
-public abstract class Bouncy {
+public abstract class BouncyArrow {
 
     private Projectile projectile;
     private LivingEntity shooter;
@@ -19,16 +19,18 @@ public abstract class Bouncy {
     private double reduce = 0.2;
     private double threshold;
     private BukkitRunnable task;
+    private Projectile oldProjectile;
 
-    public Bouncy(JavaPlugin plugin, Projectile projectile, double threshold, LivingEntity shooter) {
+    public BouncyArrow(JavaPlugin plugin, Projectile projectile, double threshold, LivingEntity shooter) {
         this.projectile = projectile;
         this.shooter = shooter;
         this.plugin = plugin;
         this.threshold = threshold;
+        this.oldProjectile = projectile;
     }
 
-    private void bounce() {
-        BlockFace blockFace = face();
+    private void bounce(Projectile projectile) {
+        BlockFace blockFace = face(projectile);
         if (blockFace != null) {
             Vector dir = new Vector(blockFace.getModX(), blockFace.getModY(), blockFace.getModZ());
             dir = dir.multiply(projectile.getVelocity().dot(dir)).multiply(2.0D);
@@ -36,8 +38,10 @@ public abstract class Bouncy {
                 Projectile newProjectile = (Projectile) projectile.getWorld().spawnEntity(projectile.getLocation(), projectile.getType());
                 newProjectile.setVelocity(projectile.getVelocity().subtract(dir).normalize().multiply(getVelocity().length()));
                 newProjectile.setShooter(projectile.getShooter());
-                projectile.remove();
+                if (projectile.isVisualFire()) { newProjectile.setFireTicks(50); }
+                Projectile old = projectile;
                 setProjectile(newProjectile);
+                old.remove();
             }
             else { task.cancel(); projectile.remove(); onDestroy(); }
         }
@@ -51,7 +55,7 @@ public abstract class Bouncy {
         this.threshold = threshold;
     }
 
-    private BlockFace face() {
+    private BlockFace face(Projectile projectile) {
         World world = projectile.getLocation().getWorld();
         if (world == null)
             return null;
@@ -96,24 +100,35 @@ public abstract class Bouncy {
         return projectile.getVelocity();
     }
 
+    public void doBounce(Projectile projectile) {
+            bounce(projectile);
+            setSpeed(projectile.getVelocity().length() - threshold);
+            onBounce();
+    }
+
     public void transform() {
         new BukkitRunnable() {
             public void run() {
                 task = this;
-                if(projectile.isDead()) { this.cancel(); }
-                if(!projectile.isOnGround()) {
+                if(projectile.getLocation().getY() < -10) {
+                    this.cancel(); onDestroy();
+                }
+                if(!projectile.isOnGround() && !projectile.isDead()) {
                     onMove();
+                    oldProjectile = projectile;
+                }
+                else if (projectile.isDead()) {
+                    onEntityHit();
                 }
                 else {
-                    setSpeed(getVelocity().length() - threshold);
-                    bounce();
-                    onBounce();
+                    doBounce(projectile);
                 }
             }
         }.runTaskTimer(plugin, 1, 1);
     }
 
     public abstract void onMove();
+    public abstract void onEntityHit();
     public abstract void onBounce();
     public abstract void onDestroy();
 
