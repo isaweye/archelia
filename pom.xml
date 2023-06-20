@@ -6,7 +6,7 @@
 
     <groupId>uk.mqchinee</groupId>
     <artifactId>FeatherLib</artifactId>
-    <version>1.0.1</version>
+    <version>1.0-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>FeatherLib</name>
