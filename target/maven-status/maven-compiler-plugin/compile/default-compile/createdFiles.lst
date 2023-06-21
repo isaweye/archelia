@@ -1,3 +1,4 @@
+uk\mqchinee\featherlib\builders\EntityBuilder$Age.class
 uk\mqchinee\featherlib\utils\Experiments.class
 org\jsoup\select\StructuralEvaluator$ImmediatePreviousSibling.class
 org\jsoup\parser\TokeniserState$59.class
@@ -28,7 +29,6 @@ uk\mqchinee\featherlib\commands\AbsCommand.class
 org\jsoup\select\CombiningEvaluator$And.class
 uk\mqchinee\featherlib\sql\core\SQLField.class
 org\jsoup\select\StructuralEvaluator$Has.class
-org\jsoup\examples\HtmlToPlainText$1.class
 org\jsoup\nodes\FormElement.class
 org\jsoup\parser\HtmlTreeBuilderState$2.class
 org\jsoup\safety\Safelist$AttributeKey.class
@@ -66,6 +66,7 @@ org\jsoup\internal\Normalizer.class
 org\jsoup\select\StructuralEvaluator.class
 uk\mqchinee\featherlib\enums\DataType.class
 org\jsoup\Connection$Method.class
+uk\mqchinee\featherlib\builders\EntityBuilder$1.class
 uk\mqchinee\featherlib\gui\core\buttons\Button.class
 org\jsoup\safety\Cleaner.class
 org\jsoup\internal\FieldsAreNonnullByDefault.class
@@ -97,7 +98,6 @@ org\jsoup\helper\package-info.class
 org\jsoup\select\StructuralEvaluator$Not.class
 org\jsoup\select\CombiningEvaluator.class
 org\jsoup\nodes\package-info.class
-org\jsoup\safety\Cleaner$1.class
 org\jsoup\select\Evaluator$AttributeWithValueEnding.class
 org\jsoup\helper\CookieUtil.class
 org\jsoup\helper\ValidationException.class
@@ -136,7 +136,6 @@ org\jsoup\helper\ChangeNotifyingArrayList.class
 uk\mqchinee\featherlib\colors\patterns\GradientPattern.class
 org\jsoup\select\Evaluator$ContainsText.class
 org\jsoup\parser\TokeniserState$21.class
-org\jsoup\helper\HttpConnection$1.class
 org\jsoup\parser\TokeniserState$38.class
 org\jsoup\parser\TreeBuilder.class
 uk\mqchinee\featherlib\builders\SoundBuilder.class
@@ -149,7 +148,6 @@ org\jsoup\nodes\Document$OutputSettings$Syntax.class
 org\jsoup\select\Evaluator$IsNthChild.class
 org\jsoup\select\Evaluator$IndexGreaterThan.class
 uk\mqchinee\featherlib\builders\MessageBuilder.class
-org\jsoup\parser\Token$1.class
 org\jsoup\parser\TokeniserState$15.class
 org\jsoup\parser\HtmlTreeBuilderState$13.class
 org\jsoup\select\Evaluator$IndexEvaluator.class
@@ -191,6 +189,7 @@ org\jsoup\parser\TokeniserState$10.class
 org\jsoup\select\Evaluator$IsRoot.class
 org\jsoup\nodes\LeafNode.class
 org\jsoup\parser\TokeniserState$30.class
+uk\mqchinee\featherlib\builders\EntityBuilder.class
 org\jsoup\select\Evaluator$IndexEquals.class
 org\jsoup\select\Evaluator$IsFirstChild.class
 org\jsoup\parser\TokeniserState$51.class

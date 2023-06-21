@@ -1,10 +1,9 @@
 package uk.mqchinee.featherlib.builders;
 
 import org.bukkit.Location;
-import org.bukkit.entity.*;
-import org.bukkit.loot.LootTable;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.entity.Ageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
 
 public class EntityBuilder {
@@ -12,7 +11,6 @@ public class EntityBuilder {
     private EntityType entityType;
     private Location location;
     private Entity entity;
-    private Mob mob;
 
     public enum Age {
         ADULT, BABY
@@ -22,7 +20,6 @@ public class EntityBuilder {
         this.entityType = entityType;
         this.location = location;
         this.entity = location.getWorld().spawnEntity(location, entityType);
-        this.mob = (Mob) entity;
     }
 
     public Location getLocation() {
@@ -31,61 +28,6 @@ public class EntityBuilder {
 
     public EntityType getEntityType() {
         return entityType;
-    }
-
-    public EntityBuilder AI(boolean bool) {
-        this.mob.setAI(bool);
-        return this;
-    }
-
-    public EntityBuilder aware(boolean bool) {
-        this.mob.setAware(bool);
-        return this;
-    }
-
-    public EntityBuilder effect(PotionEffect effect) {
-        this.mob.addPotionEffect(effect);
-        return this;
-    }
-
-    public EntityBuilder removeEffect(PotionEffectType effect) {
-        this.mob.removePotionEffect(effect);
-        return this;
-    }
-
-    public EntityBuilder pickup(boolean bool) {
-        this.mob.setCanPickupItems(bool);
-        return this;
-    }
-
-    public EntityBuilder arrowsInBody(int integer) {
-        this.mob.setArrowsInBody(integer);
-        return this;
-    }
-
-    public EntityBuilder collidable(boolean bool) {
-        this.mob.setCollidable(bool);
-        return this;
-    }
-
-    public EntityBuilder health(double health) {
-        this.mob.setHealth(health);
-        return this;
-    }
-
-    public EntityBuilder target(LivingEntity target) {
-        this.mob.setTarget(target);
-        return this;
-    }
-
-    public EntityBuilder invisible(boolean bool) {
-        this.mob.setInvisible(bool);
-        return this;
-    }
-
-    public EntityBuilder loot(LootTable loot) {
-        this.mob.setLootTable(loot);
-        return this;
     }
 
     public EntityBuilder name(String name) {
@@ -154,16 +96,13 @@ public class EntityBuilder {
             switch (age) {
                 case BABY:
                     (ageable).setBaby();
+                    this.entity = ageable;
                 case ADULT:
                     (ageable).setAdult();
+                    this.entity = ageable;
             }
-            this.entity = ageable;
         }
         return this;
-    }
-
-    public Mob mob() {
-        return this.mob;
     }
 
     public Entity entity() {
