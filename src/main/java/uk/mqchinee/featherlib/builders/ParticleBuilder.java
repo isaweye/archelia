@@ -145,6 +145,15 @@ public class ParticleBuilder {
         else { location.getWorld().spawnParticle(particle, location, count, x, y, z, speed, data); }
     }
 
+    private void spawn(Particle particle, Location location, int count, double x, double y, double z, double speed) {
+        if (getShowTo() != null) {
+            for (Player p : getShowTo()) {
+                p.spawnParticle(particle, location, count, x, y, z, speed);
+            }
+        }
+        else { location.getWorld().spawnParticle(particle, location, count, x, y, z, speed); }
+    }
+
     public void display() {
         switch (type) {
             case DUST:
@@ -155,6 +164,8 @@ public class ParticleBuilder {
             case BLOCK:
                 BlockData blockData = materialData.createBlockData();
                 spawn(particle, location, count, offset_x, offset_y, offset_z, speed, blockData);
+            case DEFAULT:
+                spawn(particle, location, count, offset_x, offset_y, offset_z, speed);
         }
     }
 
