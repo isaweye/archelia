@@ -5,7 +5,7 @@ import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
-import uk.mqchinee.featherlib.ext.EntityBuilderInterface;
+import uk.mqchinee.featherlib.impl.EntityBuilderInterface;
 import uk.mqchinee.featherlib.utils.TextUtils;
 
 public class EntityBuilder implements EntityBuilderInterface {

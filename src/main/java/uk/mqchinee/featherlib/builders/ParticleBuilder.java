@@ -7,7 +7,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import uk.mqchinee.featherlib.enums.DataType;
-import uk.mqchinee.featherlib.ext.ParticleBuilderInterface;
+import uk.mqchinee.featherlib.impl.ParticleBuilderInterface;
 
 import java.util.List;
 

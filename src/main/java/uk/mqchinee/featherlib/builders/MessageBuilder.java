@@ -13,7 +13,7 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.NodeVisitor;
 import uk.mqchinee.featherlib.colors.Iridium;
-import uk.mqchinee.featherlib.ext.MessageBuilderInterface;
+import uk.mqchinee.featherlib.impl.MessageBuilderInterface;
 
 import java.util.Collection;
 import java.util.Stack;

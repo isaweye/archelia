@@ -7,7 +7,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import uk.mqchinee.featherlib.colors.Iridium;
-import uk.mqchinee.featherlib.ext.MobBuilderInterface;
+import uk.mqchinee.featherlib.impl.MobBuilderInterface;
 import uk.mqchinee.featherlib.utils.TextUtils;
 
 public class MobBuilder implements MobBuilderInterface {

@@ -1,4 +1,4 @@
-package uk.mqchinee.featherlib.ext;
+package uk.mqchinee.featherlib.impl;
 
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;

@@ -3,7 +3,7 @@ package uk.mqchinee.featherlib.builders;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import uk.mqchinee.featherlib.ext.SoundBuilderInterface;
+import uk.mqchinee.featherlib.impl.SoundBuilderInterface;
 
 import java.util.List;
 

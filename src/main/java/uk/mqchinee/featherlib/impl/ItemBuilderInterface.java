@@ -1,4 +1,4 @@
-package uk.mqchinee.featherlib.ext;
+package uk.mqchinee.featherlib.impl;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
