@@ -13,11 +13,12 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.NodeVisitor;
 import uk.mqchinee.featherlib.colors.Iridium;
+import uk.mqchinee.featherlib.ext.MessageBuilderInterface;
 
 import java.util.Collection;
 import java.util.Stack;
 
-public class MessageBuilder {
+public class MessageBuilder implements MessageBuilderInterface {
 
     private String message;
     private TextComponent component;
@@ -83,26 +84,31 @@ public class MessageBuilder {
         this.message = message;
     }
 
+    @Override
     public MessageBuilder placeholders(Player player) {
         this.message = PlaceholderAPI.setPlaceholders(player, message);
         return this;
     }
 
+    @Override
     public MessageBuilder process() {
         this.message = Iridium.process(message);
         return this;
     }
 
+    @Override
     public MessageBuilder html() {
         component = parseXML(message);
         return this;
     }
 
-    public String getMessage() {
-        return message;
+    @Override
+    public TextComponent buildComponent() {
+        return component;
     }
 
-    public TextComponent getComponent() {
-        return component;
+    @Override
+    public String build() {
+        return message;
     }
 }
