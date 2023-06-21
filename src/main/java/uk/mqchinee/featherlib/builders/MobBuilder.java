@@ -6,12 +6,15 @@ import org.bukkit.loot.LootTable;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import uk.mqchinee.featherlib.colors.Iridium;
+import uk.mqchinee.featherlib.utils.TextUtils;
 
 public class MobBuilder {
 
     private EntityType entityType;
     private Location location;
     private Mob mob;
+    private final TextUtils t = new TextUtils();
 
     public enum Age {
         ADULT, BABY
@@ -87,7 +90,7 @@ public class MobBuilder {
     }
 
     public MobBuilder name(String name) {
-        this.mob.setCustomName(name);
+        this.mob.setCustomName(t.colorize(name));
         return this;
     }
 
@@ -148,16 +151,19 @@ public class MobBuilder {
 
     public MobBuilder age(Age age) {
         if (this.mob instanceof Ageable) {
-            Ageable ageable = (Ageable) this.mob;
+            Ageable a = (Ageable) this.mob();
             switch (age) {
                 case BABY:
-                    (ageable).setBaby();
-                    this.mob = ageable;
+                    a.setBaby();
                 case ADULT:
-                    (ageable).setAdult();
-                    this.mob = ageable;
+                    a.setAdult();
             }
         }
+        return this;
+    }
+
+    public MobBuilder hex(String name) {
+        this.mob.setCustomName(Iridium.process(name));
         return this;
     }
 

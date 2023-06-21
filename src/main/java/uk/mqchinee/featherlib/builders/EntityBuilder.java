@@ -5,12 +5,14 @@ import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
+import uk.mqchinee.featherlib.utils.TextUtils;
 
 public class EntityBuilder {
 
     private EntityType entityType;
     private Location location;
     private Entity entity;
+    private final TextUtils t = new TextUtils();
 
     public enum Age {
         ADULT, BABY
@@ -31,7 +33,7 @@ public class EntityBuilder {
     }
 
     public EntityBuilder name(String name) {
-        this.entity.setCustomName(name);
+        this.entity.setCustomName(t.colorize(name));
         return this;
     }
 

@@ -78,6 +78,7 @@ org\jsoup\helper\W3CDom$W3CBuilder.class
 org\jsoup\select\Evaluator$IsLastOfType.class
 org\jsoup\Connection$Response.class
 org\jsoup\parser\TokeniserState$47.class
+uk\mqchinee\featherlib\builders\MobBuilder.class
 org\jsoup\parser\HtmlTreeBuilderState$10.class
 org\jsoup\parser\TokeniserState$19.class
 org\jsoup\parser\TokeniserState$12.class
@@ -121,6 +122,7 @@ org\jsoup\parser\HtmlTreeBuilderState$12.class
 org\jsoup\select\NodeFilter$FilterResult.class
 org\jsoup\parser\TokeniserState$1.class
 org\jsoup\parser\TokenQueue.class
+uk\mqchinee\featherlib\builders\MobBuilder$1.class
 uk\mqchinee\featherlib\utils\RunUtils$1.class
 org\jsoup\helper\DataUtil$BomCharset.class
 org\jsoup\parser\HtmlTreeBuilderState$9.class
@@ -283,6 +285,7 @@ org\jsoup\UncheckedIOException.class
 org\jsoup\parser\ParseErrorList.class
 uk\mqchinee\featherlib\raycast\BouncyArrow.class
 org\jsoup\parser\HtmlTreeBuilderState$1.class
+uk\mqchinee\featherlib\builders\MobBuilder$Age.class
 uk\mqchinee\featherlib\gui\core\ItemBuilder.class
 uk\mqchinee\featherlib\raycast\BouncyArrow$1.class
 org\jsoup\parser\HtmlTreeBuilderState$24.class
@@ -311,4 +314,5 @@ org\jsoup\select\Evaluator$IsOnlyOfType.class
 org\jsoup\parser\HtmlTreeBuilderState$25.class
 uk\mqchinee\featherlib\gui\core\buttons\ButtonListener.class
 org\jsoup\parser\TokeniserState$27.class
+uk\mqchinee\featherlib\enums\Duration.class
 org\jsoup\parser\TokeniserState$6.class
