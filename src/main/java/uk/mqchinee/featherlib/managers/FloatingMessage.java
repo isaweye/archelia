@@ -52,7 +52,7 @@ public class FloatingMessage {
         List<String> messageLines = messageFormatter.format(chatMessage);
         Collections.reverse(messageLines);
 
-        List<Entity> lines = new ArrayList<Entity>();
+        List<Entity> lines = new ArrayList<>();
         for (String messageLine : messageLines) {
             Location location = entity.getLocation().add(0, 1, 0);
             AreaEffectCloud particle = entity.getWorld().spawn(location, AreaEffectCloud.class);

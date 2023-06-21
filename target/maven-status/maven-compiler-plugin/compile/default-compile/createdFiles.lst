@@ -39,6 +39,7 @@ org\jsoup\Connection.class
 org\jsoup\nodes\Document$QuirksMode.class
 uk\mqchinee\featherlib\builders\ParticleBuilder.class
 org\jsoup\nodes\Element$NodeList.class
+uk\mqchinee\featherlib\managers\FloatingMessage.class
 org\jsoup\safety\Cleaner$CleaningVisitor.class
 uk\mqchinee\featherlib\managers\GUIManager.class
 org\jsoup\select\Evaluator$IndexLessThan.class
@@ -260,6 +261,7 @@ org\jsoup\parser\HtmlTreeBuilderState$3.class
 org\jsoup\parser\TokeniserState$7.class
 uk\mqchinee\featherlib\gui\core\toolbar\ToolbarBuilder.class
 uk\mqchinee\featherlib\raycast\Raycast.class
+uk\mqchinee\featherlib\managers\utils\FloatingMessageFormatter.class
 org\jsoup\parser\HtmlTreeBuilderState.class
 org\jsoup\select\StructuralEvaluator$ImmediateParent.class
 org\jsoup\parser\TokeniserState$25.class
