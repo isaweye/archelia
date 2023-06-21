@@ -1,7 +1,6 @@
 package uk.mqchinee.featherlib.builders;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -23,101 +22,27 @@ public class MessageBuilder {
     private String message;
     private TextComponent component;
 
-    public void transform(Node node, TextComponent component) {
-        switch (node.nodeName()) {
-            case "k":
-                component.setObfuscated(Boolean.valueOf(true));
-                break;
-            case "b":
-                component.setBold(Boolean.valueOf(true));
-                break;
-            case "s":
-                component.setStrikethrough(Boolean.valueOf(true));
-                break;
-            case "u":
-                component.setUnderlined(Boolean.valueOf(true));
-                break;
-            case "i":
-                component.setItalic(Boolean.valueOf(true));
-                break;
-            case "x0":
-            case "black":
-                component.setColor(ChatColor.BLACK);
-                break;
-            case "x1":
-            case "darkblue":
-                component.setColor(ChatColor.DARK_BLUE);
-                break;
-            case "x2":
-            case "darkgreen":
-                component.setColor(ChatColor.DARK_GREEN);
-                break;
-            case "x3":
-            case "darkaqua":
-                component.setColor(ChatColor.DARK_AQUA);
-                break;
-            case "x4":
-            case "darkred":
-                component.setColor(ChatColor.DARK_RED);
-                break;
-            case "x5":
-            case "darkpurple":
-                component.setColor(ChatColor.DARK_PURPLE);
-                break;
-            case "x6":
-            case "gold":
-                component.setColor(ChatColor.GOLD);
-                break;
-            case "x7":
-            case "gray":
-                component.setColor(ChatColor.GRAY);
-                break;
-            case "x8":
-            case "darkgray":
-                component.setColor(ChatColor.DARK_GRAY);
-                break;
-            case "x9":
-            case "blue":
-                component.setColor(ChatColor.BLUE);
-                break;
-            case "xa":
-            case "green":
-                component.setColor(ChatColor.GREEN);
-                break;
-            case "xb":
-            case "aqua":
-                component.setColor(ChatColor.AQUA);
-                break;
-            case "xc":
-            case "red":
-                component.setColor(ChatColor.RED);
-                break;
-            case "xd":
-            case "lightpurple":
-                component.setColor(ChatColor.LIGHT_PURPLE);
-                break;
-            case "xe":
-            case "yellow":
-                component.setColor(ChatColor.YELLOW);
-                break;
-            case "xf":
-            case "white":
-                component.setColor(ChatColor.WHITE);
-                break;
-            default:
-                if (node instanceof TextNode) {
-                    TextNode text = (TextNode)node;
-                    component.setText(text.getWholeText());
-                }
-                break;
+    private void transform(Node node, TextComponent component) {
+        if (node instanceof TextNode) {
+            TextNode text = (TextNode)node;
+            component.setText(text.getWholeText());
         }
-        if (node.hasAttr("onclick"))
-            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, node.attr("onclick")));
-        if (node.hasAttr("onhover"))
-            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[] { (BaseComponent)parseXML(node.attr("onhover")) }));
+        if (node.hasAttr("run"))
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, node.attr("click")));
+        if (node.hasAttr("hover"))
+            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[] { (BaseComponent)parseXML(node.attr("hover")) }));
+        if (node.hasAttr("suggest")) {
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, node.attr("suggest")));
+        }
+        if (node.hasAttr("copy")) {
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, node.attr("copy")));
+        }
+        if (node.hasAttr("link")) {
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, node.attr("link")));
+        }
     }
 
-    public TextComponent parseXML(String xml) {
+    private TextComponent parseXML(String xml) {
         Document document = Jsoup.parse(xml, "", Parser.xmlParser());
         final Stack<TextComponent> stack = new Stack<>();
         document.traverse(new NodeVisitor() {
@@ -139,10 +64,10 @@ public class MessageBuilder {
                         if (base.getText().isEmpty() && isEmpty(base.getExtra())) {
                             base.setText(leaf.getText());
                         } else {
-                            base.addExtra((BaseComponent)leaf);
+                            base.addExtra(leaf);
                         }
                     } else {
-                        base.addExtra((BaseComponent)leaf);
+                        base.addExtra(leaf);
                     }
                 }
             }
