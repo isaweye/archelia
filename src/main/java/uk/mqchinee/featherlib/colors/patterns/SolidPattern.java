@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 
 public class SolidPattern implements Pattern {
 
-    java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("<hex:([0-9A-Fa-f]{3,6})>|#\\{([0-9A-Fa-f]{3,6})}");
+    java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("<hex:#([0-9A-Fa-f]{3,6})>|#\\{([0-9A-Fa-f]{3,6})}");
 
     public String process(String string) {
         Matcher matcher = pattern.matcher(string);
