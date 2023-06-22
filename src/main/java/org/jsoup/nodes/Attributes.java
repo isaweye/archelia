@@ -502,10 +502,10 @@ public class Attributes implements Iterable<Attribute>, Cloneable {
             return oldValue;
         }
 
-        private class EntrySet extends AbstractSet<Entry<String, String>> {
+        private class EntrySet extends AbstractSet<Map.Entry<String, String>> {
 
             @Override
-            public Iterator<Entry<String, String>> iterator() {
+            public Iterator<Map.Entry<String, String>> iterator() {
                 return new DatasetIterator();
             }
 
@@ -519,7 +519,7 @@ public class Attributes implements Iterable<Attribute>, Cloneable {
             }
         }
 
-        private class DatasetIterator implements Iterator<Entry<String, String>> {
+        private class DatasetIterator implements Iterator<Map.Entry<String, String>> {
             private Iterator<Attribute> attrIter = attributes.iterator();
             private Attribute attr;
             public boolean hasNext() {

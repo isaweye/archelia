@@ -1,4 +1,3 @@
-uk\mqchinee\featherlib\builders\EntityBuilder$Age.class
 uk\mqchinee\featherlib\utils\Experiments.class
 org\jsoup\select\StructuralEvaluator$ImmediatePreviousSibling.class
 org\jsoup\parser\TokeniserState$59.class
@@ -14,11 +13,11 @@ org\jsoup\select\StructuralEvaluator$PreviousSibling.class
 uk\mqchinee\featherlib\utils\RunUtils.class
 org\jsoup\parser\Token$Comment.class
 org\jsoup\parser\Token$EndTag.class
-org\jsoup\examples\HtmlToPlainText.class
 org\jsoup\nodes\CDataNode.class
 org\jsoup\parser\Token.class
 org\jsoup\parser\TokeniserState$33.class
 org\jsoup\nodes\Attributes$1.class
+uk\mqchinee\featherlib\converters\options\JsonMessageOptions.class
 org\jsoup\parser\TokeniserState$53.class
 org\jsoup\parser\TokeniserState$13.class
 org\jsoup\parser\HtmlTreeBuilderState$16.class
@@ -55,6 +54,7 @@ org\jsoup\parser\TokeniserState$41.class
 org\jsoup\select\Evaluator$Id.class
 org\jsoup\parser\HtmlTreeBuilderState$11.class
 org\jsoup\select\Evaluator$ContainsWholeText.class
+uk\mqchinee\featherlib\builders\deprecated\MessageBuilder$1.class
 org\jsoup\parser\TokeniserState$40.class
 uk\mqchinee\featherlib\sql\core\SQLTable.class
 org\jsoup\parser\TokeniserState$58.class
@@ -63,6 +63,7 @@ org\jsoup\select\Selector$SelectorParseException.class
 org\jsoup\parser\TokeniserState$18.class
 org\jsoup\helper\UrlBuilder.class
 org\jsoup\internal\Normalizer.class
+uk\mqchinee\featherlib\impl\SoundBuilderInterface.class
 org\jsoup\select\StructuralEvaluator.class
 uk\mqchinee\featherlib\enums\DataType.class
 org\jsoup\Connection$Method.class
@@ -149,7 +150,6 @@ org\jsoup\UnsupportedMimeTypeException.class
 org\jsoup\nodes\Document$OutputSettings$Syntax.class
 org\jsoup\select\Evaluator$IsNthChild.class
 org\jsoup\select\Evaluator$IndexGreaterThan.class
-uk\mqchinee\featherlib\builders\MessageBuilder.class
 org\jsoup\parser\TokeniserState$15.class
 org\jsoup\parser\HtmlTreeBuilderState$13.class
 org\jsoup\select\Evaluator$IndexEvaluator.class
@@ -163,6 +163,7 @@ org\jsoup\select\Evaluator$IsOnlyChild.class
 org\jsoup\parser\ParseError.class
 org\jsoup\parser\TokeniserState$67.class
 org\jsoup\nodes\Range.class
+uk\mqchinee\featherlib\impl\ParticleBuilderInterface.class
 uk\mqchinee\featherlib\managers\GUIManager$1.class
 uk\mqchinee\featherlib\utils\TextUtils.class
 org\jsoup\nodes\XmlDeclaration.class
@@ -174,8 +175,8 @@ org\jsoup\parser\TokeniserState$49.class
 org\jsoup\select\Evaluator$MatchText.class
 org\jsoup\parser\TokeniserState$36.class
 org\jsoup\select\CombiningEvaluator$Or.class
-org\jsoup\examples\HtmlToPlainText$FormattingVisitor.class
 org\jsoup\parser\TokeniserState$56.class
+uk\mqchinee\featherlib\impl\MobBuilderInterface$Age.class
 org\jsoup\parser\TokeniserState$23.class
 org\jsoup\parser\TokeniserState$43.class
 org\jsoup\parser\TokeniserState$63.class
@@ -194,6 +195,7 @@ org\jsoup\parser\TokeniserState$30.class
 uk\mqchinee\featherlib\builders\EntityBuilder.class
 org\jsoup\select\Evaluator$IndexEquals.class
 org\jsoup\select\Evaluator$IsFirstChild.class
+uk\mqchinee\featherlib\impl\EntityBuilderInterface.class
 org\jsoup\parser\TokeniserState$51.class
 org\jsoup\parser\HtmlTreeBuilderState$20.class
 org\jsoup\parser\Tokeniser.class
@@ -215,8 +217,8 @@ org\jsoup\select\Evaluator$ContainsData.class
 org\jsoup\parser\TokeniserState$8.class
 org\jsoup\parser\TokeniserState$11.class
 org\jsoup\parser\HtmlTreeBuilderState$21.class
-org\jsoup\examples\Wikipedia.class
 org\jsoup\nodes\Entities.class
+uk\mqchinee\featherlib\impl\EntityBuilderInterface$Age.class
 org\jsoup\parser\HtmlTreeBuilderState$5.class
 org\jsoup\parser\TokeniserState$48.class
 org\jsoup\parser\Token$CData.class
@@ -231,7 +233,6 @@ org\jsoup\select\package-info.class
 org\jsoup\parser\HtmlTreeBuilderState$4.class
 org\jsoup\nodes\Element$1.class
 org\jsoup\select\Evaluator$Attribute.class
-org\jsoup\examples\ListLinks.class
 org\jsoup\nodes\EntitiesData.class
 uk\mqchinee\featherlib\colors\patterns\Pattern.class
 org\jsoup\SerializationException.class
@@ -246,6 +247,7 @@ org\jsoup\nodes\Comment.class
 uk\mqchinee\featherlib\gui\core\menu\OpenMenu.class
 org\jsoup\nodes\TextNode.class
 org\jsoup\select\Evaluator$Class.class
+uk\mqchinee\featherlib\builders\deprecated\MessageBuilder.class
 org\jsoup\Connection$Base.class
 org\jsoup\parser\TokeniserState$62.class
 uk\mqchinee\featherlib\sql\core\SQLUtils.class
@@ -253,7 +255,6 @@ org\jsoup\select\Evaluator$ContainsWholeOwnText.class
 org\jsoup\nodes\NodeUtils.class
 org\jsoup\parser\Token$TokenType.class
 uk\mqchinee\featherlib\colors\patterns\SolidPattern.class
-uk\mqchinee\featherlib\builders\MessageBuilder$1.class
 org\jsoup\internal\NonnullByDefault.class
 org\jsoup\select\Evaluator$CssNthEvaluator.class
 org\jsoup\select\Evaluator$IsFirstOfType.class
@@ -279,13 +280,14 @@ uk\mqchinee\featherlib\colors\patterns\RainbowPattern.class
 org\jsoup\parser\TokeniserState.class
 org\jsoup\parser\TokeniserState$57.class
 uk\mqchinee\featherlib\sql\core\DataType.class
+uk\mqchinee\featherlib\impl\MobBuilderInterface.class
 org\jsoup\HttpStatusException.class
 org\jsoup\parser\TokeniserState$54.class
 org\jsoup\UncheckedIOException.class
 org\jsoup\parser\ParseErrorList.class
 uk\mqchinee\featherlib\raycast\BouncyArrow.class
 org\jsoup\parser\HtmlTreeBuilderState$1.class
-uk\mqchinee\featherlib\builders\MobBuilder$Age.class
+uk\mqchinee\featherlib\converters\JsonMessageConverter.class
 uk\mqchinee\featherlib\gui\core\ItemBuilder.class
 uk\mqchinee\featherlib\raycast\BouncyArrow$1.class
 org\jsoup\parser\HtmlTreeBuilderState$24.class
@@ -302,7 +304,9 @@ org\jsoup\nodes\PseudoTextElement.class
 org\jsoup\nodes\Entities$CoreCharset.class
 org\jsoup\internal\StringUtil$StringJoiner.class
 org\jsoup\select\Evaluator$AttributeWithValueMatching.class
+uk\mqchinee\featherlib\impl\ItemBuilderInterface.class
 org\jsoup\select\Evaluator$MatchesWholeText.class
+uk\mqchinee\featherlib\impl\deprecated\MessageBuilderInterface.class
 org\jsoup\parser\TokeniserState$55.class
 org\jsoup\Jsoup.class
 org\jsoup\parser\Parser.class

@@ -13,6 +13,7 @@ public class TextUtils {
             Bukkit.getConsoleSender().sendMessage(colorize(msg));
         }
     }
+
     public String colorize(String message) {
         return message.replace("&", "§");
     }

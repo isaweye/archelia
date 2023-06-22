@@ -391,7 +391,7 @@ public class Element extends Node {
      * <li>{@code el.select("a[href]")} - finds links ({@code a} tags with {@code href} attributes)
      * <li>{@code el.select("a[href*=example.com]")} - finds links pointing to example.com (loosely)
      * </ul>
-     * <p>See the query syntax documentation in {@link Selector}.</p>
+     * <p>See the query syntax documentation in {@link org.jsoup.select.Selector}.</p>
      * <p>Also known as {@code querySelectorAll()} in the Web DOM.</p>
      *
      * @param cssQuery a {@link Selector} CSS-like query
@@ -1484,7 +1484,7 @@ public class Element extends Node {
     /**
      * Get each of the element's class names. E.g. on element {@code <div class="header gray">},
      * returns a set of two elements {@code "header", "gray"}. Note that modifications to this set are not pushed to
-     * the backing {@code class} attribute; use the {@link #classNames(Set)} method to persist them.
+     * the backing {@code class} attribute; use the {@link #classNames(java.util.Set)} method to persist them.
      * @return set of classnames, empty if no class attribute
      */
     public Set<String> classNames() {

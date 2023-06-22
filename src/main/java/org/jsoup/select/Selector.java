@@ -90,7 +90,7 @@ public class Selector {
      * @param query CSS selector
      * @param root  root element to descend into
      * @return matching elements, empty if none
-     * @throws SelectorParseException (unchecked) on an invalid CSS query.
+     * @throws Selector.SelectorParseException (unchecked) on an invalid CSS query.
      */
     public static Elements select(String query, Element root) {
         Validate.notEmpty(query);

@@ -411,9 +411,9 @@ abstract class Token {
             return getData();
         }
 
-        @Override protected Character clone() {
+        @Override protected Token.Character clone() {
             try {
-                return (Character) super.clone();
+                return (Token.Character) super.clone();
             } catch (CloneNotSupportedException e) {
                 throw new RuntimeException(e);
             }
@@ -435,7 +435,7 @@ abstract class Token {
 
     final static class EOF extends Token {
         EOF() {
-            type = TokenType.EOF;
+            type = Token.TokenType.EOF;
         }
 
         @Override

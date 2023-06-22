@@ -18,14 +18,14 @@ import java.util.Map;
 /**
  The Connection interface is a convenient HTTP client and session object to fetch content from the web, and parse them
  into Documents.
- <p>To start a new session, use either {@link Jsoup#newSession()} or {@link Jsoup#connect(String)}.
- Connections contain {@link Request} and {@link Response} objects (once executed). Configuration
+ <p>To start a new session, use either {@link org.jsoup.Jsoup#newSession()} or {@link org.jsoup.Jsoup#connect(String)}.
+ Connections contain {@link Connection.Request} and {@link Connection.Response} objects (once executed). Configuration
  settings (URL, timeout, useragent, etc) set on a session will be applied by default to each subsequent request.</p>
  <p>To start a new request from the session, use {@link #newRequest()}.</p>
  <p>Cookies are stored in memory for the duration of the session. For that reason, do not use one single session for all
  requests in a long-lived application, or you are likely to run out of memory, unless care is taken to clean up the
  cookie store. The cookie store for the session is available via {@link #cookieStore()}. You may provide your own
- implementation via {@link #cookieStore(CookieStore)} before making requests.</p>
+ implementation via {@link #cookieStore(java.net.CookieStore)} before making requests.</p>
  <p>Request configuration can be made using either the shortcut methods in Connection (e.g. {@link #userAgent(String)}),
  or by methods in the Connection.Request object directly. All request configuration must be made before the request is
  executed. When used as an ongoing session, initialize all defaults prior to making multi-threaded {@link
@@ -259,7 +259,7 @@ public interface Connection {
      * @param name header name
      * @param value header value
      * @return this Connection, for chaining
-     * @see Request#headers()
+     * @see org.jsoup.Connection.Request#headers()
      */
     Connection header(String name, String value);
 
@@ -267,7 +267,7 @@ public interface Connection {
      * Adds each of the supplied headers to the request.
      * @param headers map of headers name {@literal ->} value pairs
      * @return this Connection, for chaining
-     * @see Request#headers()
+     * @see org.jsoup.Connection.Request#headers()
      */
     Connection headers(Map<String,String> headers);
 

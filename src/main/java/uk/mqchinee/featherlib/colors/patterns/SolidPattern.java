@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 
 public class SolidPattern implements Pattern {
 
-    java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("<SOLID:([0-9A-Fa-f]{3,6})>|#\\{([0-9A-Fa-f]{3,6})}");
+    java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("<hex:([0-9A-Fa-f]{3,6})>|#\\{([0-9A-Fa-f]{3,6})}");
 
     public String process(String string) {
         Matcher matcher = pattern.matcher(string);
@@ -18,6 +18,9 @@ public class SolidPattern implements Pattern {
             string = string.replace(matcher.group(), Iridium.getColor(color) + "");
         }
         return string;
+    }
+    public String clear(String string) {
+        return process(string);
     }
 
 }

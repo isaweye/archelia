@@ -1,4 +1,4 @@
-package uk.mqchinee.featherlib.builders;
+package uk.mqchinee.featherlib.builders.deprecated;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -13,37 +13,47 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.NodeVisitor;
 import uk.mqchinee.featherlib.colors.Iridium;
-import uk.mqchinee.featherlib.impl.MessageBuilderInterface;
+import uk.mqchinee.featherlib.converters.JsonMessageConverter;
+import uk.mqchinee.featherlib.impl.deprecated.MessageBuilderInterface;
 
 import java.util.Collection;
 import java.util.Stack;
 
+@Deprecated
 public class MessageBuilder implements MessageBuilderInterface {
 
     private String message;
     private TextComponent component;
 
-    private void transform(Node node, TextComponent component) {
-        if (node instanceof TextNode) {
-            TextNode text = (TextNode)node;
-            component.setText(text.getWholeText());
-        }
-        if (node.hasAttr("run"))
-            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, node.attr("click")));
-        if (node.hasAttr("hover"))
-            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[] { (BaseComponent)parseXML(node.attr("hover")) }));
-        if (node.hasAttr("suggest")) {
-            component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, node.attr("suggest")));
-        }
-        if (node.hasAttr("copy")) {
-            component.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, node.attr("copy")));
-        }
-        if (node.hasAttr("link")) {
-            component.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, node.attr("link")));
-        }
+    private boolean isEmpty(Collection<?> collection) {
+        return (collection == null || collection.isEmpty());
     }
 
-    private TextComponent parseXML(String xml) {
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
+    public void transform(Node node, TextComponent component) {
+        if (node instanceof TextNode) {
+            component.setText(((TextNode) node).getWholeText());
+        }
+        if (node.hasAttr("run"))
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, node.attr("run")));
+        if (node.hasAttr("link"))
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, node.attr("link")));
+        if (node.hasAttr("suggest"))
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, node.attr("suggest")));
+        if (node.hasAttr("copy"))
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, node.attr("copy")));
+        if (node.hasAttr("hover"))
+            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[] { parseXML(node.attr("hover")) }));
+    }
+
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
+    public TextComponent parseXML(String xml) {
         Document document = Jsoup.parse(xml, "", Parser.xmlParser());
         final Stack<TextComponent> stack = new Stack<>();
         document.traverse(new NodeVisitor() {
@@ -76,39 +86,65 @@ public class MessageBuilder implements MessageBuilderInterface {
         return stack.empty() ? new TextComponent() : stack.pop();
     }
 
-    private boolean isEmpty(Collection<?> collection) {
-        return (collection == null || collection.isEmpty());
-    }
-
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
     public MessageBuilder(String message) {
         this.message = message;
     }
 
-    @Override
+
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
     public MessageBuilder placeholders(Player player) {
         this.message = PlaceholderAPI.setPlaceholders(player, message);
         return this;
     }
 
-    @Override
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
     public MessageBuilder process() {
         this.message = Iridium.process(message);
         return this;
     }
 
-    @Override
-    public MessageBuilder html() {
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
+    public MessageBuilder remove() {
+        this.message = Iridium.clearThat(message);
+        return this;
+    }
+
+
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
+    public MessageBuilder xml() {
         component = parseXML(message);
         return this;
     }
 
-    @Override
-    public TextComponent buildComponent() {
-        return component;
-    }
-
-    @Override
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
     public String build() {
         return message;
+    }
+
+    /**
+     * @see JsonMessageConverter
+     */
+    @Deprecated
+    public TextComponent buildComponent() {
+        return component;
     }
 }

@@ -27,7 +27,7 @@ import static javax.xml.transform.OutputKeys.METHOD;
 import static org.jsoup.nodes.Document.OutputSettings.Syntax;
 
 /**
- * Helper class to transform a {@link org.jsoup.nodes.Document} to a {@link Document org.w3c.dom.Document},
+ * Helper class to transform a {@link org.jsoup.nodes.Document} to a {@link org.w3c.dom.Document org.w3c.dom.Document},
  * for integration with toolsets that use the W3C DOM.
  */
 public class W3CDom {
@@ -189,7 +189,7 @@ public class W3CDom {
             org.jsoup.nodes.Document inDoc = in.ownerDocument();
             org.jsoup.nodes.DocumentType doctype = inDoc != null ? inDoc.documentType() : null;
             if (doctype != null) {
-                DocumentType documentType = impl.createDocumentType(doctype.name(), doctype.publicId(), doctype.systemId());
+                org.w3c.dom.DocumentType documentType = impl.createDocumentType(doctype.name(), doctype.publicId(), doctype.systemId());
                 out.appendChild(documentType);
             }
             out.setXmlStandalone(true);
@@ -209,7 +209,7 @@ public class W3CDom {
      *
      * @param in jsoup doc
      * @param out w3c doc
-     * @see W3CDom#fromJsoup(org.jsoup.nodes.Element)
+     * @see org.jsoup.helper.W3CDom#fromJsoup(org.jsoup.nodes.Element)
      */
     public void convert(org.jsoup.nodes.Document in, Document out) {
         // just provides method API backcompat
@@ -222,7 +222,7 @@ public class W3CDom {
      *
      * @param in jsoup element
      * @param out w3c doc
-     * @see W3CDom#fromJsoup(org.jsoup.nodes.Element)
+     * @see org.jsoup.helper.W3CDom#fromJsoup(org.jsoup.nodes.Element)
      */
     public void convert(org.jsoup.nodes.Element in, Document out) {
         W3CBuilder builder = new W3CBuilder(out);
@@ -289,7 +289,7 @@ public class W3CDom {
         List<T> nodes = new ArrayList<>(nodeList.getLength());
 
         for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
+            org.w3c.dom.Node node = nodeList.item(i);
             Object source = node.getUserData(W3CDom.SourceProperty);
             if (nodeType.isInstance(source))
                 nodes.add(nodeType.cast(source));

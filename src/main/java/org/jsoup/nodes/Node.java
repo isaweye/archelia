@@ -620,7 +620,7 @@ public abstract class Node implements Cloneable {
      * Get the list index of this node in its node sibling list. E.g. if this is the first node
      * sibling, returns 0.
      * @return position in node sibling list
-     * @see Element#elementSiblingIndex()
+     * @see org.jsoup.nodes.Element#elementSiblingIndex()
      */
     public int siblingIndex() {
         return siblingIndex;

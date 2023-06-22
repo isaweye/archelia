@@ -9,7 +9,7 @@ import java.io.StringReader;
 import java.util.List;
 
 /**
- Parses HTML or XML into a {@link Document}. Generally, it is simpler to use one of the parse methods in
+ Parses HTML or XML into a {@link org.jsoup.nodes.Document}. Generally, it is simpler to use one of the parse methods in
  {@link org.jsoup.Jsoup}.
  <p>Note that a Parser instance object is not threadsafe. To reuse a Parser configuration in a multi-threaded
  environment, use {@link #newInstance()} to make copies. */

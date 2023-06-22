@@ -220,7 +220,7 @@ public class HtmlTreeBuilder extends TreeBuilder {
                 currentToken.tokenType(), currentToken, state));
     }
 
-    Element insert(final StartTag startTag) {
+    Element insert(final Token.StartTag startTag) {
         dedupeAttributes(startTag);
 
         // handle empty unknown tags
@@ -254,7 +254,7 @@ public class HtmlTreeBuilder extends TreeBuilder {
         stack.add(el);
     }
 
-    Element insertEmpty(StartTag startTag) {
+    Element insertEmpty(Token.StartTag startTag) {
         dedupeAttributes(startTag);
 
         Tag tag = tagFor(startTag.name(), settings);
@@ -271,7 +271,7 @@ public class HtmlTreeBuilder extends TreeBuilder {
         return el;
     }
 
-    FormElement insertForm(StartTag startTag, boolean onStack, boolean checkTemplateStack) {
+    FormElement insertForm(Token.StartTag startTag, boolean onStack, boolean checkTemplateStack) {
         dedupeAttributes(startTag);
 
         Tag tag = tagFor(startTag.name(), settings);

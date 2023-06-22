@@ -92,7 +92,7 @@ public class HttpConnection implements Connection {
         return val.replace("\"", "%22");
     }
 
-    private Request req;
+    private HttpConnection.Request req;
     private @Nullable Connection.Response res;
 
     @Override
@@ -335,7 +335,7 @@ public class HttpConnection implements Connection {
 
     @Override
     public Connection request(Connection.Request request) {
-        req = (Request) request; // will throw a class-cast exception if the user has extended some but not all of Connection; that's desired
+        req = (HttpConnection.Request) request; // will throw a class-cast exception if the user has extended some but not all of Connection; that's desired
         return this;
     }
 
@@ -608,7 +608,7 @@ public class HttpConnection implements Connection {
         }
     }
 
-    public static class Request extends Base<Connection.Request> implements Connection.Request {
+    public static class Request extends HttpConnection.Base<Connection.Request> implements Connection.Request {
         static {
             System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
             // make sure that we can send Sec-Fetch-Site headers etc.
@@ -797,7 +797,7 @@ public class HttpConnection implements Connection {
         }
     }
 
-    public static class Response extends Base<Connection.Response> implements Connection.Response {
+    public static class Response extends HttpConnection.Base<Connection.Response> implements Connection.Response {
         private static final int MAX_REDIRECTS = 20;
         private static final String LOCATION = "Location";
         private final int statusCode;
@@ -810,7 +810,7 @@ public class HttpConnection implements Connection {
         private boolean executed = false;
         private boolean inputStreamRead = false;
         private int numRedirects = 0;
-        private final Request req;
+        private final HttpConnection.Request req;
 
         /*
          * Matches XML content types (like text/xml, application/xhtml+xml;charset=UTF8, etc)
@@ -829,11 +829,11 @@ public class HttpConnection implements Connection {
             contentType = null;
         }
 
-        static Response execute(Request req) throws IOException {
+        static Response execute(HttpConnection.Request req) throws IOException {
             return execute(req, null);
         }
 
-        static Response execute(Request req, @Nullable Response previousResponse) throws IOException {
+        static Response execute(HttpConnection.Request req, @Nullable Response previousResponse) throws IOException {
             synchronized (req) {
                 Validate.isFalse(req.executing, "Multiple threads were detected trying to execute the same request concurrently. Make sure to use Connection#newRequest() and do not share an executing request between threads.");
                 req.executing = true;
@@ -1024,7 +1024,7 @@ public class HttpConnection implements Connection {
         }
 
         // set up connection defaults, and details from request
-        private static HttpURLConnection createConnection(Request req) throws IOException {
+        private static HttpURLConnection createConnection(HttpConnection.Request req) throws IOException {
             Proxy proxy = req.proxy();
             final HttpURLConnection conn = (HttpURLConnection) (
                 proxy == null ?
@@ -1071,7 +1071,7 @@ public class HttpConnection implements Connection {
         }
 
         // set up url, method, header, cookies
-        private Response(HttpURLConnection conn, Request request, @Nullable Response previousResponse) throws IOException {
+        private Response(HttpURLConnection conn, HttpConnection.Request request, @Nullable HttpConnection.Response previousResponse) throws IOException {
             this.conn = conn;
             this.req = request;
             method = Method.valueOf(conn.getRequestMethod());

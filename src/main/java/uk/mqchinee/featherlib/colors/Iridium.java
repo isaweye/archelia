@@ -2,12 +2,11 @@ package uk.mqchinee.featherlib.colors;
 
 import com.google.common.collect.ImmutableMap;
 import net.md_5.bungee.api.ChatColor;
-import org.apache.commons.lang.Validate;
-import org.bukkit.Bukkit;
 import uk.mqchinee.featherlib.colors.patterns.GradientPattern;
 import uk.mqchinee.featherlib.colors.patterns.Pattern;
 import uk.mqchinee.featherlib.colors.patterns.RainbowPattern;
 import uk.mqchinee.featherlib.colors.patterns.SolidPattern;
+import uk.mqchinee.featherlib.utils.TextUtils;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -18,9 +17,8 @@ import java.util.stream.Collectors;
 
 public class Iridium {
 
-    private static final int VERSION = getVersion();
-
-    private static final boolean SUPPORTS_RGB = VERSION >= 16;
+    private static final boolean SUPPORTS_RGB = true;
+    private static final TextUtils t = new TextUtils();
 
     private static final List<String> SPECIAL_COLORS = Arrays.asList("&l", "&n", "&o", "&k", "&m", "§l", "§n", "§o", "§k", "§m");
 
@@ -58,6 +56,15 @@ public class Iridium {
         return strings.stream()
                 .map(Iridium::process)
                 .collect(Collectors.toList());
+    }
+
+    public static String clearThat(String string) {
+        for (Pattern pattern : PATTERNS) {
+            string = pattern.clear(string);
+        }
+
+        string = ChatColor.translateAlternateColorCodes('&', string);
+        return string;
     }
 
     public static String color(String string, Color color) {
@@ -175,22 +182,5 @@ public class Iridium {
         return COLORS.get(nearestColor);
     }
 
-    private static int getVersion() {
-        String version = Bukkit.getVersion();
-        Validate.notEmpty(version, "Cannot get major Minecraft version from null or empty string");
-
-        int index = version.lastIndexOf("MC:");
-        if (index != -1) {
-            version = version.substring(index + 4, version.length() - 1);
-        } else if (version.endsWith("SNAPSHOT")) {
-            index = version.indexOf('-');
-            version = version.substring(0, index);
-        }
-
-        int lastDot = version.lastIndexOf('.');
-        if (version.indexOf('.') != lastDot) version = version.substring(0, lastDot);
-
-        return Integer.parseInt(version.substring(2));
-    }
 
 }
