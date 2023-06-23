@@ -4,13 +4,13 @@ import java.util.SplittableRandom;
 
 public class Experiments {
 
-    public void ignore(Runnable runnable) {
+    public static void ignore(Runnable runnable) {
         try {
             runnable.run();
         } catch (Exception ignore) {}
     }
 
-    public void chance(int integer, Runnable runnable) {
+    public static void chance(int integer, Runnable runnable) {
         SplittableRandom random = new SplittableRandom();
         if(random.nextInt(1, 101) <= integer) { runnable.run(); }
     }

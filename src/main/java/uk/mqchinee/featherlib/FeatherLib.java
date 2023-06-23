@@ -1,5 +1,7 @@
 package uk.mqchinee.featherlib;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -13,10 +15,11 @@ import java.util.logging.Logger;
 
 public final class FeatherLib extends JavaPlugin {
 
-    public static List<String> currentlyUsing = new ArrayList<>();
+    public static List<Plugin> currentlyUsing = new ArrayList<>();
     private static Logger log;
     private static FeatherLib instance;
     private static Economy economy = null;
+    private static ProtocolManager protocolManager = null;
 
     @Override
     public void onEnable() {
@@ -36,6 +39,11 @@ public final class FeatherLib extends JavaPlugin {
             log.info("§fHooked into §aVault§f!");
         }
         else { log.info("§fFailed to hook into §cVault§f!"); }
+
+        if (protocolLib()) {
+            log.info("§fHooked into §aProtocolLib§f!");
+        }
+        else { log.info("§fFailed to hook into §cProtocolLib§f!"); }
     }
 
     private boolean vault() {
@@ -50,13 +58,21 @@ public final class FeatherLib extends JavaPlugin {
         return false;
     }
 
+    private boolean protocolLib() {
+        if (Bukkit.getServer().getPluginManager().getPlugin("ProtocolLib") != null) {
+            protocolManager = ProtocolLibrary.getProtocolManager();
+            return true;
+        }
+        return false;
+    }
+
     private void update() {
         for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
             if (plugin.getDescription().getDepend().contains("FeatherLib")) {
-                currentlyUsing.add(plugin.getName());
+                currentlyUsing.add(plugin);
             }
             if (plugin.getDescription().getSoftDepend().contains("FeatherLib")) {
-                currentlyUsing.add(plugin.getName());
+                currentlyUsing.add(plugin);
             }
         }
     }
@@ -67,6 +83,10 @@ public final class FeatherLib extends JavaPlugin {
 
     public static Economy economy() {
         return economy;
+    }
+
+    public static ProtocolManager protocol() {
+        return protocolManager;
     }
     public static FeatherLib get() {
         return instance;

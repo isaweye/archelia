@@ -39,7 +39,6 @@ public abstract class Ricochet {
     private double offsetZ = 0.2;
     private double weight = 0.5;
     private BukkitRunnable task;
-    private final Experiments e = new Experiments();
     private boolean physics = false;
     private int max = 3;
     private int now = 0;
@@ -155,7 +154,7 @@ public abstract class Ricochet {
     }
 
     public void stop() {
-        e.ignore(() -> task.cancel());
+        Experiments.ignore(() -> task.cancel());
     }
 
     public void launch() {

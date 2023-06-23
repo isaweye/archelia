@@ -8,10 +8,8 @@ import java.util.Map;
 
 public class MapSorter {
 
-    private RunUtils r = new RunUtils();
-
     public void sort(Map map, int skip, int last, ComparingBy comparingBy, Comparator comparator, Consumer<Map.Entry> entry) {
-        r.async(() -> {
+        RunUtils.async(() -> {
             switch (comparingBy) {
                 case KEY:
                     map.entrySet()
@@ -32,7 +30,7 @@ public class MapSorter {
     }
 
     public void sort(Map map, int skip, int last, ComparingBy comparingBy, Consumer<Map.Entry> entry) {
-        r.async(() -> {
+        RunUtils.async(() -> {
             switch (comparingBy) {
                 case KEY:
                     map.entrySet()

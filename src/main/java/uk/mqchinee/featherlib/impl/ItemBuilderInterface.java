@@ -5,7 +5,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import uk.mqchinee.featherlib.gui.core.ItemBuilder;
+import uk.mqchinee.featherlib.builders.ItemBuilder;
 
 import java.util.List;
 import java.util.Map;

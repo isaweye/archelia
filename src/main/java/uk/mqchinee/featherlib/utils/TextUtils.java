@@ -8,22 +8,22 @@ import java.util.List;
 
 public class TextUtils {
 
-    public void console(String... message) {
+    public static void console(String... message) {
         for(String msg : message) {
             Bukkit.getConsoleSender().sendMessage(colorize(msg));
         }
     }
 
-    public String colorize(String message) {
+    public static String colorize(String message) {
         return message.replace("&", "§");
     }
 
-    public List<String> fromString(String data) {
+    public static List<String> fromString(String data) {
         data = data.replace("[","").replace("]","");
         return Arrays.asList(data.split(",",-1));
     }
 
-    public String fromList(List<String> list) {
+    public static String fromList(List<String> list) {
         StringBuilder send = new StringBuilder("");
         for(Object message : list) {
             String msg = message.toString();
@@ -32,12 +32,12 @@ public class TextUtils {
         return String.valueOf(send);
     }
 
-    public void send(String message) {
+    public static void send(String message) {
         console(message);
         sendToOps(message);
     }
 
-    public void sendToOps(String message) {
+    public static void sendToOps(String message) {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             if (player.isOp()) {
                 player.sendMessage(colorize(message));
@@ -45,7 +45,7 @@ public class TextUtils {
         }
     }
 
-    public String fromListColorized(List<String> list) {
+    public static String fromListColorized(List<String> list) {
         StringBuilder send = new StringBuilder("");
         for(Object message : list) {
             String msg = message.toString();

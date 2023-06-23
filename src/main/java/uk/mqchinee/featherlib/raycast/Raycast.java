@@ -36,7 +36,6 @@ public abstract class Raycast {
     private double offsetZ = 0.2;
     private double weight = 0.5;
     private BukkitRunnable task;
-    private final Experiments e = new Experiments();
     private boolean physics = false;
 
     public Raycast(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {
@@ -96,7 +95,7 @@ public abstract class Raycast {
     }
 
     public void stop() {
-        e.ignore(() -> task.cancel());
+        Experiments.ignore(() -> task.cancel());
     }
 
     public void setWeight(double weight) {

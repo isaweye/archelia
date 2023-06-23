@@ -15,8 +15,6 @@ import java.util.Random;
 
 public class ItemUtils {
 
-    private final TextUtils t = new TextUtils();
-
     public Map<String, Object> serialize(ItemStack item) {
         return item.serialize();
     }

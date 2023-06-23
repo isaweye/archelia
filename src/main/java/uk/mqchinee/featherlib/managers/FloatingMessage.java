@@ -1,7 +1,11 @@
 package uk.mqchinee.featherlib.managers;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.PacketContainer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.Entity;
 import uk.mqchinee.featherlib.managers.utils.FloatingMessageFormatter;
@@ -17,17 +21,20 @@ public class FloatingMessage {
     private final int minDuration;
     private final int maxDuration;
     private final int readSpeed;
+    private final boolean useProtocolLib;
 
     public FloatingMessage (
             FloatingMessageFormatter messageFormatter,
             int minDuration,
             int maxDuration,
-            int readSpeed
+            int readSpeed,
+            boolean useProtocolLib
     ) {
         this.messageFormatter = messageFormatter;
         this.minDuration = minDuration;
         this.maxDuration = maxDuration;
         this.readSpeed = readSpeed;
+        this.useProtocolLib = useProtocolLib;
     }
 
     private Entity getCurrentMount(Entity entity) {
@@ -42,35 +49,42 @@ public class FloatingMessage {
     }
 
     public void spawnOn(Entity entity, String chatMessage) {
-        AreaEffectCloud currentLinesMount = (AreaEffectCloud) getCurrentMount(entity);
-        int currentLinesMountDuration = currentLinesMount == null ? 0 :
-                currentLinesMount.getDuration() - currentLinesMount.getTicksLived();
+        if (!useProtocolLib) {
+            AreaEffectCloud currentLinesMount = (AreaEffectCloud) getCurrentMount(entity);
+            int currentLinesMountDuration = currentLinesMount == null ? 0 :
+                    currentLinesMount.getDuration() - currentLinesMount.getTicksLived();
 
-        int computedDuration = computeDuration(chatMessage);
-        int duration = Math.max(computedDuration, currentLinesMountDuration);
+            int computedDuration = computeDuration(chatMessage);
+            int duration = Math.max(computedDuration, currentLinesMountDuration);
 
-        List<String> messageLines = messageFormatter.format(chatMessage);
-        Collections.reverse(messageLines);
 
-        List<Entity> lines = new ArrayList<>();
-        for (String messageLine : messageLines) {
-            Location location = entity.getLocation().add(0, 1, 0);
-            AreaEffectCloud particle = entity.getWorld().spawn(location, AreaEffectCloud.class);
-            particle.setRadius(0);
-            particle.setWaitTime(0);
-            particle.setDuration(duration);
-            particle.setCustomNameVisible(true);
-            particle.setCustomName(messageLine);
-            particle.addScoreboardTag(floatingMessageTag);
-            lines.add(particle);
-        }
 
-        if (currentLinesMount != null) lines.add(currentLinesMount);
+            List<String> messageLines = messageFormatter.format(chatMessage);
+            Collections.reverse(messageLines);
 
-        Entity linesMount = entity;
-        for (Entity line : lines) {
-            linesMount.addPassenger(line);
-            linesMount = line;
+            List<Entity> lines = new ArrayList<>();
+            for (String messageLine : messageLines) {
+                Location location = entity.getLocation().add(0, 1, 0);
+                AreaEffectCloud particle = entity.getWorld().spawn(location, AreaEffectCloud.class);
+                particle.setParticle(Particle.BLOCK_CRACK, Material.AIR.createBlockData());
+                particle.setRadius(0);
+                particle.setWaitTime(0);
+                particle.setDuration(duration);
+                particle.setCustomNameVisible(true);
+                particle.setCustomName(messageLine);
+                particle.addScoreboardTag(floatingMessageTag);
+                lines.add(particle);
+            }
+
+            if (currentLinesMount != null) lines.add(currentLinesMount);
+
+            Entity linesMount = entity;
+            for (Entity line : lines) {
+                linesMount.addPassenger(line);
+                linesMount = line;
+            }
+        } else {
+            PacketContainer test = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
         }
     }
 

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("deprecation")
 public final class JsonMessageConverter {
 
     public JsonMessageConverter(boolean hover, boolean run, boolean suggest, boolean link, boolean translateCodes, boolean iridium) {
@@ -27,7 +28,7 @@ public final class JsonMessageConverter {
     }
 
     public static final JsonMessageConverter DEFAULT = new JsonMessageConverter(true, true, true, true, true, true);
-    private static final Pattern JMM_PATTERN = Pattern.compile("\\<(.+?)\\>(.+?)\\</>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+    private static final Pattern JMM_PATTERN = Pattern.compile("\\<(.+?)\\>\\<(.+?)\\>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
     private static final Pattern JMM_ARG_SPLIT_PATTERN = Pattern.compile(" || ", Pattern.CASE_INSENSITIVE | Pattern.LITERAL);
 
     private final boolean hover;

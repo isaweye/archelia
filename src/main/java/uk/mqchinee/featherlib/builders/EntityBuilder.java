@@ -13,7 +13,6 @@ public class EntityBuilder implements EntityBuilderInterface {
     private EntityType entityType;
     private Location location;
     private Entity entity;
-    private final TextUtils t = new TextUtils();
 
     public EntityBuilder(EntityType entityType, Location location) {
         this.entityType = entityType;
@@ -33,7 +32,7 @@ public class EntityBuilder implements EntityBuilderInterface {
 
     @Override
     public EntityBuilder name(String name) {
-        this.entity.setCustomName(t.colorize(name));
+        this.entity.setCustomName(TextUtils.colorize(name));
         return this;
     }
 
@@ -105,8 +104,7 @@ public class EntityBuilder implements EntityBuilderInterface {
 
     @Override
     public EntityBuilder age(Age age) {
-        if (this.entity instanceof Ageable) {
-            Ageable ageable = (Ageable) this.entity;
+        if (this.entity instanceof Ageable ageable) {
             switch (age) {
                 case BABY:
                     (ageable).setBaby();
