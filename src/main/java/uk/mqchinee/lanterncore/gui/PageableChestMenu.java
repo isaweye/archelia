@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import uk.mqchinee.lanterncore.gui.item.ClickableItem;
@@ -23,8 +22,8 @@ public class PageableChestMenu extends ChestMenu {
 
     private int page;
 
-    private AbstractMap.SimpleEntry<Integer, MenuItem> nextPageItem = null;
-    private AbstractMap.SimpleEntry<Integer, MenuItem> previousPageItem = null;
+    private AbstractMap.SimpleEntry<Integer, ClickableItem> nextPageItem = null;
+    private AbstractMap.SimpleEntry<Integer, ClickableItem> previousPageItem = null;
 
     private List<PageableChestMenu> mirrorMenus = Lists.newArrayList();
     private PageableChestMenu fatherMenu;
@@ -42,8 +41,8 @@ public class PageableChestMenu extends ChestMenu {
         this.items = father.items;
         this.pageableItems = father.pageableItems;
 
-        if(father.nextPageItem != null) this.setNextPageItem(father.nextPageItem.getValue().getItem(), father.nextPageItem.getKey());
-        if(father.previousPageItem != null) this.setPreviousPageItem(father.previousPageItem.getValue().getItem(), father.previousPageItem.getKey());
+        if(father.nextPageItem != null) this.setNextPageItem(father.nextPageItem.getValue(), father.nextPageItem.getKey());
+        if(father.previousPageItem != null) this.setPreviousPageItem(father.previousPageItem.getValue(), father.previousPageItem.getKey());
 
         this.mirrorMenus = null;
         this.fatherMenu = father;
@@ -111,7 +110,7 @@ public class PageableChestMenu extends ChestMenu {
         return 0;
     }
 
-    public PageableChestMenu setNextPageItem(ItemStack item, int slot) {
+    public PageableChestMenu setNextPageItem(ClickableItem item, int slot) {
         if(slot < 0 || slot >= this.getRows() * 9) throw new IllegalArgumentException("The slot can't be less than zero or greater than the inventory size.");
         for(int slotIndex : itemSlots) {
             if(slot == slotIndex) throw new IllegalArgumentException("You can't add an item in a slot reserved for pageable items.");
@@ -120,7 +119,7 @@ public class PageableChestMenu extends ChestMenu {
         if(fatherMenu == null) mirrorMenus.forEach(menu -> menu.setNextPageItem(item, slot));
 
         Integer oldSlot = nextPageItem != null ? nextPageItem.getKey() : null;
-        nextPageItem = new AbstractMap.SimpleEntry<>(slot, ClickableItem.create(item)
+        nextPageItem = new AbstractMap.SimpleEntry<>(slot, (ClickableItem) item
                 .setOnPrimary(click -> {
                     if(click.getWhoClicked() instanceof Player) {
                         Bukkit.getScheduler().runTask(this.plugin, () -> {
@@ -139,7 +138,7 @@ public class PageableChestMenu extends ChestMenu {
         return this;
     }
 
-    public PageableChestMenu setPreviousPageItem(ItemStack item, int slot) {
+    public PageableChestMenu setPreviousPageItem(ClickableItem item, int slot) {
         if(slot < 0 || slot >= this.getRows() * 9) throw new IllegalArgumentException("The slot can't be less than zero or greater than the inventory size.");
         for(int slotIndex : itemSlots) {
             if(slot == slotIndex) throw new IllegalArgumentException("You can't add an item in a slot reserved for pageable items.");
@@ -148,7 +147,7 @@ public class PageableChestMenu extends ChestMenu {
         if(fatherMenu == null) mirrorMenus.forEach(menu -> menu.setPreviousPageItem(item, slot));
 
         Integer oldSlot = previousPageItem != null ? previousPageItem.getKey() : null;
-        previousPageItem = new AbstractMap.SimpleEntry<>(slot, ClickableItem.create(item)
+        previousPageItem = new AbstractMap.SimpleEntry<>(slot, (ClickableItem) item
                 .setOnPrimary(click -> {
                     if(click.getWhoClicked() instanceof Player) {
                         Bukkit.getScheduler().runTask(this.plugin, () -> {
@@ -257,8 +256,8 @@ public class PageableChestMenu extends ChestMenu {
         copy.setOnShiftSecondary(getOnShiftSecondary());
         copy.setOnDouble(getOnDouble());
 
-        if(nextPageItem != null) copy.setNextPageItem(nextPageItem.getValue().getItem(), nextPageItem.getKey());
-        if(previousPageItem != null) copy.setPreviousPageItem(previousPageItem.getValue().getItem(), previousPageItem.getKey());
+        if(nextPageItem != null) copy.setNextPageItem(nextPageItem.getValue(), nextPageItem.getKey());
+        if(previousPageItem != null) copy.setPreviousPageItem(previousPageItem.getValue(), previousPageItem.getKey());
 
         getItems().forEach((slot, item) -> copy.addItem(item.copy(), slot));
         copy.setPageableItems(getPageableItems());
