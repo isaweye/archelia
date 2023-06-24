@@ -20,6 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import uk.mqchinee.lanterncore.gui.item.ClickableItem;
+import uk.mqchinee.lanterncore.gui.item.LoopableItem;
 import uk.mqchinee.lanterncore.gui.item.MenuItem;
 
 import java.util.*;
@@ -81,6 +82,14 @@ public class ChestMenu {
     }
 
     public void fillRow(int row, ClickableItem item) {
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            for (int i = 0; i < row*9; i++) {
+                addItem(item, i);
+            }
+        });
+    }
+
+    public void fillRow(int row, LoopableItem item) {
         Bukkit.getScheduler().runTask(plugin, () -> {
             for (int i = 0; i < row*9; i++) {
                 addItem(item, i);
