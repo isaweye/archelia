@@ -29,7 +29,7 @@ public final class LanternCore extends JavaPlugin {
         log.info(TextUtils.colorize("&6Lantern&fCore &fhas been successfully &aloaded &fand is &aready to use&f!"));
         update();
 
-        getCommand("feather").setExecutor(new Command());
+        getCommand("lantern").setExecutor(new Command());
     }
 
     private void setup() {

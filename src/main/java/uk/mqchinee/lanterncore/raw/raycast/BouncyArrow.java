@@ -1,4 +1,4 @@
-package uk.mqchinee.lanterncore.raycast;
+package uk.mqchinee.lanterncore.raw.raycast;
 
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,8 +14,8 @@ import org.bukkit.util.Vector;
 public abstract class BouncyArrow {
 
     private Projectile projectile;
-    private LivingEntity shooter;
-    private JavaPlugin plugin;
+    private final LivingEntity shooter;
+    private final JavaPlugin plugin;
     private double reduce = 0.2;
     private double threshold;
     private BukkitRunnable task;
@@ -110,14 +110,14 @@ public abstract class BouncyArrow {
         new BukkitRunnable() {
             public void run() {
                 task = this;
-                if(projectile.getLocation().getY() < -10) {
+                if(projectile.getLocation().getY() < -70) {
                     this.cancel(); onDestroy();
                 }
                 if(!projectile.isOnGround() && !projectile.isDead()) {
                     onMove();
                     oldProjectile = projectile;
                 }
-                else if (projectile.isDead()) {
+                else if (projectile.isDead() || projectile.isEmpty()) {
                     onEntityHit();
                     this.cancel();
                 }
