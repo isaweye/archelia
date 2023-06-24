@@ -2,12 +2,12 @@ package uk.mqchinee.lanterncore.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitScheduler;
-import uk.mqchinee.lanterncore.FeatherLib;
+import uk.mqchinee.lanterncore.LanternCore;
 import uk.mqchinee.lanterncore.enums.Time;
 
 public class RunUtils {
-    public static FeatherLib get() {
-        return FeatherLib.get();
+    public static LanternCore get() {
+        return LanternCore.get();
     }
 
     public static BukkitScheduler scheduler() {
