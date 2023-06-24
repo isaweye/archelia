@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FeatherLib.iml" filepath="$PROJECT_DIR$/FeatherLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LanternCore.iml" filepath="$PROJECT_DIR$/LanternCore.iml" />
     </modules>
   </component>
 </project>
