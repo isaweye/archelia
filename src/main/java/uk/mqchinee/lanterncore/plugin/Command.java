@@ -12,7 +12,7 @@ public class Command implements CommandExecutor {
 
     private String get() {
         StringBuilder stringBuilder = new StringBuilder();
-        int i = 0;
+        int i = 1;
         List<Plugin> list = LanternCore.currentlyUsing;
         for (Plugin plugin : list) {
             if (list.size() != i) {

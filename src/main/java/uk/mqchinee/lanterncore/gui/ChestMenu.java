@@ -80,6 +80,14 @@ public class ChestMenu {
         return this;
     }
 
+    public void fillRow(int row, ClickableItem item) {
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            for (int i = 0; i < row*9; i++) {
+                addItem(item, i);
+            }
+        });
+    }
+
     public MenuItem getItem(Integer slot) {
         return items.get(slot);
     }

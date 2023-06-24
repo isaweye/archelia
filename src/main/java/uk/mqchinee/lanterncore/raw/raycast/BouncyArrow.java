@@ -117,7 +117,7 @@ public abstract class BouncyArrow {
                     onMove();
                     oldProjectile = projectile;
                 }
-                else if (projectile.isDead() || projectile.isEmpty()) {
+                else if (projectile.isDead()) {
                     onEntityHit();
                     this.cancel();
                 }

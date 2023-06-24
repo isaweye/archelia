@@ -111,6 +111,29 @@ public class PageableChestMenu extends ChestMenu {
         return 0;
     }
 
+    public void nextPage() {
+        Bukkit.getScheduler().runTask(this.plugin, () -> {
+            if(this.page + 1 < getPageCount()) {
+                this.page += 1;
+                update();
+            }
+        });
+    }
+
+    public void previousPage() {
+        Bukkit.getScheduler().runTask(this.plugin, () -> {
+            if(this.page > 0) {
+                this.page -= 1;
+                update();
+            }
+        });
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+        update();
+    }
+
     public PageableChestMenu setNextPageItem(ClickableItem item, int slot) {
         if(slot < 0 || slot >= this.getRows() * 9) throw new IllegalArgumentException("The slot can't be less than zero or greater than the inventory size.");
         for(int slotIndex : itemSlots) {
@@ -123,12 +146,7 @@ public class PageableChestMenu extends ChestMenu {
         nextPageItem = new AbstractMap.SimpleEntry<>(slot, (ClickableItem) item
                 .setOnPrimary(click -> {
                     if(click.getWhoClicked() instanceof Player) {
-                        Bukkit.getScheduler().runTask(this.plugin, () -> {
-                            if(this.page + 1 < getPageCount()) {
-                                this.page += 1;
-                                update();
-                            }
-                        });
+                        nextPage();
                     }
                 })
         );
@@ -151,12 +169,7 @@ public class PageableChestMenu extends ChestMenu {
         previousPageItem = new AbstractMap.SimpleEntry<>(slot, (ClickableItem) item
                 .setOnPrimary(click -> {
                     if(click.getWhoClicked() instanceof Player) {
-                        Bukkit.getScheduler().runTask(this.plugin, () -> {
-                            if(this.page > 0) {
-                                this.page -= 1;
-                                update();
-                            }
-                        });
+                        previousPage();
                     }
                 })
         );

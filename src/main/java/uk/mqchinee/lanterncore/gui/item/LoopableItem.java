@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class LoopableItem extends MenuItem {
 
     @Getter private final List<ItemStack> items;
-    private final int totalTicks;
+    private int totalTicks;
 
     private int tickCount;
 
@@ -23,6 +23,14 @@ public class LoopableItem extends MenuItem {
 
     public static LoopableItem create(@NonNull List<ItemStack> items, int ticks) {
         return new LoopableItem(items, ticks);
+    }
+
+    public void setDelay(int delay) {
+        this.totalTicks = delay;
+    }
+
+    public int getDelay() {
+        return this.totalTicks;
     }
 
     @Override
