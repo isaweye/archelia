@@ -29,6 +29,7 @@ public class PageableChestMenu extends ChestMenu {
     private PageableChestMenu fatherMenu;
 
     PageableChestMenu(String title, int rows, int[] itemSlots, JavaPlugin plugin) {
+        // TODO: rewrite this
         super(title, rows, plugin);
         this.itemSlots = itemSlots;
         this.page = 0;
