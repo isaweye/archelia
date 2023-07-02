@@ -42,7 +42,6 @@ public abstract class Ricochet {
     private boolean physics = false;
     private int max = 3;
     private int now = 0;
-    private Block last;
     private final List<Block> bl = new ArrayList<>();
 
     public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {

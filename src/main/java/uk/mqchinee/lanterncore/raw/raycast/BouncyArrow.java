@@ -19,14 +19,12 @@ public abstract class BouncyArrow {
     private double reduce = 0.2;
     private double threshold;
     private BukkitRunnable task;
-    private Projectile oldProjectile;
 
     public BouncyArrow(JavaPlugin plugin, Projectile projectile, double threshold, LivingEntity shooter) {
         this.projectile = projectile;
         this.shooter = shooter;
         this.plugin = plugin;
         this.threshold = threshold;
-        this.oldProjectile = projectile;
     }
 
     private void bounce(Projectile projectile) {
@@ -115,7 +113,6 @@ public abstract class BouncyArrow {
                 }
                 if(!projectile.isOnGround() && !projectile.isDead()) {
                     onMove();
-                    oldProjectile = projectile;
                 }
                 else if (projectile.isDead()) {
                     onEntityHit();

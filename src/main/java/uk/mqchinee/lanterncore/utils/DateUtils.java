@@ -8,8 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 public class DateUtils {
 
-    private final TextUtils textUtils = new TextUtils();
-
     public long now(int offset) {
         Date date = new Date();
         date.setTime(date.getTime() + TimeUnit.HOURS.toMillis(offset));

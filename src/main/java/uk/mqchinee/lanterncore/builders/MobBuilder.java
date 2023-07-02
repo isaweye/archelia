@@ -12,10 +12,9 @@ import uk.mqchinee.lanterncore.utils.TextUtils;
 
 public class MobBuilder implements MobBuilderInterface {
 
-    private EntityType entityType;
-    private Location location;
-    private Mob mob;
-    private final TextUtils t = new TextUtils();
+    private final EntityType entityType;
+    private final Location location;
+    private final Mob mob;
 
     public MobBuilder(EntityType entityType, Location location) {
         this.entityType = entityType;
@@ -101,7 +100,7 @@ public class MobBuilder implements MobBuilderInterface {
 
     @Override
     public MobBuilder name(String name) {
-        this.mob.setCustomName(t.colorize(name));
+        this.mob.setCustomName(TextUtils.colorize(name));
         return this;
     }
 

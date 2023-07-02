@@ -3,6 +3,7 @@ package uk.mqchinee.lanterncore.plugin;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import uk.mqchinee.lanterncore.LanternCore;
 import uk.mqchinee.lanterncore.utils.TextUtils;
 
@@ -25,7 +26,7 @@ public class Command implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, String[] args) {
         String cu = (LanternCore.currentlyUsing.size() > 0) ? "\n&7Currently used by these plugins: \n&8&l- "+ get() : "";
         sender.sendMessage(TextUtils.colorize("&f--------< &6Lantern&fCore &f>--------\n&7Author: &fmqchinee\n&7Version: &f"+ LanternCore.get().getDescription().getVersion() + "\n&7API version: &f"+ LanternCore.get().getDescription().getAPIVersion() + cu));
         return true;

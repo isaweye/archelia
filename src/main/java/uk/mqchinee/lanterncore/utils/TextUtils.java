@@ -25,10 +25,10 @@ public class TextUtils {
     }
 
     public static String fromList(List<String> list) {
-        StringBuilder send = new StringBuilder("");
+        StringBuilder send = new StringBuilder();
         for(Object message : list) {
             String msg = message.toString();
-            send.append(msg+"\n");
+            send.append(msg).append("\n");
         }
         return String.valueOf(send);
     }
@@ -47,10 +47,10 @@ public class TextUtils {
     }
 
     public static String fromListColorized(List<String> list) {
-        StringBuilder send = new StringBuilder("");
+        StringBuilder send = new StringBuilder();
         for(Object message : list) {
             String msg = message.toString();
-            send.append(colorize(msg)+"\n");
+            send.append(colorize(msg)).append("\n");
         }
         return String.valueOf(send);
     }

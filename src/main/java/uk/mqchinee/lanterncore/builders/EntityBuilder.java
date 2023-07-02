@@ -10,8 +10,8 @@ import uk.mqchinee.lanterncore.utils.TextUtils;
 
 public class EntityBuilder implements EntityBuilderInterface {
 
-    private EntityType entityType;
-    private Location location;
+    private final EntityType entityType;
+    private final Location location;
     private Entity entity;
 
     public EntityBuilder(EntityType entityType, Location location) {

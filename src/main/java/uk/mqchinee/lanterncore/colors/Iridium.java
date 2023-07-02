@@ -6,7 +6,6 @@ import uk.mqchinee.lanterncore.colors.patterns.GradientPattern;
 import uk.mqchinee.lanterncore.colors.patterns.Pattern;
 import uk.mqchinee.lanterncore.colors.patterns.RainbowPattern;
 import uk.mqchinee.lanterncore.colors.patterns.SolidPattern;
-import uk.mqchinee.lanterncore.utils.TextUtils;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 public class Iridium {
 
     private static final boolean SUPPORTS_RGB = true;
-    private static final TextUtils t = new TextUtils();
 
     private static final List<String> SPECIAL_COLORS = Arrays.asList("&l", "&n", "&o", "&k", "&m", "§l", "§n", "§o", "§k", "§m");
 
