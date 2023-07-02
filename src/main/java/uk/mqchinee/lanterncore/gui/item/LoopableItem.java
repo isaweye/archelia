@@ -5,6 +5,7 @@ import lombok.NonNull;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class LoopableItem extends MenuItem {
@@ -13,12 +14,21 @@ public class LoopableItem extends MenuItem {
     private int totalTicks;
 
     private int tickCount;
+    private Consumer<LoopableItem> onUpdate;
 
     private LoopableItem(@NonNull List<ItemStack> items, int ticks) {
         super(items.get(0));
         this.items = items;
         this.totalTicks = ticks;
         this.tickCount = ticks;
+    }
+
+    public void setOnUpdate(Consumer<LoopableItem> onUpdate) {
+        this.onUpdate = onUpdate;
+    }
+
+    public Consumer<LoopableItem> getOnUpdate() {
+        return onUpdate;
     }
 
     public static LoopableItem create(@NonNull List<ItemStack> items, int ticks) {
@@ -42,11 +52,21 @@ public class LoopableItem extends MenuItem {
             int itemIndex = items.indexOf(getItem()) + 1;
             if(itemIndex >= items.size()) setItem(items.get(0));
             else setItem(items.get(itemIndex));
+            if(onUpdate != null) { onUpdate.accept(this); }
 
             return true;
         }
 
         return false;
+    }
+
+    public void setIndex(int index) {
+        setItem(items.get(index));
+        if(onUpdate != null) { onUpdate.accept(this); }
+    }
+
+    public ItemStack getItemStep(int step) {
+        return items.get(items.indexOf(getItem()) + (step));
     }
 
     @Override

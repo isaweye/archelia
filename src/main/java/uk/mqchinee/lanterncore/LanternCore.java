@@ -26,7 +26,7 @@ public final class LanternCore extends JavaPlugin {
 
         setup();
 
-        log.info(TextUtils.colorize("&6Lantern&fCore &fhas been successfully &aloaded &fand is &aready to use&f!"));
+        Bukkit.getConsoleSender().sendMessage(TextUtils.colorize("&6Lantern&fCore &fhas been successfully &aloaded &fand is &aready to use&f!"));
         update();
 
         getCommand("lantern").setExecutor(new Command());
@@ -34,9 +34,9 @@ public final class LanternCore extends JavaPlugin {
 
     private void setup() {
         if (vault()) {
-            log.info(TextUtils.colorize("&fHooked into &aVault&f!"));
+            Bukkit.getConsoleSender().sendMessage(TextUtils.colorize("&fHooked into &aVault&f!"));
         }
-        else { log.info(TextUtils.colorize("&fFailed to hook into &cVault&f!")); }
+        else { Bukkit.getConsoleSender().sendMessage(TextUtils.colorize("&fFailed to hook into &cVault&f!")); }
 
     }
 

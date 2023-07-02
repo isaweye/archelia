@@ -81,20 +81,22 @@ public class ChestMenu {
         return this;
     }
 
-    public void fillRow(int row, ClickableItem item) {
-        Bukkit.getScheduler().runTask(plugin, () -> {
-            for (int i = 0; i < row*9; i++) {
-                addItem(item, i);
-            }
-        });
+    public ChestMenu setItem(MenuItem item, int slot) {
+        if (getItem(slot) != null) { removeItem(slot); }
+        addItem(item, slot);
+        return this;
     }
 
-    public void fillRow(int row, LoopableItem item) {
-        Bukkit.getScheduler().runTask(plugin, () -> {
-            for (int i = 0; i < row*9; i++) {
-                addItem(item, i);
-            }
-        });
+    public void fill(int from, int till, LoopableItem item) {
+        for (int i = from; i < (till*9); i++) {
+            addItem(item, i);
+        }
+    }
+
+    public void fill(int from, int till, ClickableItem item) {
+        for (int i = from; i < (till*9); i++) {
+            addItem(item, i);
+        }
     }
 
     public MenuItem getItem(Integer slot) {
