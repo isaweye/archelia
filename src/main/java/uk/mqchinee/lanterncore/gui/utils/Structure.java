@@ -6,6 +6,7 @@ import uk.mqchinee.lanterncore.gui.ChestMenu;
 import uk.mqchinee.lanterncore.gui.PageableChestMenu;
 import uk.mqchinee.lanterncore.gui.item.MenuItem;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Structure {
@@ -15,6 +16,7 @@ public class Structure {
 
     public Structure(String... rows) {
         this.structure = rows;
+        this.map = new HashMap<>();
     }
 
     public Structure set(char _char, MenuItem item) {
@@ -28,7 +30,7 @@ public class Structure {
 
     public void parse(ChestMenu menu) {
         int char_no = 0;
-        for(int i = 0; i < menu.getRows()+1; i++) {
+        for(int i = 0; i < menu.getRows(); i++) {
             for(char ch: getStructure()[i].toCharArray()) {
                 if (ch != '#') { menu.addItem(get(ch), char_no); }
                 char_no++;
@@ -38,7 +40,7 @@ public class Structure {
 
     public void parse(PageableChestMenu menu) {
         int char_no = 0;
-        for(int i = 0; i < menu.getRows()+1; i++) {
+        for(int i = 0; i < menu.getRows(); i++) {
             for(char ch: getStructure()[i].toCharArray()) {
                 if (ch != '#') { menu.addItem(get(ch), char_no); }
                 char_no++;

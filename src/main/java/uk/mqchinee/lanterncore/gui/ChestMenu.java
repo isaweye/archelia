@@ -88,13 +88,13 @@ public class ChestMenu {
     }
 
     public void fill(int from, int till, LoopableItem item) {
-        for (int i = from; i < (till*9); i++) {
+        for (int i = from; i < (till+1); i++) {
             addItem(item, i);
         }
     }
 
     public void fill(int from, int till, ClickableItem item) {
-        for (int i = from; i < (till*9); i++) {
+        for (int i = from; i < (till+1); i++) {
             addItem(item, i);
         }
     }
