@@ -1,5 +1,7 @@
 package uk.mqchinee.lanterncore.raw.raycast;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -22,27 +24,27 @@ import java.util.List;
 
 public abstract class Ricochet {
 
-    private List<Material> allowedMaterials = new ArrayList<>();
-    private Collection<EntityType> allowedEntities = Collections.emptyList();
-    private int lifespan;
-    private int delay;
-    private Time type;
-    private final Location location;
-    private LivingEntity shooter = null;
-    private Vector direction;
-    private final JavaPlugin plugin;
-    private double step;
-    private Block endBlock;
-    private Entity penetratedEntity;
-    private double offsetX = 0.2;
-    private double offsetY = 0.1;
-    private double offsetZ = 0.2;
-    private double weight = 0.5;
+    @Getter @Setter private List<Material> allowedMaterials = new ArrayList<>();
+    @Getter @Setter private Collection<EntityType> allowedEntities = Collections.emptyList();
+    @Getter @Setter private int lifespan;
+    @Getter @Setter private int delay;
+    @Getter @Setter private Time type;
+    @Getter private final Location location;
+    @Getter @Setter private LivingEntity shooter = null;
+    @Getter @Setter private Vector direction;
+    @Getter private final JavaPlugin plugin;
+    @Getter @Setter private double step;
+    @Getter @Setter private Block endBlock;
+    @Getter @Setter private Entity penetratedEntity;
+    @Getter @Setter private double offsetX = 0.2;
+    @Getter @Setter private double offsetY = 0.1;
+    @Getter @Setter private double offsetZ = 0.2;
+    @Getter @Setter private double weight = 0.5;
     private BukkitRunnable task;
-    private boolean physics = false;
-    private int max = 3;
-    private int now = 0;
-    private final List<Block> bl = new ArrayList<>();
+    @Getter @Setter private boolean physics = false;
+    @Getter @Setter private int max = 3;
+    @Getter @Setter private int now = 0;
+    @Getter @Setter private List<Block> bl = new ArrayList<>();
 
     public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {
         this.type = type;
@@ -66,22 +68,6 @@ public abstract class Ricochet {
 
         if (this.type == Time.IN_TICKS) { this.delay = delay; }
         else { this.delay = delay*20; }
-    }
-
-    public boolean getPhysics() {
-        return physics;
-    }
-
-    public void setPhysics(boolean physics) {
-        this.physics = physics;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
-    public void setMax(int max) {
-        this.max = max;
     }
 
     private void ricochet(Location loc) {
@@ -122,34 +108,6 @@ public abstract class Ricochet {
             return Math.abs(coordinate);
         }
         return -coordinate;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getOffsetX() {
-        return offsetX;
-    }
-
-    public double getOffsetY() {
-        return offsetY;
-    }
-
-    public double getOffsetZ() {
-        return offsetZ;
-    }
-
-    public void setOffsetX(double offsetX) {
-        this.offsetX = offsetX;
-    }
-
-    public void setOffsetY(double offsetY) {
-        this.offsetY = offsetY;
-    }
-
-    public void setOffsetZ(double offsetZ) {
-        this.offsetZ = offsetZ;
     }
 
     public void stop() {
@@ -209,78 +167,6 @@ public abstract class Ricochet {
             }
 
         }.runTaskTimer(plugin, delay, delay);
-    }
-
-    public Block getBlock() {
-        return endBlock;
-    }
-
-    public double getStep() {
-        return step;
-    }
-
-    public void setStep(double step) {
-        this.step = step;
-    }
-
-    public Entity getPenetratedEntity() {
-        return penetratedEntity;
-    }
-
-    public LivingEntity getShooter() {
-        return shooter;
-    }
-
-    public Vector getDirection() {
-        return direction;
-    }
-
-    public void setDirection(Vector direction) {
-        this.direction = direction;
-    }
-
-    public int getLifespan() {
-        return lifespan;
-    }
-
-    public int getDelay() {
-        return delay;
-    }
-
-    public Time getType() {
-        return type;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setDelay(int delay) {
-        this.delay = delay;
-    }
-
-    public void setAllowedEntities(List<EntityType> allowedEntities) {
-        this.allowedEntities = allowedEntities;
-    }
-
-    public List<Material> getAllowedMaterials() {
-        return allowedMaterials;
-    }
-
-    public Collection<EntityType> getAllowedEntities() {
-        return allowedEntities;
-    }
-
-    public void setAllowedMaterials(List<Material> allowedMaterials) {
-        this.allowedMaterials = allowedMaterials;
-    }
-
-    public void setLifespan(int lifespan) {
-        this.lifespan = lifespan;
-    }
-
-    public void setType(Time type) {
-        this.type = type;
     }
 
     public abstract void onMove();

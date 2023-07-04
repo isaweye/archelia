@@ -1,5 +1,7 @@
 package uk.mqchinee.lanterncore.raw.raycast;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -13,11 +15,11 @@ import org.bukkit.util.Vector;
 
 public abstract class BouncyArrow {
 
-    private Projectile projectile;
-    private final LivingEntity shooter;
-    private final JavaPlugin plugin;
-    private double reduce = 0.2;
-    private double threshold;
+    @Getter @Setter private Projectile projectile;
+    @Getter private final LivingEntity shooter;
+    @Getter private final JavaPlugin plugin;
+    @Getter @Setter private double reduce = 0.2;
+    @Getter @Setter private double threshold;
     private BukkitRunnable task;
 
     public BouncyArrow(JavaPlugin plugin, Projectile projectile, double threshold, LivingEntity shooter) {
@@ -45,12 +47,9 @@ public abstract class BouncyArrow {
         }
     }
 
-    public double getThreshold() {
-        return threshold;
-    }
 
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
+    public Vector getVelocity() {
+        return projectile.getVelocity();
     }
 
     private BlockFace face(Projectile projectile) {
@@ -69,33 +68,9 @@ public abstract class BouncyArrow {
         return (blockFace == BlockFace.SELF) ? BlockFace.UP : blockFace;
     }
 
-    public LivingEntity getShooter() {
-        return shooter;
-    }
-
-    public double getReduce() {
-        return reduce;
-    }
-
-    public Projectile getProjectile() {
-        return projectile;
-    }
-
-    public void setProjectile(Projectile projectile) {
-        this.projectile = projectile;
-    }
-
-    public void setReduce(double reduce) {
-        this.reduce = reduce;
-    }
-
     public void setSpeed(double speed) {
         double init = getVelocity().length();
         projectile.getVelocity().multiply(speed/init);
-    }
-
-    public Vector getVelocity() {
-        return projectile.getVelocity();
     }
 
     public void doBounce(Projectile projectile) {
