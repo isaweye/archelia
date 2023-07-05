@@ -2,6 +2,7 @@ package uk.mqchinee.lanterncore.gui;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -17,7 +18,7 @@ import java.util.function.Consumer;
 
 public class PageableChestMenu extends ChestMenu {
 
-    @Getter private final int[] itemSlots;
+    @Getter @Setter private int[] itemSlots;
     private List<MenuItem> pageableItems;
 
     private int page;
@@ -29,9 +30,16 @@ public class PageableChestMenu extends ChestMenu {
     private PageableChestMenu fatherMenu;
 
     PageableChestMenu(String title, int rows, int[] itemSlots, JavaPlugin plugin) {
-        // TODO: rewrite this
         super(title, rows, plugin);
         this.itemSlots = itemSlots;
+        this.page = 0;
+        this.pageableItems = Lists.newArrayList();
+        this.fatherMenu = null;
+    }
+
+    PageableChestMenu(String title, int rows, JavaPlugin plugin) {
+        super(title, rows, plugin);
+        this.itemSlots = new int[]{};
         this.page = 0;
         this.pageableItems = Lists.newArrayList();
         this.fatherMenu = null;

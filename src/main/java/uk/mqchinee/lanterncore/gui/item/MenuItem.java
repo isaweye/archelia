@@ -23,6 +23,7 @@ public abstract class MenuItem {
     @Getter @Setter protected Consumer<InventoryClickEvent> onShiftSecondary = (click) -> {};
     @Getter @Setter protected Consumer<InventoryClickEvent> onDropAll = (click) -> {};
     @Getter @Setter protected Consumer<InventoryClickEvent> onNumber = (click) -> {};
+    @Getter @Setter protected Consumer<InventoryClickEvent> onClick = (click) -> {};
 
     public boolean update() { return false; }
 

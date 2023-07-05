@@ -24,6 +24,7 @@ public class ClickableItem extends MenuItem {
                 .setOnDrop(this.getOnDrop())
                 .setOnNumber(this.getOnNumber())
                 .setOnShiftSecondary(this.getOnShiftSecondary())
+                .setOnClick(this.getOnClick())
                 .setOnDropAll(this.getOnDropAll());
     }
 

@@ -6,13 +6,16 @@ import uk.mqchinee.lanterncore.gui.ChestMenu;
 import uk.mqchinee.lanterncore.gui.PageableChestMenu;
 import uk.mqchinee.lanterncore.gui.item.MenuItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Structure {
 
     @Getter @Setter private String[] structure;
     @Getter @Setter private Map<Character, MenuItem> map;
+    @Getter @Setter private List<Integer> pageSlots = new ArrayList<>();
 
     public Structure(String... rows) {
         this.structure = rows;
@@ -42,10 +45,15 @@ public class Structure {
         int char_no = 0;
         for(int i = 0; i < menu.getRows(); i++) {
             for(char ch: getStructure()[i].toCharArray()) {
-                if (ch != '#') { menu.addItem(get(ch), char_no); }
+                if (ch != '#') {
+                    if (ch == '%') { pageSlots.add(char_no); } else {
+                        menu.addItem(get(ch), char_no);
+                    }
+                }
                 char_no++;
             }
         }
+        menu.setItemSlots(pageSlots.stream().mapToInt(Integer::intValue).toArray());
     }
 
 }

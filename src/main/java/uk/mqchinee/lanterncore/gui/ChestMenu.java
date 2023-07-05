@@ -248,16 +248,14 @@ public class ChestMenu {
         private static final MenuItem dummyItem = ClickableItem.create(new ItemStack(Material.AIR));
 
         private final JavaPlugin plugin;
-        private final Set<ChestMenu> chestMenus = Collections.synchronizedSet(Sets.newHashSet());
+        public final Set<ChestMenu> chestMenus = Collections.synchronizedSet(Sets.newHashSet());
 
         @EventHandler
         public void onClick(InventoryClickEvent ce) {
             for (ChestMenu chestMenu : chestMenus) {
                 if(chestMenu.getInventory().equals(ce.getInventory())) {
-                    // Prevent inventory double clicks from stealing items from the menu
                     if(ce.getClick() == ClickType.DOUBLE_CLICK) ce.setCancelled(true);
 
-                    // Prevent Shift + Click from placing items inside the menu
                     if(ce.getClick() == ClickType.SHIFT_LEFT || ce.getClick() == ClickType.SHIFT_RIGHT) ce.setCancelled(true);
 
                     int slot = ce.getSlot();
