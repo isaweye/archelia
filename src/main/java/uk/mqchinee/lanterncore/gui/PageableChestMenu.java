@@ -28,25 +28,28 @@ public class PageableChestMenu extends ChestMenu {
 
     private List<PageableChestMenu> mirrorMenus = Lists.newArrayList();
     private PageableChestMenu fatherMenu;
+    private final boolean isConcurrent;
 
-    PageableChestMenu(String title, int rows, int[] itemSlots, JavaPlugin plugin) {
-        super(title, rows, plugin);
+    PageableChestMenu(String title, int rows, int[] itemSlots, JavaPlugin plugin, boolean isConcurrent) {
+        super(title, rows, plugin, isConcurrent);
         this.itemSlots = itemSlots;
+        this.isConcurrent = isConcurrent;
         this.page = 0;
         this.pageableItems = Lists.newArrayList();
         this.fatherMenu = null;
     }
 
-    PageableChestMenu(String title, int rows, JavaPlugin plugin) {
-        super(title, rows, plugin);
+    PageableChestMenu(String title, int rows, JavaPlugin plugin, boolean isConcurrent) {
+        super(title, rows, plugin, isConcurrent);
         this.itemSlots = new int[]{};
+        this.isConcurrent = isConcurrent;
         this.page = 0;
         this.pageableItems = Lists.newArrayList();
         this.fatherMenu = null;
     }
 
     private PageableChestMenu(PageableChestMenu father) {
-        this(father.getTitle(), father.getRows(), father.getItemSlots(), father.plugin);
+        this(father.getTitle(), father.getRows(), father.getItemSlots(), father.plugin, father.isConcurrent);
         this.items = father.items;
         this.pageableItems = father.pageableItems;
 
@@ -263,7 +266,7 @@ public class PageableChestMenu extends ChestMenu {
 
     @Override
     public ChestMenu copy() {
-        PageableChestMenu copy = new PageableChestMenu(this.getTitle(), this.getRows(), this.getItemSlots(), this.plugin);
+        PageableChestMenu copy = new PageableChestMenu(this.getTitle(), this.getRows(), this.getItemSlots(), this.plugin, this.isConcurrent);
 
         copy.setOnOpen(getOnOpen());
         copy.setOnClose(getOnClose());

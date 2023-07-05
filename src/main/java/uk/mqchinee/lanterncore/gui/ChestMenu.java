@@ -51,21 +51,26 @@ public class ChestMenu {
     @Getter @Setter private Consumer<InventoryClickEvent> onShiftSecondary = (click) -> {};
     @Getter @Setter private Consumer<InventoryClickEvent> onDropAll = (click) -> {};
     @Getter @Setter private Consumer<InventoryClickEvent> onNumber = (click) -> {};
+    private final boolean isConcurrent;
 
     //Items
-    protected Map<Integer, MenuItem> items = new ConcurrentHashMap<>();
+    protected Map<Integer, MenuItem> items;
 
     //Bukkit Inventory
     @Getter protected Inventory inventory;
     protected final Set<Integer> slotsRequiringUpdate = Sets.newHashSet();
     @Getter(AccessLevel.PROTECTED) @Setter(AccessLevel.PROTECTED) private BukkitTask updateItemsTask = null;
 
-    ChestMenu(String title, int rows, JavaPlugin plugin) {
+    /**
+        @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+     */
+    ChestMenu(String title, int rows, JavaPlugin plugin, boolean isConcurrent) {
         if(rows <= 0 || rows > 6) throw new IllegalArgumentException("The number of rows for a menu must be >= 1 && <= 6.");
-
+        if(isConcurrent) { this.items = new ConcurrentHashMap<>(); } else { this.items = new HashMap<>(); }
         this.title = Objects.requireNonNull(title);
         this.rows = rows;
         this.plugin = Objects.requireNonNull(plugin);
+        this.isConcurrent = isConcurrent;
     }
 
     public ChestMenu addItem(MenuItem item, int slot) {
@@ -200,7 +205,7 @@ public class ChestMenu {
     }
 
     public ChestMenu copy() {
-        ChestMenu copy = new ChestMenu(this.title, this.rows, this.plugin);
+        ChestMenu copy = new ChestMenu(this.title, this.rows, this.plugin, this.isConcurrent);
 
         copy.setOnOpen(this.getOnOpen());
         copy.setOnClose(this.getOnClose());
