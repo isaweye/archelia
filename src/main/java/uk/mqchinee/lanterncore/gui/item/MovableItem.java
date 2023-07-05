@@ -15,7 +15,7 @@ public class MovableItem extends MenuItem {
     @Getter @Setter private int speed;
     @Getter private int total = speed;
     @Getter @Setter private int[] slots;
-    @Getter private int current = slots[0];
+    @Getter private int current;
     private int n = 0;
     @Getter private String[] structure;
     private final List<Integer> structureSlots = new ArrayList<>();
@@ -24,18 +24,17 @@ public class MovableItem extends MenuItem {
         super(item);
         this.menu = menu;
         this.slots = slots;
+        this.current = slots[0];
         this.speed = speed;
     }
 
-    private MovableItem(@NonNull ItemStack item, int speed, ChestMenu menu) {
+    private MovableItem(@NonNull ItemStack item, int speed, ChestMenu menu, String... structure) {
         super(item);
         this.menu = menu;
-        this.slots = new int[]{};
+        this.structure = structure;
+        parse();
+        this.current = this.slots[0];
         this.speed = speed;
-    }
-
-    public void setStructure(String... rows) {
-        this.structure = rows;
     }
 
     public void parse() {
@@ -46,7 +45,7 @@ public class MovableItem extends MenuItem {
                     char_no++;
                 }
             }
-        setSlots(structureSlots.stream().mapToInt(Integer::intValue).toArray());
+        this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
     }
 
     @Override
@@ -55,7 +54,7 @@ public class MovableItem extends MenuItem {
         if (total <= 0) {
             n++;
             menu.removeItem(current);
-            if (n > slots.length) {
+            if (n >= slots.length) {
                 n = 0;
             }
             current = slots[n];
@@ -69,8 +68,8 @@ public class MovableItem extends MenuItem {
         return new MovableItem(item, slots, speed, menu);
     }
 
-    public static MovableItem create(@NonNull ItemStack item, int speed, ChestMenu menu) {
-        return new MovableItem(item, speed, menu);
+    public static MovableItem create(@NonNull ItemStack item, int speed, ChestMenu menu, String... structure) {
+        return new MovableItem(item, speed, menu, structure);
     }
 
     @Override
