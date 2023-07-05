@@ -7,8 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import uk.mqchinee.lanterncore.gui.ChestMenu;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -43,12 +41,6 @@ public class MovableItem extends MenuItem {
         this.reverse = reverse;
     }
 
-    private Object[] reverse(Object[] arr) {
-        List<Object> list = Arrays.asList(arr);
-        Collections.reverse(list);
-        return list.toArray();
-    }
-
     public void parse() {
             int char_no = 0;
             for(int i = 0; i < menu.getRows(); i++) {
@@ -72,6 +64,7 @@ public class MovableItem extends MenuItem {
                 }
                 n = 0;
             }
+            current = slots[n];
             menu.setItem(this, current);
             total = speed;
             return true;
