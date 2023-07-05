@@ -267,6 +267,8 @@ public class ChestMenu {
                         MenuItem item = chestMenu.getItem(slot);
                         if (item == null) item = dummyItem;
 
+                        item.getOnClick().accept(ce);
+
                         switch (ce.getClick()) {
                             case DOUBLE_CLICK:
                                 chestMenu.getOnDouble().accept(ce);
