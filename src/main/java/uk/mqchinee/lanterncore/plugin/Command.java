@@ -27,8 +27,12 @@ public class Command implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, String[] args) {
-        String cu = (LanternCore.currentlyUsing.size() > 0) ? "\n&7Currently used by these plugins: \n&8&l- "+ get() : "";
-        sender.sendMessage(TextUtils.colorize("&f--------< &6Lantern&fCore &f>--------\n&7Author: &fmqchinee\n&7Version: &f"+ LanternCore.get().getDescription().getVersion() + "\n&7API version: &f"+ LanternCore.get().getDescription().getAPIVersion() + cu));
+        String cu = (LanternCore.currentlyUsing.size() > 0) ? "&7Currently used by these plugins: \n&8&l- "+ get() : "";
+        sender.sendMessage(TextUtils.colorize("&f--------< &6Lantern&fCore &f>--------"));
+        sender.sendMessage(TextUtils.colorize("&7Author: &fmqchinee"));
+        sender.sendMessage(TextUtils.colorize("&7Version: &f"+ LanternCore.get().getDescription().getVersion()));
+        sender.sendMessage(TextUtils.colorize("&7API version: &f"+ LanternCore.get().getDescription().getAPIVersion()));
+        sender.sendMessage(cu);
         return true;
     }
 

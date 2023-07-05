@@ -18,6 +18,7 @@ public class MovableItem extends MenuItem {
     @Getter @Setter private int[] slots;
     @Getter private int current;
     private int n = 0;
+    @Getter @Setter private MenuItem background = null;
     @Getter private String[] structure;
     private final List<Integer> structureSlots = new ArrayList<>();
     private final boolean reverse;
@@ -57,7 +58,8 @@ public class MovableItem extends MenuItem {
         total--;
         if (total <= 0) {
             n++;
-            menu.removeItem(current);
+            if (getBackground() == null) { menu.removeItem(current); }
+            else { menu.setItem(background, current); }
             if (n >= slots.length) {
                 if (reverse) {
                     this.slots = IntStream.rangeClosed(1, slots.length).map(i -> slots[slots.length-i]).toArray();
