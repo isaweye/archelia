@@ -30,6 +30,10 @@ public class PageableChestMenu extends ChestMenu {
     private PageableChestMenu fatherMenu;
     private final boolean isConcurrent;
 
+    /**
+     @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap
+     */
     PageableChestMenu(String title, int rows, int[] itemSlots, JavaPlugin plugin, boolean isConcurrent) {
         super(title, rows, plugin, isConcurrent);
         this.itemSlots = itemSlots;
@@ -39,6 +43,10 @@ public class PageableChestMenu extends ChestMenu {
         this.fatherMenu = null;
     }
 
+    /**
+     @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap
+     */
     PageableChestMenu(String title, int rows, JavaPlugin plugin, boolean isConcurrent) {
         super(title, rows, plugin, isConcurrent);
         this.itemSlots = new int[]{};
@@ -310,7 +318,6 @@ public class PageableChestMenu extends ChestMenu {
     @Override
     protected void handleUpdateItems() {
         super.handleUpdateItems();
-
         getPageableItems().forEach(item -> {
             if (item.update()) {
                 requireUpdate(getPageableItemSlot(item).getValue());

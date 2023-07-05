@@ -10,19 +10,31 @@ public final class MenuManager {
 
     static final Map<JavaPlugin, ChestMenu.Listener> registeredListeners = Maps.newHashMap();
 
-    public static ChestMenu createChestMenu(String title, int rows, JavaPlugin plugin) {
+    /**
+     @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap
+     */
+    public static ChestMenu createChestMenu(String title, int rows, JavaPlugin plugin, boolean isConcurrent) {
         registerListener(plugin);
-        return new ChestMenu(title, rows, plugin);
+        return new ChestMenu(title, rows, plugin, isConcurrent);
     }
 
-    public static PageableChestMenu createPageableChestMenu(String title, int rows, int[] itemSlots, JavaPlugin plugin) {
+    /**
+     @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap
+     */
+    public static PageableChestMenu createPageableChestMenu(String title, int rows, int[] itemSlots, JavaPlugin plugin, boolean isConcurrent) {
         registerListener(plugin);
-        return new PageableChestMenu(title, rows, itemSlots, plugin);
+        return new PageableChestMenu(title, rows, itemSlots, plugin, isConcurrent);
     }
 
-    public static PageableChestMenu createPageableChestMenu(String title, int rows, JavaPlugin plugin) {
+    /**
+     @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap
+     */
+    public static PageableChestMenu createPageableChestMenu(String title, int rows, JavaPlugin plugin, boolean isConcurrent) {
         registerListener(plugin);
-        return new PageableChestMenu(title, rows, plugin);
+        return new PageableChestMenu(title, rows, plugin, isConcurrent);
     }
 
     private static void registerListener(JavaPlugin plugin) {

@@ -6,8 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.Entity;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import uk.mqchinee.lanterncore.managers.utils.FloatingMessageFormatter;
 
 import java.util.ArrayList;
@@ -62,7 +60,6 @@ public class FloatingMessage {
             for (String messageLine : messageLines) {
                 Location location = entity.getLocation().add(0, 1, 0);
                 AreaEffectCloud particle = entity.getWorld().spawn(location, AreaEffectCloud.class);
-                particle.addCustomEffect(new PotionEffect(PotionEffectType.SPEED, 200, 0, true, false), true);
                 particle.setParticle(Particle.BLOCK_CRACK, Material.AIR.createBlockData());
                 particle.setRadius(0);
                 particle.setWaitTime(0);

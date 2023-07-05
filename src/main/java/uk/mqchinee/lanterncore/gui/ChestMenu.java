@@ -62,7 +62,8 @@ public class ChestMenu {
     @Getter(AccessLevel.PROTECTED) @Setter(AccessLevel.PROTECTED) private BukkitTask updateItemsTask = null;
 
     /**
-        @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+         @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+         If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap
      */
     ChestMenu(String title, int rows, JavaPlugin plugin, boolean isConcurrent) {
         if(rows <= 0 || rows > 6) throw new IllegalArgumentException("The number of rows for a menu must be >= 1 && <= 6.");
