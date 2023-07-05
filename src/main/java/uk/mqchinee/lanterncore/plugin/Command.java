@@ -32,7 +32,7 @@ public class Command implements CommandExecutor {
         sender.sendMessage(TextUtils.colorize("&7Author: &fmqchinee"));
         sender.sendMessage(TextUtils.colorize("&7Version: &f"+ LanternCore.get().getDescription().getVersion()));
         sender.sendMessage(TextUtils.colorize("&7API version: &f"+ LanternCore.get().getDescription().getAPIVersion()));
-        sender.sendMessage(cu);
+        sender.sendMessage(TextUtils.colorize(cu));
         return true;
     }
 
