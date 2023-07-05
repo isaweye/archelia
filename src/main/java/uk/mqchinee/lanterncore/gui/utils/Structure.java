@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import uk.mqchinee.lanterncore.gui.ChestMenu;
 import uk.mqchinee.lanterncore.gui.PageableChestMenu;
+import uk.mqchinee.lanterncore.gui.item.ClickableItem;
 import uk.mqchinee.lanterncore.gui.item.MenuItem;
 
 import java.util.ArrayList;
@@ -46,7 +47,10 @@ public class Structure {
         for(int i = 0; i < menu.getRows(); i++) {
             for(char ch: getStructure()[i].toCharArray()) {
                 if (ch != '#') {
-                    if (ch == '%') { pageSlots.add(char_no); } else {
+                    if (ch == '%') { pageSlots.add(char_no); }
+                    else if (ch == '<') { menu.setPreviousPageItem((ClickableItem) get(ch), char_no); }
+                    else if (ch == '>') { menu.setNextPageItem((ClickableItem) get(ch), char_no); }
+                    else {
                         menu.addItem(get(ch), char_no);
                     }
                 }
