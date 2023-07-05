@@ -3,6 +3,7 @@ package uk.mqchinee.lanterncore.gui.item;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.function.Consumer;
@@ -12,7 +13,7 @@ public class ToggleableItem extends MenuItem {
     @Getter @Setter private Consumer<ToggleableItem> onUpdate;
     @Getter @Setter private ItemStack enabled;
     @Getter @Setter private ItemStack disabled;
-    @Getter @Setter private ItemStack last;
+    @Getter @Setter private ItemStack last = new ItemStack(Material.AIR);
     private final boolean toggleOnClick;
 
     private ToggleableItem(@NonNull ItemStack e, @NonNull ItemStack d, boolean toggleOnClick) {
@@ -24,7 +25,7 @@ public class ToggleableItem extends MenuItem {
 
     @Override
     public boolean update() {
-        return getItem() != getLast();
+        return true;
     }
 
     public static ToggleableItem create(@NonNull ItemStack e, @NonNull ItemStack d, boolean toggleOnClick) {
@@ -32,19 +33,19 @@ public class ToggleableItem extends MenuItem {
     }
 
     public boolean enabled() {
-        return getItem() == getEnabled();
+        return true;
     }
 
     public void toggle() {
-        if (enabled()) { setItem(getDisabled()); setLast(getDisabled()); return; }
-        setItem(getEnabled()); setLast(getEnabled());
-        onUpdate.accept(this);
+        if (enabled()) { setItem(getDisabled()); return; }
+        setItem(getEnabled());
+        if (onUpdate != null) { onUpdate.accept(this); }
     }
 
     public void toggle(boolean state) {
-        if (state) { setItem(getEnabled()); setLast(getEnabled()); return; }
-        setItem(getDisabled()); setLast(getDisabled());
-        onUpdate.accept(this);
+        if (state) { setItem(getEnabled()); return; }
+        setItem(getDisabled());
+        if (onUpdate != null) { onUpdate.accept(this); }
     }
 
     @Override
