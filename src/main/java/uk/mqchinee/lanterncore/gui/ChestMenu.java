@@ -270,41 +270,42 @@ public class ChestMenu {
                         item.getOnClick().accept(ce);
 
                         switch (ce.getClick()) {
-                            case DOUBLE_CLICK:
+                            case DOUBLE_CLICK -> {
                                 chestMenu.getOnDouble().accept(ce);
                                 item.getOnDouble().accept(ce);
-                                break;
-                            case SHIFT_LEFT:
+                            }
+                            case SHIFT_LEFT -> {
                                 chestMenu.getOnShiftPrimary().accept(ce);
                                 item.getOnShiftPrimary().accept(ce);
-                                break;
-                            case SHIFT_RIGHT:
+                            }
+                            case SHIFT_RIGHT -> {
                                 chestMenu.getOnShiftSecondary().accept(ce);
                                 item.getOnShiftSecondary().accept(ce);
-                                break;
-                            case LEFT:
+                            }
+                            case LEFT -> {
                                 chestMenu.getOnPrimary().accept(ce);
                                 item.getOnPrimary().accept(ce);
-                                break;
-                            case MIDDLE:
+                            }
+                            case MIDDLE -> {
                                 chestMenu.getOnMiddle().accept(ce);
                                 item.getOnMiddle().accept(ce);
-                                break;
-                            case RIGHT:
+                            }
+                            case RIGHT -> {
                                 chestMenu.getOnSecondary().accept(ce);
                                 item.getOnSecondary().accept(ce);
-                                break;
-                            case CONTROL_DROP:
+                            }
+                            case CONTROL_DROP -> {
                                 chestMenu.getOnDropAll().accept(ce);
                                 item.getOnDropAll().accept(ce);
-                                break;
-                            case DROP:
+                            }
+                            case DROP -> {
                                 chestMenu.getOnDrop().accept(ce);
                                 item.getOnDrop().accept(ce);
-                                break;
-                            case NUMBER_KEY:
+                            }
+                            case NUMBER_KEY -> {
                                 chestMenu.getOnNumber().accept(ce);
                                 item.getOnNumber().accept(ce);
+                            }
                         }
                     }
 
