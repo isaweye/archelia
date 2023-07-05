@@ -15,8 +15,10 @@ public class DynamicItem extends MenuItem {
     }
 
     public void replace(ItemStack item, int time, Time type) {
-        setItem(item);
-        RunUtils.runLater(() -> setItem(i), time, type);
+        if (getItem() == i) {
+            setItem(item);
+            RunUtils.runLater(() -> setItem(i), time, type);
+        }
     }
 
     public static DynamicItem create(@NonNull ItemStack item) {

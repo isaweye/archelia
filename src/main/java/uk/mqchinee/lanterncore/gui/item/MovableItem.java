@@ -7,7 +7,10 @@ import org.bukkit.inventory.ItemStack;
 import uk.mqchinee.lanterncore.gui.ChestMenu;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class MovableItem extends MenuItem {
 
@@ -19,22 +22,31 @@ public class MovableItem extends MenuItem {
     private int n = 0;
     @Getter private String[] structure;
     private final List<Integer> structureSlots = new ArrayList<>();
+    private final boolean reverse;
 
-    private MovableItem(@NonNull ItemStack item, int[] slots, int speed, ChestMenu menu) {
+    private MovableItem(@NonNull ItemStack item, int[] slots, int speed, ChestMenu menu, boolean reverse) {
         super(item);
         this.menu = menu;
         this.slots = slots;
         this.current = slots[0];
         this.speed = speed;
+        this.reverse = reverse;
     }
 
-    private MovableItem(@NonNull ItemStack item, int speed, ChestMenu menu, String... structure) {
+    private MovableItem(@NonNull ItemStack item, int speed, ChestMenu menu, boolean reverse, String... structure) {
         super(item);
         this.menu = menu;
         this.structure = structure;
         parse();
         this.current = this.slots[0];
         this.speed = speed;
+        this.reverse = reverse;
+    }
+
+    private Object[] reverse(Object[] arr) {
+        List<Object> list = Arrays.asList(arr);
+        Collections.reverse(list);
+        return list.toArray();
     }
 
     public void parse() {
@@ -55,26 +67,29 @@ public class MovableItem extends MenuItem {
             n++;
             menu.removeItem(current);
             if (n >= slots.length) {
+                if (reverse) {
+                    this.slots = IntStream.rangeClosed(1, slots.length).map(i -> slots[slots.length-i]).toArray();
+                }
                 n = 0;
             }
-            current = slots[n];
             menu.setItem(this, current);
             total = speed;
+            return true;
         }
         return false;
     }
 
-    public static MovableItem create(@NonNull ItemStack item, int[] slots, int speed, ChestMenu menu) {
-        return new MovableItem(item, slots, speed, menu);
+    public static MovableItem create(@NonNull ItemStack item, int[] slots, int speed, ChestMenu menu, boolean reverse) {
+        return new MovableItem(item, slots, speed, menu, reverse);
     }
 
-    public static MovableItem create(@NonNull ItemStack item, int speed, ChestMenu menu, String... structure) {
-        return new MovableItem(item, speed, menu, structure);
+    public static MovableItem create(@NonNull ItemStack item, int speed, ChestMenu menu, boolean reverse, String... structure) {
+        return new MovableItem(item, speed, menu, reverse, structure);
     }
 
     @Override
     public MenuItem copy() {
-        return create(this.getItem().clone(), getSlots(), getSpeed(), getMenu())
+        return create(this.getItem().clone(), getSlots(), getSpeed(), getMenu(), this.reverse)
                 .setOnPrimary(this.getOnPrimary())
                 .setOnMiddle(this.getOnMiddle())
                 .setOnSecondary(this.getOnSecondary())
