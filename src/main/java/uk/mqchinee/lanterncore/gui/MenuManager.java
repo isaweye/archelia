@@ -20,6 +20,11 @@ public final class MenuManager {
         return new PageableChestMenu(title, rows, itemSlots, plugin);
     }
 
+    public static PageableChestMenu createPageableChestMenu(String title, int rows, JavaPlugin plugin) {
+        registerListener(plugin);
+        return new PageableChestMenu(title, rows, plugin);
+    }
+
     private static void registerListener(JavaPlugin plugin) {
         if(!registeredListeners.containsKey(plugin)) {
             ChestMenu.Listener listener = new ChestMenu.Listener(plugin);

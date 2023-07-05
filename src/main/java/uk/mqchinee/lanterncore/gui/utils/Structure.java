@@ -35,7 +35,7 @@ public class Structure {
     public void parse(ChestMenu menu) {
         int char_no = 0;
         for(int i = 0; i < menu.getRows(); i++) {
-            for(char ch: getStructure()[i].toCharArray()) {
+            for(char ch: getStructure()[i].replace(" ", "").toCharArray()) {
                 if (ch != '#') { menu.addItem(get(ch), char_no); }
                 char_no++;
             }
@@ -45,7 +45,7 @@ public class Structure {
     public void parse(PageableChestMenu menu) {
         int char_no = 0;
         for(int i = 0; i < menu.getRows(); i++) {
-            for(char ch: getStructure()[i].toCharArray()) {
+            for(char ch: getStructure()[i].replace(" ", "").toCharArray()) {
                 if (ch != '#') {
                     if (ch == '%') { pageSlots.add(char_no); }
                     else if (ch == '<') { menu.setPreviousPageItem((ClickableItem) get(ch), char_no); }
