@@ -33,7 +33,7 @@ public class ToggleableItem extends MenuItem {
     }
 
     public boolean enabled() {
-        return true;
+        return getItem() == getEnabled();
     }
 
     public void toggle() {
