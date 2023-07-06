@@ -33,7 +33,7 @@ public class ConfigManager {
         return new Config(write(path, child, resource));
     }
 
-    private static File write(String path, String filename, InputStream resource) {
+    public static File write(String path, String filename, InputStream resource) {
         File file = new File(path, filename);
         if( !file.exists() ) {
             OutputStream outputStream = null;
