@@ -27,6 +27,11 @@ public class Config implements ConfigInterface {
         this.file = file;
     }
 
+    public Config(FileConfiguration config) {
+        this.configuration = config;
+        this.file = new File(config.getCurrentPath());
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(configuration);

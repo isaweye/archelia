@@ -1,6 +1,7 @@
 package uk.mqchinee.lanterncore.managers;
 
 import lombok.SneakyThrows;
+import org.bukkit.configuration.file.FileConfiguration;
 import uk.mqchinee.lanterncore.abs.Config;
 
 import java.io.File;
@@ -31,6 +32,10 @@ public class ConfigManager {
     @SneakyThrows
     public static Config create(String path, String child, InputStream resource) {
         return new Config(write(path, child, resource));
+    }
+
+    public static Config create(FileConfiguration configuration) {
+        return new Config(configuration);
     }
 
     public static File write(String path, String filename, InputStream resource) {
