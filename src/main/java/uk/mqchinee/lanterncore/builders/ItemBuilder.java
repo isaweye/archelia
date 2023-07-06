@@ -15,8 +15,18 @@ public class ItemBuilder implements ItemBuilderInterface {
     private ItemMeta meta;
 
     public ItemBuilder(Material material) {
-        item = new ItemStack(material);
-        meta = item.getItemMeta();
+        this.item = new ItemStack(material);
+        this.meta = item.getItemMeta();
+    }
+
+    public ItemBuilder(ItemStack item) {
+        this.item = item;
+        this.meta = item.getItemMeta();
+    }
+
+    public ItemBuilder() {
+        this.item = new ItemStack(Material.STONE);
+        this.meta = item.getItemMeta();
     }
 
     @Override
