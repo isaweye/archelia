@@ -1,4 +1,4 @@
-package uk.mqchinee.lanterncore.raw.raycast;
+package uk.mqchinee.lanterncore.raw.projectile;
 
 import lombok.Getter;
 import lombok.Setter;

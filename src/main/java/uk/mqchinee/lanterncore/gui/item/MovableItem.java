@@ -60,7 +60,7 @@ public class MovableItem extends MenuItem {
             n++;
             if (getBackground() == null) { menu.removeItem(current); }
             else { menu.setItem(background, current); }
-            if (n >= slots.length) {
+            if (n == slots.length) {
                 if (reverse) {
                     this.slots = IntStream.rangeClosed(1, slots.length).map(i -> slots[slots.length-i]).toArray();
                 }
