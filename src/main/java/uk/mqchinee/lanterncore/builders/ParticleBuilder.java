@@ -15,7 +15,7 @@ public class ParticleBuilder implements ParticleBuilderInterface {
 
     private double offset_y = 0.1;
     private double offset_z = 0.1;
-    private Material materialData;
+    private Material materialData = new ItemStack(Material.STONE).getType();
     private Particle.DustOptions dustOptions;
     private double speed = 0;
     private List<Player> showTo = null;
@@ -23,7 +23,7 @@ public class ParticleBuilder implements ParticleBuilderInterface {
     private int count = 3;
     private Particle particle;
     private double offset_x = 0.1;
-    private DataType type;
+    private final DataType type;
 
     public ParticleBuilder(DataType type) {
         this.type = type;
@@ -139,7 +139,7 @@ public class ParticleBuilder implements ParticleBuilderInterface {
         return this;
     }
 
-    private void spawn(Particle particle, Location location, int count, double x, double y, double z, double speed, BlockData data) {
+    public void block(Particle particle, Location location, int count, double x, double y, double z, double speed, BlockData data) {
         if (getShowTo() != null) {
             for (Player p : getShowTo()) {
                 p.spawnParticle(particle, location, count, x, y, z, speed, data);
@@ -148,7 +148,7 @@ public class ParticleBuilder implements ParticleBuilderInterface {
         else { location.getWorld().spawnParticle(particle, location, count, x, y, z, speed, data); }
     }
 
-    private void spawn(Particle particle, Location location, int count, double x, double y, double z, double speed, Particle.DustOptions data) {
+    public void dust(Particle particle, Location location, int count, double x, double y, double z, double speed, Particle.DustOptions data) {
         if (getShowTo() != null) {
             for (Player p : getShowTo()) {
                 p.spawnParticle(particle, location, count, x, y, z, speed, data);
@@ -157,7 +157,7 @@ public class ParticleBuilder implements ParticleBuilderInterface {
         else { location.getWorld().spawnParticle(particle, location, count, x, y, z, speed, data); }
     }
 
-    private void spawn(Particle particle, Location location, int count, double x, double y, double z, double speed, ItemStack data) {
+    public void item(Particle particle, Location location, int count, double x, double y, double z, double speed, ItemStack data) {
         if (getShowTo() != null) {
             for (Player p : getShowTo()) {
                 p.spawnParticle(particle, location, count, x, y, z, speed, data);
@@ -166,7 +166,7 @@ public class ParticleBuilder implements ParticleBuilderInterface {
         else { location.getWorld().spawnParticle(particle, location, count, x, y, z, speed, data); }
     }
 
-    private void spawn(Particle particle, Location location, int count, double x, double y, double z, double speed) {
+    public void spawn(Particle particle, Location location, int count, double x, double y, double z, double speed) {
         if (getShowTo() != null) {
             for (Player p : getShowTo()) {
                 p.spawnParticle(particle, location, count, x, y, z, speed);
@@ -179,13 +179,13 @@ public class ParticleBuilder implements ParticleBuilderInterface {
     public void build() {
         switch (type) {
             case DUST:
-                spawn(particle, location, count, offset_x, offset_y, offset_z, speed, dustOptions);
+                dust(particle, location, count, offset_x, offset_y, offset_z, speed, dustOptions);
             case ITEM:
                 ItemStack itemData = new ItemStack(materialData);
-                spawn(particle, location, count, offset_x, offset_y, offset_z, speed, itemData);
+                item(particle, location, count, offset_x, offset_y, offset_z, speed, itemData);
             case BLOCK:
                 BlockData blockData = materialData.createBlockData();
-                spawn(particle, location, count, offset_x, offset_y, offset_z, speed, blockData);
+                block(particle, location, count, offset_x, offset_y, offset_z, speed, blockData);
             case DEFAULT:
                 spawn(particle, location, count, offset_x, offset_y, offset_z, speed);
         }
