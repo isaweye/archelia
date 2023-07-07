@@ -72,8 +72,10 @@ public class MyGUI {
         DynamicItem D = DynamicItem.create(new ItemStack(Material.OAK_LEAVES));
         D.setOnClick(e -> D.replace(new ItemStack(Material.BARRIER), 1, Time.IN_SECONDS));
 
-        ItemStack on = new ItemBuilder(Material.GREEN_STAINED_GLASS).name("&fSomething &aENABLED").build();
-        ItemStack off = new ItemBuilder(Material.RED_STAINED_GLASS).name("&fSomething &cDISABLED").build();
+        ItemStack on = new ItemBuilder(Material.GREEN_STAINED_GLASS)
+            .name("&fSomething &aENABLED").build();
+        ItemStack off = new ItemBuilder(Material.RED_STAINED_GLASS)
+            .name("&fSomething &cDISABLED").build();
 
          // enabled, disabled, toggle on click
         ToggleableItem T = ToggleableItem.create(on, off, true);
