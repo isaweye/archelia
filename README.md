@@ -1,4 +1,6 @@
-![banner](https://github.com/isaweye/lantern-core/assets/130868496/71769d39-6fc7-4b3f-a860-a5502810bb61)
+<p align="left">
+  <img src="repository/banner.png"/>
+</p>
 
 **LanternCore is a mixture of good and bad, past and present, which is used by my plugins.**
 
@@ -126,7 +128,7 @@ public class MyGUI {
 ### Result
 
 <p align="center">
-  <img src="https://github.com/isaweye/lantern-core/assets/130868496/70890832-002f-41e7-9f4b-e8306f01912f" alt="animated" />
+  <img src="repository/buttons.gif" alt="animated" />
 </p>
 
 ```java
@@ -182,7 +184,8 @@ public class MyGUI {
 
 ### Result
 
-![pageable](https://github.com/isaweye/lantern-core/assets/130868496/eddc970e-05fa-4c4c-bdf4-ac3d1e078e33)
-
+<p align="center">
+  <img src="repository/pageable.gif" alt="animated" />
+</p>
 
 *More examples will be added soon...*
