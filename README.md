@@ -38,14 +38,20 @@ public class MyGUI {
 
     public void prepare() {
 
-        ClickableItem S = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name("&emovable").build());
-        ClickableItem I = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name("&eloopable").build());
-        ClickableItem G = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name("&eclickable").build());
-        ClickableItem N = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name("&edynamic").build());
-        ClickableItem K = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name("&etoggleable").build());
+        ClickableItem S = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
+            .name("&emovable").build());
+        ClickableItem I = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
+            .name("&eloopable").build());
+        ClickableItem G = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
+            .name("&eclickable").build());
+        ClickableItem N = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
+            .name("&edynamic").build());
+        ClickableItem K = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
+            .name("&etoggleable").build());
 
         // item, speed, menu, reverse, structure
-        MovableItem M = MovableItem.create(new ItemBuilder(Material.QUARTZ).name("&fitem")).build(), 4, menu, true,
+        MovableItem M = MovableItem.create(
+            new ItemBuilder(Material.QUARTZ).name("&fitem")).build(), 4, menu, true,
                 "# % % % % % % % %",
                 "# # # # # # # # #",
                 "# # # # # # # # #",
@@ -54,7 +60,11 @@ public class MyGUI {
         );
         M.setOnClick(e -> e.getWhoClicked().sendMessage("test"));
 
-        LoopableItem L = LoopableItem.create(Arrays.asList(new ItemStack(Material.DIAMOND), new ItemStack(Material.GOLD_INGOT), new ItemStack(Material.IRON_INGOT)), 20);
+        LoopableItem L = LoopableItem.create(Arrays.asList(
+            new ItemStack(Material.DIAMOND),
+            new ItemStack(Material.GOLD_INGOT),
+            new ItemStack(Material.IRON_INGOT)),
+        20);
 
         ClickableItem C = ClickableItem.create(new ItemStack(Material.OAK_BUTTON));
         C.setOnPrimary(e -> e.getWhoClicked().sendMessage("hi, "+e.getWhoClicked().getName()));
