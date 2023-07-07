@@ -28,8 +28,10 @@ public class MyGUI {
 
     public MyGUI() {
     // title, rows, plugin. is concurrent
+
     // (Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
-    // If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap)
+    //    If you want to get rid of ConcurrentModificationException
+    // (occurs when using MovableItem), use ConcurrentHashMap)
 
         this.menu = MenuManager.createChestMenu("Buttons", 5, MyPlugin.getInstance(), true);
     }
@@ -102,6 +104,12 @@ public class MyGUI {
     private final PageableChestMenu menu;
 
     public MyGUI() {
+    // title, rows, plugin. is concurrent
+   
+    // (Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+    //    If you want to get rid of ConcurrentModificationException
+    // (occurs when using MovableItem), use ConcurrentHashMap)
+
         this.menu = MenuManager.createPageableChestMenu("Dirt", 6, MyPlugin.getInstance(), false);
     }
 
