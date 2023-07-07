@@ -42,7 +42,7 @@ public class MyGUI {
         ClickableItem N = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name("&edynamic").build());
         ClickableItem K = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name("&etoggleable").build());
 
-        MovableItem M = MovableItem.create(new ItemBuilder(Material.QUARTZ).name("&fitem"))").build(), 4, menu, true,
+        MovableItem M = MovableItem.create(new ItemBuilder(Material.QUARTZ).name("&fitem")).build(), 4, menu, true,
                 "# % % % % % % % %",
                 "# # # # # # # # #",
                 "# # # # # # # # #",
