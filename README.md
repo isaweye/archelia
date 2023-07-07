@@ -69,8 +69,8 @@ public class MyGUI {
         ClickableItem C = ClickableItem.create(new ItemStack(Material.OAK_BUTTON));
         C.setOnPrimary(e -> e.getWhoClicked().sendMessage("hi, "+e.getWhoClicked().getName()));
 
-        DynamicItem D = DynamicItem.create(new ItemStack(Material.OAK_LEAVES));
-        D.setOnClick(e -> D.replace(new ItemStack(Material.BARRIER), 1, Time.IN_SECONDS));
+        DynamicItem D = DynamicItem.create(new ItemStack(Material.OAK_LEAVES), menu);
+        D.setOnClick(e -> D.replace(new ItemStack(Material.BARRIER), 20));
 
         ItemStack on = new ItemBuilder(Material.GREEN_STAINED_GLASS)
             .name("&fSomething &aENABLED").build();
