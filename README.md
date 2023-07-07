@@ -125,7 +125,9 @@ public class MyGUI {
 ```
 ### Result
 
-![buttons](https://github.com/isaweye/lantern-core/assets/130868496/70890832-002f-41e7-9f4b-e8306f01912f)
+<p align="center">
+  <img src="https://github.com/isaweye/lantern-core/assets/130868496/70890832-002f-41e7-9f4b-e8306f01912f" alt="animated" />
+</p>
 
 ```java
 public class MyGUI {
