@@ -16,6 +16,19 @@
     </dependency>
 ```
 
+### OR
+
+1. Add as dependency
+```xml
+    <dependency>
+        <groupId>uk.mqchinee</groupId>
+        <artifactId>LanternCore</artifactId>
+        <version>version-here</version>
+        <scope>system</scope>
+        <systemPath>path-to-jar</systemPath>
+    </dependency>
+```
+
 ## Usage example
 
 ### Inventory-Based GUI creation
