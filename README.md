@@ -13,6 +13,7 @@
         <groupId>uk.mqchinee</groupId>
         <artifactId>LanternCore</artifactId>
         <version>version-here</version>
+        <scope>provided</scope>
     </dependency>
 ```
 
