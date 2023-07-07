@@ -36,7 +36,7 @@ public class ChestMenu {
     //Base properties
     @Getter private final String title;
     @Getter private final int rows;
-    protected final JavaPlugin plugin;
+    @Getter final JavaPlugin plugin;
 
     //Global actions
     @Getter @Setter private Consumer<InventoryOpenEvent> onOpen = (interact) -> {};

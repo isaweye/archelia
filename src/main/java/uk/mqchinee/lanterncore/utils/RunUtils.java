@@ -6,6 +6,7 @@ import uk.mqchinee.lanterncore.LanternCore;
 import uk.mqchinee.lanterncore.enums.Time;
 
 public class RunUtils {
+
     public static LanternCore get() {
         return LanternCore.get();
     }
@@ -29,9 +30,9 @@ public class RunUtils {
     public static void runLater(Runnable r, int wait, Time type) {
         switch (type) {
             case IN_TICKS:
-                scheduler().runTaskLater(get(), r, wait);
+                scheduler().runTaskLater(LanternCore.get(), r, wait);
             case IN_SECONDS:
-                scheduler().runTaskLater(get(), r, toSeconds(wait));
+                scheduler().runTaskLater(LanternCore.get(), r, toSeconds(wait));
         }
     }
 

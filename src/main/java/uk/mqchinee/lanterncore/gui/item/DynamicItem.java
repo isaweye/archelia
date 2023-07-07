@@ -2,27 +2,34 @@ package uk.mqchinee.lanterncore.gui.item;
 
 import lombok.NonNull;
 import org.bukkit.inventory.ItemStack;
-import uk.mqchinee.lanterncore.enums.Time;
-import uk.mqchinee.lanterncore.utils.RunUtils;
+import org.bukkit.scheduler.BukkitRunnable;
+import uk.mqchinee.lanterncore.gui.ChestMenu;
 
 public class DynamicItem extends MenuItem {
 
     private final ItemStack i;
+    private final ChestMenu menu;
 
-    private DynamicItem(@NonNull ItemStack item) {
+    private DynamicItem(@NonNull ItemStack item, ChestMenu menu) {
         super(item);
+        this.menu = menu;
         this.i = item;
     }
 
-    public void replace(ItemStack item, int time, Time type) {
+    public void replace(ItemStack item, int ticks) {
         if (getItem() == i) {
             setItem(item);
-            RunUtils.runLater(() -> setItem(i), time, type);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    setItem(i);
+                }
+            }.runTaskLater(menu.getPlugin(), ticks);
         }
     }
 
-    public static DynamicItem create(@NonNull ItemStack item) {
-        return new DynamicItem(item);
+    public static DynamicItem create(@NonNull ItemStack item, ChestMenu menu) {
+        return new DynamicItem(item, menu);
     }
 
     @Override
@@ -32,7 +39,7 @@ public class DynamicItem extends MenuItem {
 
     @Override
     public MenuItem copy() {
-        return create(i.clone())
+        return create(i.clone(), menu)
                 .setOnPrimary(this.getOnPrimary())
                 .setOnMiddle(this.getOnMiddle())
                 .setOnSecondary(this.getOnSecondary())
