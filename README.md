@@ -17,3 +17,6 @@
 ```
 
 ## Usage example
+
+### Inventory-Based GUI creation
+> extended version of [@fomacho](https://github.com/focamacho)'s [SealMenus](https://github.com/focamacho/SealMenus)
