@@ -50,7 +50,7 @@ public class MyGUI {
                 "# # # # # # # # #",
                 "# # # # # # # # #"
         );
-        M.setOnClick(e -> e.getWhoClicked().sendMessage("test))"));
+        M.setOnClick(e -> e.getWhoClicked().sendMessage("test"));
 
         LoopableItem L = LoopableItem.create(Arrays.asList(new ItemStack(Material.DIAMOND), new ItemStack(Material.GOLD_INGOT), new ItemStack(Material.IRON_INGOT)), 20);
 
@@ -94,5 +94,53 @@ public class MyGUI {
 
 }
 ```
+### Result
+
+```java
+public class MyGUI {
+
+    private final PageableChestMenu menu;
+
+    public MyGUI() {
+        this.menu = MenuManager.createPageableChestMenu("Dirt", 6, MyPlugin.getInstance(), false);
+    }
+
+    public void prepare() {
+
+        ClickableItem C = ClickableItem.create(new ItemStack(Material.GRAY_STAINED_GLASS_PANE));
+        ClickableItem A = ClickableItem.create(new ItemStack(Material.EMERALD));
+        ClickableItem B = ClickableItem.create(new ItemStack(Material.BOOK));
+
+        Structure s = new Structure(
+                "C A C C B C C A C",
+                "C % % % % % % % C",
+                "C % % % % % % % C",
+                "C % % % % % % % C",
+                "C % % % % % % % C",
+                "C < C C C C C > C"
+        )
+                .set('C', C)
+                .set('A', A)
+                .set('B', B)
+                .set('<', ClickableItem.create(new ItemStack(Material.SPECTRAL_ARROW)))
+                .set('>', ClickableItem.create(new ItemStack(Material.SPECTRAL_ARROW)));
+
+        s.parse(menu);
+
+        for(int i = 1; i < 64; i++) {
+            menu.addPageableItem(ClickableItem.create(new ItemStack(Material.DIRT, i)));
+        }
+
+    }
+
+    public void open(Player player) {
+        prepare();
+        menu.open(player);
+    }
+
+}
+```
+
+### Result
 
 *More examples will be added soon...*
