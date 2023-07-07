@@ -110,6 +110,8 @@ public class MyGUI {
 ```
 ### Result
 
+![buttons](https://github.com/isaweye/lantern-core/assets/130868496/70890832-002f-41e7-9f4b-e8306f01912f)
+
 ```java
 public class MyGUI {
 
@@ -162,5 +164,8 @@ public class MyGUI {
 ```
 
 ### Result
+
+![pageable](https://github.com/isaweye/lantern-core/assets/130868496/eddc970e-05fa-4c4c-bdf4-ac3d1e078e33)
+
 
 *More examples will be added soon...*
