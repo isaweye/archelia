@@ -16,6 +16,19 @@
     </dependency>
 ```
 
+### OR
+
+1. Add as dependency
+```xml
+    <dependency>
+        <groupId>uk.mqchinee</groupId>
+        <artifactId>LanternCore</artifactId>
+        <version>version-here</version>
+        <scope>system</scope>
+        <systemPath>path-to-jar</systemPath>
+    </dependency>
+```
+
 ## Usage example
 
 ### Inventory-Based GUI creation
@@ -69,8 +82,8 @@ public class MyGUI {
         ClickableItem C = ClickableItem.create(new ItemStack(Material.OAK_BUTTON));
         C.setOnPrimary(e -> e.getWhoClicked().sendMessage("hi, "+e.getWhoClicked().getName()));
 
-        DynamicItem D = DynamicItem.create(new ItemStack(Material.OAK_LEAVES));
-        D.setOnClick(e -> D.replace(new ItemStack(Material.BARRIER), 1, Time.IN_SECONDS));
+        DynamicItem D = DynamicItem.create(new ItemStack(Material.OAK_LEAVES), menu);
+        D.setOnClick(e -> D.replace(new ItemStack(Material.BARRIER), 20));
 
         ItemStack on = new ItemBuilder(Material.GREEN_STAINED_GLASS)
             .name("&fSomething &aENABLED").build();
@@ -109,6 +122,8 @@ public class MyGUI {
 }
 ```
 ### Result
+
+![buttons](https://github.com/isaweye/lantern-core/assets/130868496/70890832-002f-41e7-9f4b-e8306f01912f)
 
 ```java
 public class MyGUI {
@@ -162,5 +177,8 @@ public class MyGUI {
 ```
 
 ### Result
+
+![pageable](https://github.com/isaweye/lantern-core/assets/130868496/eddc970e-05fa-4c4c-bdf4-ac3d1e078e33)
+
 
 *More examples will be added soon...*
