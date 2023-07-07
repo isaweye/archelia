@@ -27,7 +27,7 @@ public class MyGUI {
     private final ChestMenu menu;
 
     public MyGUI() {
-    // title, rows, plugin. is concurrent
+    // title, rows, plugin, is concurrent
 
     // (Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
     //    If you want to get rid of ConcurrentModificationException
@@ -104,7 +104,7 @@ public class MyGUI {
     private final PageableChestMenu menu;
 
     public MyGUI() {
-    // title, rows, plugin. is concurrent
+    // title, rows, plugin, is concurrent
    
     // (Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
     //    If you want to get rid of ConcurrentModificationException
