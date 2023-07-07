@@ -14,7 +14,7 @@
     <dependency>
         <groupId>uk.mqchinee</groupId>
         <artifactId>LanternCore</artifactId>
-        <version>version-here</version>
+        <version>{version-here}</version>
         <scope>provided</scope>
     </dependency>
 ```
@@ -27,9 +27,9 @@
     <dependency>
         <groupId>uk.mqchinee</groupId>
         <artifactId>LanternCore</artifactId>
-        <version>version-here</version>
+        <version>{version-here}</version>
         <scope>system</scope>
-        <systemPath>path-to-jar</systemPath>
+        <systemPath>{path-to-jar}</systemPath>
     </dependency>
 ```
 
