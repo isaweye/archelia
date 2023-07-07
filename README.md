@@ -17,7 +17,8 @@
     </dependency>
 ```
 
-### OR *not recommended*
+### OR 
+*(not recommended)*
 
 1. Add as dependency
 ```xml
