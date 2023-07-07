@@ -131,6 +131,7 @@ public class MyGUI {
   <img src="repository/buttons.gif" alt="animated" />
 </p>
 
+
 ```java
 public class MyGUI {
 
