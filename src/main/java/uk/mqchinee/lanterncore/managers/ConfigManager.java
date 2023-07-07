@@ -47,7 +47,7 @@ public class ConfigManager {
                 outputStream = Files.newOutputStream(file.toPath());
 
 
-                int read = 0;
+                int read;
                 byte[] bytes = new byte[1024];
 
                 while ((read = resource.read(bytes)) != -1) {
