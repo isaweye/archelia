@@ -31,7 +31,7 @@ import java.util.function.Consumer;
 @Accessors(chain = true)
 public class ChestMenu {
 
-    private static final MenuItem dummyItem = ClickableItem.create(new ItemStack(Material.AIR));
+    private static final MenuItem dummyItem = ClickableItem.create(new ItemStack(Material.AIR), false);
 
     //Base properties
     @Getter private final String title;
@@ -252,7 +252,7 @@ public class ChestMenu {
     @RequiredArgsConstructor
     static class Listener implements org.bukkit.event.Listener {
 
-        private static final MenuItem dummyItem = ClickableItem.create(new ItemStack(Material.AIR));
+        private static final MenuItem dummyItem = ClickableItem.create(new ItemStack(Material.AIR), false);
 
         private final JavaPlugin plugin;
         public final Set<ChestMenu> chestMenus = Collections.synchronizedSet(Sets.newHashSet());

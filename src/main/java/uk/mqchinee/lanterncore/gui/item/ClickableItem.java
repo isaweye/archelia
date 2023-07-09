@@ -5,17 +5,25 @@ import org.bukkit.inventory.ItemStack;
 
 public class ClickableItem extends MenuItem {
 
-    private ClickableItem(@NonNull ItemStack item) {
+    private final boolean update;
+
+    private ClickableItem(@NonNull ItemStack item, boolean update) {
         super(item);
+        this.update = update;
     }
 
-    public static ClickableItem create(@NonNull ItemStack item) {
-        return new ClickableItem(item);
+    public static ClickableItem create(@NonNull ItemStack item, boolean update) {
+        return new ClickableItem(item, update);
+    }
+
+    @Override
+    public boolean update() {
+        return this.update;
     }
 
     @Override
     public MenuItem copy() {
-        return create(this.getItem().clone())
+        return create(this.getItem().clone(), this.update)
                 .setOnPrimary(this.getOnPrimary())
                 .setOnMiddle(this.getOnMiddle())
                 .setOnSecondary(this.getOnSecondary())
