@@ -2,8 +2,6 @@
   <img src="repository/banner.png"/>
 </p>
 
-**LanternCore is a mixture of good and bad, past and present, which is used by my plugins.**
-
 ## Installation
 1. Install to local repo
 ```shell
