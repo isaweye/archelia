@@ -2,6 +2,8 @@
   <img src="repository/banner.png"/>
 </p>
 
+> version: 1.3.1-RELEASE
+
 ## Installation
 1. Install to local repo
 ```shell
