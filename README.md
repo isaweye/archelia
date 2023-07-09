@@ -53,16 +53,18 @@ public class MyGUI {
 
     public void prepare() {
 
+        // ItemStack, update
+
         ClickableItem S = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
-            .name("&emovable").build());
+            .name("&emovable").build(), false);
         ClickableItem I = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
-            .name("&eloopable").build());
+            .name("&eloopable").build(), false);
         ClickableItem G = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
-            .name("&eclickable").build());
+            .name("&eclickable").build(), false);
         ClickableItem N = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
-            .name("&edynamic").build());
+            .name("&edynamic").build(), false);
         ClickableItem K = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN)
-            .name("&etoggleable").build());
+            .name("&etoggleable").build(), false);
 
         // item, speed, menu, reverse, structure
         MovableItem M = MovableItem.create(
@@ -81,7 +83,7 @@ public class MyGUI {
             new ItemStack(Material.IRON_INGOT)),
         20);
 
-        ClickableItem C = ClickableItem.create(new ItemStack(Material.OAK_BUTTON));
+        ClickableItem C = ClickableItem.create(new ItemStack(Material.OAK_BUTTON), false);
         C.setOnPrimary(e -> e.getWhoClicked().sendMessage("hi, "+e.getWhoClicked().getName()));
 
         DynamicItem D = DynamicItem.create(new ItemStack(Material.OAK_LEAVES), menu);
@@ -147,9 +149,9 @@ public class MyGUI {
 
     public void prepare() {
 
-        ClickableItem C = ClickableItem.create(new ItemStack(Material.GRAY_STAINED_GLASS_PANE));
-        ClickableItem A = ClickableItem.create(new ItemStack(Material.EMERALD));
-        ClickableItem B = ClickableItem.create(new ItemStack(Material.BOOK));
+        ClickableItem C = ClickableItem.create(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), false);
+        ClickableItem A = ClickableItem.create(new ItemStack(Material.EMERALD), false);
+        ClickableItem B = ClickableItem.create(new ItemStack(Material.BOOK), false);
 
         Structure s = new Structure(
                 "C A C C B C C A C",
@@ -162,13 +164,13 @@ public class MyGUI {
                 .set('C', C)
                 .set('A', A)
                 .set('B', B)
-                .set('<', ClickableItem.create(new ItemStack(Material.SPECTRAL_ARROW)))
-                .set('>', ClickableItem.create(new ItemStack(Material.SPECTRAL_ARROW)));
+                .set('<', ClickableItem.create(new ItemStack(Material.SPECTRAL_ARROW), false))
+                .set('>', ClickableItem.create(new ItemStack(Material.SPECTRAL_ARROW), false));
 
         s.parse(menu);
 
         for(int i = 1; i < 64; i++) {
-            menu.addPageableItem(ClickableItem.create(new ItemStack(Material.DIRT, i)));
+            menu.addPageableItem(ClickableItem.create(new ItemStack(Material.DIRT, i), false));
         }
 
     }
