@@ -1,6 +1,6 @@
-![banner](https://github.com/isaweye/lantern-core/assets/130868496/71769d39-6fc7-4b3f-a860-a5502810bb61)
-
-**LanternCore is a mixture of good and bad, past and present, which is used by my plugins.**
+<p align="left">
+  <img src="repository/banner.png"/>
+</p>
 
 ## Installation
 1. Install to local repo
@@ -12,20 +12,22 @@
     <dependency>
         <groupId>uk.mqchinee</groupId>
         <artifactId>LanternCore</artifactId>
-        <version>version-here</version>
+        <version>{version-here}</version>
+        <scope>provided</scope>
     </dependency>
 ```
 
-### OR
+### OR 
+*(not recommended)*
 
 1. Add as dependency
 ```xml
     <dependency>
         <groupId>uk.mqchinee</groupId>
         <artifactId>LanternCore</artifactId>
-        <version>version-here</version>
+        <version>{version-here}</version>
         <scope>system</scope>
-        <systemPath>path-to-jar</systemPath>
+        <systemPath>{path-to-jar}</systemPath>
     </dependency>
 ```
 
@@ -123,7 +125,10 @@ public class MyGUI {
 ```
 ### Result
 
-![buttons](https://github.com/isaweye/lantern-core/assets/130868496/70890832-002f-41e7-9f4b-e8306f01912f)
+<p align="center">
+  <img src="repository/buttons.gif" alt="animated" />
+</p>
+
 
 ```java
 public class MyGUI {
@@ -178,7 +183,8 @@ public class MyGUI {
 
 ### Result
 
-![pageable](https://github.com/isaweye/lantern-core/assets/130868496/eddc970e-05fa-4c4c-bdf4-ac3d1e078e33)
-
+<p align="center">
+  <img src="repository/pageable.gif" alt="animated" />
+</p>
 
 *More examples will be added soon...*
