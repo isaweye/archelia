@@ -28,6 +28,7 @@ public final class LanternCore extends JavaPlugin {
         update();
 
         getCommand("lantern").setExecutor(new Command());
+
     }
 
     private void setup() {
