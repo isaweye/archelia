@@ -2,7 +2,7 @@
   <img src="repository/banner.png"/>
 </p>
 
-> version: 1.3.1-RELEASE
+> version: 1.3.2-RELEASE
 
 ## Installation
 1. Install to local repo
