@@ -8,6 +8,7 @@ import uk.mqchinee.lanterncore.gui.ChestMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 public class MovableItem extends MenuItem {
@@ -22,6 +23,7 @@ public class MovableItem extends MenuItem {
     @Getter private String[] structure;
     private final List<Integer> structureSlots = new ArrayList<>();
     private final boolean reverse;
+    @Getter @Setter private Consumer<MovableItem> onReverse;
 
     private MovableItem(@NonNull ItemStack item, int[] slots, int speed, ChestMenu menu, boolean reverse) {
         super(item);
@@ -63,6 +65,7 @@ public class MovableItem extends MenuItem {
             if (n == slots.length) {
                 if (reverse) {
                     this.slots = IntStream.rangeClosed(1, slots.length).map(i -> slots[slots.length-i]).toArray();
+                    if (getOnReverse() != null) { onReverse.accept(this); }
                 }
                 n = 0;
             }

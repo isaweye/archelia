@@ -32,7 +32,7 @@ public class InputMenuUtils {
     }
 
     public static void clear(ClickableItem item) {
-        update(item, " ");
+        update(item, "");
     }
 
 }

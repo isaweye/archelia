@@ -19,7 +19,7 @@ public class InputMenu {
 
     @Getter private final PageableChestMenu menu;
     @Getter @Setter private List<String> symbols = new ArrayList<>();
-    @Getter private ClickableItem sign = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name(" ").build(), true);
+    @Getter private final ClickableItem sign = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name("").build(), true);
 
     public InputMenu(String title, JavaPlugin plugin) {
         this.menu = MenuManager.createPageableChestMenu(title, 6, plugin, false);
@@ -59,19 +59,18 @@ public class InputMenu {
     }
 
     public void defaultLatin(boolean lower, boolean upper) {
+        List<String> alphabet = Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
         if (lower) {
-            List<String> LowerCaseAlphabet = Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
-            LowerCaseAlphabet.forEach((str) -> {
-                ClickableItem c = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name(str).build(), false);
+            alphabet.forEach((str) -> {
+                ClickableItem c = ClickableItem.create(new ItemBuilder(Material.ENDER_EYE).name(str).build(), false);
                 c.setOnClick(e -> InputMenuUtils.add(sign, str));
                 menu.addPageableItem(c);
             });
         }
         if (upper) {
-            List<String> UpperCaseAlphabet = Arrays.asList("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
-            UpperCaseAlphabet.forEach((str) -> {
-                ClickableItem c = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name(str).build(), false);
-                c.setOnClick(e -> InputMenuUtils.add(sign, str));
+            alphabet.forEach((str) -> {
+                ClickableItem c = ClickableItem.create(new ItemBuilder(Material.ENDER_PEARL).name(str).build(), false);
+                c.setOnClick(e -> InputMenuUtils.add(sign, str.toUpperCase()));
                 menu.addPageableItem(c);
             });
         }
