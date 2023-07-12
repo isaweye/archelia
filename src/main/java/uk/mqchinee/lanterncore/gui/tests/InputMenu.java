@@ -50,7 +50,7 @@ public class InputMenu {
          .set('B', B)
          .set('W', W);
 
-        s.parse(menu);
+        s.process(menu);
         getSymbols().forEach((str -> {
             ClickableItem c = ClickableItem.create(new ItemBuilder(Material.OAK_SIGN).name(str).build(), false);
             c.setOnClick(e -> InputMenuUtils.add(sign, str));

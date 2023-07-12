@@ -1,15 +1,13 @@
 package uk.mqchinee.lanterncore.impl;
 
+import uk.mqchinee.lanterncore.gui.ChestMenu;
 import uk.mqchinee.lanterncore.gui.PageableChestMenu;
 import uk.mqchinee.lanterncore.gui.item.MenuItem;
 
-import java.util.List;
 import java.util.Map;
 
 public interface StructureInterface {
     StructureInterface set(char _char, MenuItem item);
-
-    MenuItem get(char _char);
 
     String[] getStructure();
 
@@ -19,9 +17,8 @@ public interface StructureInterface {
 
     void setMap(Map<Character, MenuItem> map);
 
-    List<Integer> getPageSlots();
+    void process(PageableChestMenu menu);
 
-    void setPageSlots(List<Integer> pageSlots);
+    void process(ChestMenu menu);
 
-    void parse(PageableChestMenu menu);
 }
