@@ -2,7 +2,7 @@
   <img src="repository/banner.png"/>
 </p>
 
-> version: 1.3.2-RELEASE
+> version: 1.4-RELEASE
 
 ## Installation
 1. Install to local repo
@@ -117,7 +117,7 @@ public class MyGUI {
                 .set('D', D)
                 .set('T', T);
 
-        structure.parse(menu);
+        structure.process(menu);
     }
 
     public void open(Player player) {
@@ -169,7 +169,7 @@ public class MyGUI {
                 .set('<', ClickableItem.create(new ItemStack(Material.SPECTRAL_ARROW), false))
                 .set('>', ClickableItem.create(new ItemStack(Material.SPECTRAL_ARROW), false));
 
-        s.parse(menu);
+        s.process(menu);
 
         for(int i = 1; i < 64; i++) {
             menu.addPageableItem(ClickableItem.create(new ItemStack(Material.DIRT, i), false));
