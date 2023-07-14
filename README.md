@@ -2,7 +2,7 @@
   <img src="repository/banner.png"/>
 </p>
 
-> version: 1.4-RELEASE
+> Version: **1.4.1-RELEASE**
 
 ## Installation
 1. Install to local repo
@@ -44,11 +44,11 @@ public class MyGUI {
     private final ChestMenu menu;
 
     public MyGUI() {
-    // title, rows, plugin, is concurrent
-
-    // (Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
-    //    If you want to get rid of ConcurrentModificationException
-    // (occurs when using MovableItem), use ConcurrentHashMap)
+        // title, rows, plugin, is concurrent
+    
+        // (Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+        //    If you want to get rid of ConcurrentModificationException
+        // (occurs when using MovableItem), use ConcurrentHashMap)
 
         this.menu = MenuManager.createChestMenu("Buttons", 5, MyPlugin.getInstance(), true);
     }
@@ -135,17 +135,19 @@ public class MyGUI {
 
 
 ```java
+@InventoryStructure({
+  "C A C C B C C A C",
+  "C % % % % % % % C",
+  "C % % % % % % % C",
+  "C % % % % % % % C",
+  "C % % % % % % % C",
+  "C < C C C C C > C"
+})
 public class MyGUI {
 
     private final PageableChestMenu menu;
 
     public MyGUI() {
-    // title, rows, plugin, is concurrent
-   
-    // (Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
-    //    If you want to get rid of ConcurrentModificationException
-    // (occurs when using MovableItem), use ConcurrentHashMap)
-
         this.menu = MenuManager.createPageableChestMenu("Dirt", 6, MyPlugin.getInstance(), false);
     }
 
@@ -155,14 +157,7 @@ public class MyGUI {
         ClickableItem A = ClickableItem.create(new ItemStack(Material.EMERALD), false);
         ClickableItem B = ClickableItem.create(new ItemStack(Material.BOOK), false);
 
-        Structure s = new Structure(
-                "C A C C B C C A C",
-                "C % % % % % % % C",
-                "C % % % % % % % C",
-                "C % % % % % % % C",
-                "C % % % % % % % C",
-                "C < C C C C C > C"
-        )
+        Structure s = Structure.getFromAnnotation(this.getClass())
                 .set('C', C)
                 .set('A', A)
                 .set('B', B)
