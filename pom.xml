@@ -6,7 +6,7 @@
 
     <groupId>uk.mqchinee</groupId>
     <artifactId>LanternCore</artifactId>
-    <version>1.4.1-RELEASE</version>
+    <version>1.5-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>LanternCore</name>
