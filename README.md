@@ -1,8 +1,8 @@
-<p align="left">
+gui<p align="left">
   <img src="repository/banner.png"/>
 </p>
 
-> Version: **1.4.1-RELEASE**
+> Version: **1.5-RELEASE**
 
 ## Installation
 1. Install to local repo
