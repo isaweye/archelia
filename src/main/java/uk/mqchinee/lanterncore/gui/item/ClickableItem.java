@@ -2,7 +2,6 @@ package uk.mqchinee.lanterncore.gui.item;
 
 import lombok.NonNull;
 import org.bukkit.inventory.ItemStack;
-
 public class ClickableItem extends MenuItem {
 
     private final boolean update;
