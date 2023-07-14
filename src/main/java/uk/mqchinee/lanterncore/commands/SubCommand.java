@@ -49,6 +49,11 @@ public abstract class SubCommand {
             }
         }
 
+        if (!isNull(getInfo().permission()) && (!getSender().hasPermission(getInfo().permission()))) {
+            sender.sendMessage(TextUtils.colorize(info.permission_message()));
+            return;
+        }
+
         if(hasArgs && (getArgs().length < 2)) {
             sender.sendMessage(TextUtils.colorize(getInfo().no_args_message()));
             return;
@@ -59,11 +64,6 @@ public abstract class SubCommand {
                 sender.sendMessage(TextUtils.colorize(getInfo().regex_message()));
                 return;
             }
-        }
-
-        if (!isNull(getInfo().permission()) && (!getSender().hasPermission(getInfo().permission()))) {
-            sender.sendMessage(TextUtils.colorize(info.permission_message()));
-            return;
         }
         execute();
     }
