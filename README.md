@@ -1,4 +1,4 @@
-gui<p align="left">
+<p align="left">
   <img src="repository/banner.png"/>
 </p>
 
