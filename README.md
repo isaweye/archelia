@@ -127,7 +127,6 @@ public class MyGUI {
 
 }
 ```
-### Result
 
 <p align="center">
   <img src="repository/buttons.gif" alt="animated" />
@@ -180,10 +179,151 @@ public class MyGUI {
 }
 ```
 
-### Result
-
 <p align="center">
   <img src="repository/pageable.gif" alt="animated" />
+</p>
+
+
+### Creating commands
+
+```java
+@CommandInfo()
+public class MySimpleCommand extends AbstractCommand {
+    public MySimpleCommand() {
+        super("command", MyPlugin.getInstance());
+    }
+
+    @Override
+    public List<String> complete(CommandSender commandSender, String[] strings) {
+        return null;
+    }
+
+    @Override
+    public void sub(CommandSender commandSender, String[] strings) {}
+
+    @Override
+    public void execute(CommandSender commandSender, String s, String[] strings) {
+        commandSender.sendMessage("Hello, world!");
+    }
+}
+```
+
+```java
+@Override
+    public void onEnable() {
+        new MySimpleCommand();
+    }
+```
+
+<p align="center">
+  <img src="repository/simple.gif" alt="animated" />
+</p>
+
+```java
+@CommandInfo(
+        permission = "myplugin.worldcommand",
+        permission_message = "&cYou don't have permission to do that.",
+        filter = SenderFilter.PLAYER,
+        filter_message = "&cThis command can only be used by players."
+)
+public class WorldCommand extends AbstractCommand {
+    public WorldCommand() {
+        super("world", MyPlugin.getInstance());
+    }
+
+    @Override
+    public List<String> complete(CommandSender commandSender, String[] strings) {
+        return Arrays.asList("hello", "goodbye", "echo");
+    }
+
+    @Override
+    public void sub(CommandSender commandSender, String[] strings) {
+        subCommand(new Hello(this, commandSender, strings));
+        subCommand(new Goodbye(this, commandSender, strings));
+        subCommand(new Echo(this, commandSender, strings));
+    }
+
+    @Override
+    public void execute(CommandSender commandSender, String s, String[] strings) {
+        commandSender.sendMessage(":)");
+    }
+}
+```
+
+```java
+@SubCommandInfo()
+public class Hello extends SubCommand {
+    public Hello(AbstractCommand parent, CommandSender sender, String[] args) {
+        super(parent, sender, args, false); // hasArgs: false
+    }
+
+    @Override
+    public String getName() {
+        return "hello";
+    }
+
+    @Override
+    public void execute() {
+        getSender().sendMessage("Hello, World!");
+    }
+}
+```
+
+```java
+@SubCommandInfo()
+public class Goodbye extends SubCommand {
+    public Goodbye(AbstractCommand parent, CommandSender sender, String[] args) {
+        super(parent, sender, args, false);
+    }
+
+    @Override
+    public String getName() {
+        return "goodbye";
+    }
+
+    @Override
+    public void execute() {
+        getSender().sendMessage("Goodbye, World!");
+    }
+}
+```
+
+```java
+  @SubCommandInfo(
+        permission = "myplugin.echo",
+        permission_message = "&cYou don't have permission to do that.",
+        filter = SenderFilter.PLAYER, // SenderFilter.CONSOLE, SendFilter.BOTH
+        filter_message = "&cThis command can only be used by players.",
+        no_args_message = "&cUsage: /world echo &oINTEGER",
+        regex = "[0-9]+",
+        regex_message = "&cUsage: /world echo &oINTEGER"
+)
+public class Echo extends SubCommand {
+    public Echo(AbstractCommand parent, CommandSender sender, String[] args) {
+        super(parent, sender, args, true); // hasArgs: true
+    }
+
+    @Override
+    public String getName() {
+        return "echo";
+    }
+
+    @Override
+    public void execute() {
+        getSender().sendMessage(getArgs()[1]);
+    }
+}
+```
+
+```java
+@Override
+    public void onEnable() {
+        new WorldCommand();
+    }
+```
+
+<p align="center">
+  <img src="repository/absdefg.gif" alt="animated" />
 </p>
 
 *More examples will be added soon...*
