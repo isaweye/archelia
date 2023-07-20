@@ -1,0 +1,39 @@
+package uk.mqchinee.archelia.plugin;
+
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+import uk.mqchinee.archelia.LanternCore;
+import uk.mqchinee.archelia.utils.TextUtils;
+
+import java.util.List;
+
+public class Command implements CommandExecutor {
+
+    private String get() {
+        StringBuilder stringBuilder = new StringBuilder();
+        int i = 1;
+        List<Plugin> list = LanternCore.currentlyUsing;
+        for (Plugin plugin : list) {
+            if (list.size() != i) {
+                stringBuilder.append(TextUtils.colorize("&a")).append(plugin.getName()).append(TextUtils.colorize("&f, "));
+                i++;
+            }
+            else { stringBuilder.append(TextUtils.colorize("&a")).append(plugin.getName()).append(TextUtils.colorize("&f.")); }
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, String[] args) {
+        String cu = (LanternCore.currentlyUsing.size() > 0) ? "&7Currently used by these plugins: \n&8&l- "+ get() : "";
+        sender.sendMessage(TextUtils.colorize("&f--------< &6Lantern&fCore &f>--------"));
+        sender.sendMessage(TextUtils.colorize("&7Author: &fmqchinee"));
+        sender.sendMessage(TextUtils.colorize("&7Version: &f"+ LanternCore.get().getDescription().getVersion()));
+        sender.sendMessage(TextUtils.colorize("&7API version: &f"+ LanternCore.get().getDescription().getAPIVersion()));
+        sender.sendMessage(TextUtils.colorize(cu));
+        return true;
+    }
+
+}

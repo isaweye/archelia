@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LanternCore.iml" filepath="$PROJECT_DIR$/LanternCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Archelia.iml" filepath="$PROJECT_DIR$/Archelia.iml" />
     </modules>
   </component>
 </project>
