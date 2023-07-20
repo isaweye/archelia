@@ -32,7 +32,3 @@
         <systemPath>{path-to-jar}</systemPath>
     </dependency>
 ```
-
-<p align="center">
-  <img src="repository/absdefg.gif" alt="animated" />
-</p>
