@@ -1,4 +1,4 @@
-name: LanternCore
+name: Archelia
 version: '${project.version}'
 main: uk.mqchinee.archelia.Archelia
 author: mqchinee
