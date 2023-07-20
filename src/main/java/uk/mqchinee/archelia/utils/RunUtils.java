@@ -8,7 +8,7 @@ import uk.mqchinee.archelia.enums.Time;
 public class RunUtils {
 
     public static Archelia get() {
-        return Archelia.get();
+        return Archelia.getInstance();
     }
 
     public static BukkitScheduler scheduler() {
@@ -30,9 +30,9 @@ public class RunUtils {
     public static void runLater(Runnable r, int wait, Time type) {
         switch (type) {
             case IN_TICKS:
-                scheduler().runTaskLater(Archelia.get(), r, wait);
+                scheduler().runTaskLater(Archelia.getInstance(), r, wait);
             case IN_SECONDS:
-                scheduler().runTaskLater(Archelia.get(), r, toSeconds(wait));
+                scheduler().runTaskLater(Archelia.getInstance(), r, toSeconds(wait));
         }
     }
 

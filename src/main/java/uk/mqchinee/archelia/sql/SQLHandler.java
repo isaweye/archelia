@@ -28,16 +28,16 @@ public class SQLHandler {
 
 	public static ResultSet sqlQuery(final String sql) {
 		if (debug)
-			Archelia.logger().info("SQL QUERY: " + sql);
+			Archelia.getPluginLogger().info("SQL QUERY: " + sql);
 
 		ResultSet rs = null;
 		try {
 			final Statement statement = connection.createStatement();
 			if (debug)
-				Archelia.logger().info("EXECUTING: " + sql);
+				Archelia.getPluginLogger().info("EXECUTING: " + sql);
 			rs = statement.executeQuery(sql);
 			if (debug)
-				Archelia.logger().info("SUCCESS: " + sql);
+				Archelia.getPluginLogger().info("SUCCESS: " + sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -49,13 +49,13 @@ public class SQLHandler {
 
 	public static void sqlUpdate(final String sql) {
 		if (debug)
-			Archelia.logger().info("SQL UPDATE: " + sql);
+			Archelia.getPluginLogger().info("SQL UPDATE: " + sql);
 		try {
 			final PreparedStatement pstmt = SQLHandler.getConnection().prepareStatement(sql);
 			pstmt.executeUpdate();
 			pstmt.close();
 			if (debug)
-				Archelia.logger().info("SUCCESS: " + sql);
+				Archelia.getPluginLogger().info("SUCCESS: " + sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
