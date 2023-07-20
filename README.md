@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="repository/banner.png"/>
+  <img src="docs/repository/banner.png"/>
 </p>
 
 > Version: **1.5-RELEASE**
