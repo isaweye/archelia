@@ -1,6 +1,6 @@
 package uk.mqchinee.archelia.sql;
 
-import uk.mqchinee.archelia.LanternCore;
+import uk.mqchinee.archelia.Archelia;
 
 import java.io.File;
 import java.sql.*;
@@ -28,16 +28,16 @@ public class SQLHandler {
 
 	public static ResultSet sqlQuery(final String sql) {
 		if (debug)
-			LanternCore.logger().info("SQL QUERY: " + sql);
+			Archelia.logger().info("SQL QUERY: " + sql);
 
 		ResultSet rs = null;
 		try {
 			final Statement statement = connection.createStatement();
 			if (debug)
-				LanternCore.logger().info("EXECUTING: " + sql);
+				Archelia.logger().info("EXECUTING: " + sql);
 			rs = statement.executeQuery(sql);
 			if (debug)
-				LanternCore.logger().info("SUCCESS: " + sql);
+				Archelia.logger().info("SUCCESS: " + sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -49,13 +49,13 @@ public class SQLHandler {
 
 	public static void sqlUpdate(final String sql) {
 		if (debug)
-			LanternCore.logger().info("SQL UPDATE: " + sql);
+			Archelia.logger().info("SQL UPDATE: " + sql);
 		try {
 			final PreparedStatement pstmt = SQLHandler.getConnection().prepareStatement(sql);
 			pstmt.executeUpdate();
 			pstmt.close();
 			if (debug)
-				LanternCore.logger().info("SUCCESS: " + sql);
+				Archelia.logger().info("SUCCESS: " + sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -2,13 +2,13 @@ package uk.mqchinee.archelia.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitScheduler;
-import uk.mqchinee.archelia.LanternCore;
+import uk.mqchinee.archelia.Archelia;
 import uk.mqchinee.archelia.enums.Time;
 
 public class RunUtils {
 
-    public static LanternCore get() {
-        return LanternCore.get();
+    public static Archelia get() {
+        return Archelia.get();
     }
 
     public static BukkitScheduler scheduler() {
@@ -30,9 +30,9 @@ public class RunUtils {
     public static void runLater(Runnable r, int wait, Time type) {
         switch (type) {
             case IN_TICKS:
-                scheduler().runTaskLater(LanternCore.get(), r, wait);
+                scheduler().runTaskLater(Archelia.get(), r, wait);
             case IN_SECONDS:
-                scheduler().runTaskLater(LanternCore.get(), r, toSeconds(wait));
+                scheduler().runTaskLater(Archelia.get(), r, toSeconds(wait));
         }
     }
 
