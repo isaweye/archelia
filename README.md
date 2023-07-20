@@ -36,5 +36,3 @@
 <p align="center">
   <img src="repository/absdefg.gif" alt="animated" />
 </p>
-
-*More examples will be added soon...*
