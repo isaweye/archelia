@@ -251,9 +251,60 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Getting started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         Getting started
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local" class="md-nav__link">
+    Local
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jitpack" class="md-nav__link">
+    JitPack
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -313,23 +364,25 @@
 </p>
 
 <p><a class="md-button" href="https://github.com/isaweye/archelia/releases/latest"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> GET <strong>.JAR</strong> FILE</a></p>
-<ol>
-<li>Install to local repo
+<h2 id="installation">Installation</h2>
+<h3 id="local">Local</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">recommended</label><label for="__tabbed_1_2">not recommended</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>Step 1.</strong> Install to local repo</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">   </span>$<span class="w"> </span>mvn<span class="w"> </span>install
-</span></code></pre></div></li>
-<li>Add as dependency
+</span></code></pre></div>
+<p><strong>Step 2.</strong> Add as dependency</p>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="nt">&lt;dependency&gt;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">        </span><span class="nt">&lt;groupId&gt;</span>uk.mqchinee<span class="nt">&lt;/groupId&gt;</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="nt">&lt;artifactId&gt;</span>Archelia<span class="nt">&lt;/artifactId&gt;</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="nt">&lt;version&gt;</span>{version-here}<span class="nt">&lt;/version&gt;</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">&lt;/dependency&gt;</span>
-</span></code></pre></div></li>
-</ol>
-<p><strong>OR</strong> 
-<em>(not recommended)</em></p>
-<ol>
-<li>Add as dependency
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><strong>Step 1.</strong> Add as dependency</p>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">    </span><span class="nt">&lt;dependency&gt;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span><span class="nt">&lt;groupId&gt;</span>uk.mqchinee<span class="nt">&lt;/groupId&gt;</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="nt">&lt;artifactId&gt;</span>Archelia<span class="nt">&lt;/artifactId&gt;</span>
@@ -337,8 +390,65 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&lt;scope&gt;</span>system<span class="nt">&lt;/scope&gt;</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">&lt;systemPath&gt;</span>{path-to-jar}<span class="nt">&lt;/systemPath&gt;</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">&lt;/dependency&gt;</span>
-</span></code></pre></div></li>
-</ol>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="jitpack">JitPack</h3>
+<p><a href="https://jitpack.io/#isaweye/archelia"><img alt="" src="https://jitpack.io/v/isaweye/archelia.svg" /></a></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">maven</label><label for="__tabbed_2_2">gradle</label><label for="__tabbed_2_3">sbt</label><label for="__tabbed_2_4">leiningen</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>Step 1.</strong> Add the JitPack repository to your build file</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">    </span><span class="nt">&lt;repositories&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="nt">&lt;repository&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">            </span><span class="nt">&lt;id&gt;</span>jitpack.io<span class="nt">&lt;/id&gt;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">            </span><span class="nt">&lt;url&gt;</span>https://jitpack.io<span class="nt">&lt;/url&gt;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">&lt;/repository&gt;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">&lt;/repositories&gt;</span>
+</span></code></pre></div>
+<p><strong>Step 2.</strong> Add the dependency</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">    </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">        </span><span class="nt">&lt;groupId&gt;</span>com.github.isaweye<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="nt">&lt;artifactId&gt;</span>archelia<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="nt">&lt;version&gt;</span>Tag<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><strong>Step 1.</strong> Add the JitPack repository to your build file</p>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">    </span><span class="n">allprojects</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">        </span><span class="n">repositories</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">            </span><span class="p">...</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">            </span><span class="n">maven</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="p">:</span><span class="c1">//jitpack.io&#39; }</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Step 2.</strong> Add the dependency</p>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">    </span><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">            </span><span class="n">implementation</span><span class="w"> </span><span class="err">&#39;</span><span class="n">com</span><span class="p">.</span><span class="na">github</span><span class="p">.</span><span class="na">isaweye</span><span class="p">:</span><span class="n">archelia</span><span class="p">:</span><span class="n">Tag</span><span class="err">&#39;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><strong>Step 1.</strong> Add the JitPack repository to your build file</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>    <span class="n">resolvers</span> <span class="o">+=</span> <span class="s2">&quot;jitpack&quot;</span> <span class="n">at</span> <span class="s2">&quot;https://jitpack.io&quot;</span>
+</span></code></pre></div>
+<p><strong>Step 2.</strong> Add the dependency</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>    <span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s2">&quot;com.github.User&quot;</span> <span class="o">%</span> <span class="s2">&quot;Repo&quot;</span> <span class="o">%</span> <span class="s2">&quot;Tag&quot;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><strong>Step 1.</strong> Add the JitPack repository to your build file</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>    <span class="p">:</span><span class="n">repositories</span> <span class="p">[[</span><span class="s2">&quot;jitpack&quot;</span> <span class="s2">&quot;https://jitpack.io&quot;</span><span class="p">]]</span>
+</span></code></pre></div>
+<p><strong>Step 2.</strong> Add the dependency</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>    <span class="p">:</span><span class="n">dependencies</span> <span class="p">[[</span><span class="n">com</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">User</span><span class="o">/</span><span class="n">Repo</span> <span class="s2">&quot;Tag&quot;</span><span class="p">]]</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
 
 
 
@@ -349,6 +459,8 @@
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
         </div>
         
       </main>
@@ -376,7 +488,7 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "content.code.select", "toc.integrate"], "search": "assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "content.code.select", "toc.integrate", "content.tabs.link"], "search": "assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="assets/javascripts/bundle.220ee61c.min.js"></script>
