@@ -12,27 +12,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * The main plugin class for the Archelia plugin.
+ */
 public final class Archelia extends JavaPlugin {
 
+    /**
+     * A list of plugins that are currently using the Archelia plugin as a dependency or soft dependency.
+     */
     public static List<Plugin> currentlyUsing = new ArrayList<>();
-    @Getter private static Logger pluginLogger;
 
-    @Getter private static Archelia instance;
-    @Getter private static Economy economy = null;
+    @Getter
+    private static Logger pluginLogger;
+
+    @Getter
+    private static Archelia instance;
+
+    @Getter
+    private static Economy economy = null;
 
     @Override
     public void onEnable() {
         instance = this;
         pluginLogger = this.getLogger();
 
+        // Check which plugins are using Archelia as a dependency or soft dependency and add them to the currentlyUsing list.
         for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
             if (plugin.getDescription().getDepend().contains("Archelia") || plugin.getDescription().getSoftDepend().contains("Archelia")) {
                 currentlyUsing.add(plugin);
             }
         }
 
+        // Register the custom command.
         new Command();
 
+        // Attempt to hook into the Vault economy plugin.
+        log();
     }
 
     private void log() {
@@ -43,6 +58,11 @@ public final class Archelia extends JavaPlugin {
         this.getLogger().warning("Failed to hook into Vault!");
     }
 
+    /**
+     * Attempt to hook into the Vault economy plugin and set the economy variable.
+     *
+     * @return True if hooking was successful, false otherwise.
+     */
     private boolean vault() {
         if (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null) {
             RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);

@@ -16,6 +16,10 @@ import uk.mqchinee.archelia.gui.item.MenuItem;
 import java.util.*;
 import java.util.function.Consumer;
 
+/**
+ * The PageableChestMenu class represents a specialized type of ChestMenu that allows paging through its items.
+ * It is an extension of the ChestMenu class, providing additional functionality for managing pageable items.
+ */
 public class PageableChestMenu extends ChestMenu {
 
     @Getter @Setter private int[] itemSlots;
@@ -31,8 +35,15 @@ public class PageableChestMenu extends ChestMenu {
     private final boolean isConcurrent;
 
     /**
-     @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
-     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap
+     * Creates a new PageableChestMenu with the specified title, number of rows, item slots, plugin, and concurrency mode.
+     *
+     * @param title        The title of the menu.
+     * @param rows         The number of rows for the menu (1 to 6).
+     * @param itemSlots    An array of integers representing the slots where the items will be placed on the pages.
+     * @param plugin       The JavaPlugin instance that owns the menu.
+     * @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+     *                     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem),
+     *                     use ConcurrentHashMap.
      */
     PageableChestMenu(String title, int rows, int[] itemSlots, JavaPlugin plugin, boolean isConcurrent) {
         super(title, rows, plugin, isConcurrent);
@@ -44,8 +55,14 @@ public class PageableChestMenu extends ChestMenu {
     }
 
     /**
-     @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
-     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap
+     * Creates a new PageableChestMenu with the specified title, number of rows, plugin, and concurrency mode.
+     *
+     * @param title        The title of the menu.
+     * @param rows         The number of rows for the menu (1 to 6).
+     * @param plugin       The JavaPlugin instance that owns the menu.
+     * @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
+     *                     If you want to get rid of ConcurrentModificationException (occurs when using MovableItem),
+     *                     use ConcurrentHashMap.
      */
     PageableChestMenu(String title, int rows, JavaPlugin plugin, boolean isConcurrent) {
         super(title, rows, plugin, isConcurrent);

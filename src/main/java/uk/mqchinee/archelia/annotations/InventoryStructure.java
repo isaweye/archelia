@@ -5,9 +5,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation used to define the structure of an inventory.
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-
 public @interface InventoryStructure {
-    String[] value() default {"#########","#########","#########","#########","#########","#########"};
+
+    /**
+     * The array of strings representing the structure of the inventory.
+     * @return The array of strings representing the inventory structure.
+     */
+    String[] value() default {"#########", "#########", "#########", "#########", "#########", "#########"};
 }

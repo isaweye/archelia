@@ -10,20 +10,37 @@ import uk.mqchinee.archelia.utils.TextUtils;
 
 import java.util.*;
 
+/**
+ * A builder class for creating and customizing ItemStack objects in a Bukkit environment.
+ */
 public class ItemBuilder implements ItemBuilderInterface {
+
     private ItemStack item;
     private ItemMeta meta;
 
+    /**
+     * Constructs an ItemBuilder with the specified material.
+     *
+     * @param material The material of the ItemStack to be created.
+     */
     public ItemBuilder(Material material) {
         this.item = new ItemStack(material);
         this.meta = item.getItemMeta();
     }
 
+    /**
+     * Constructs an ItemBuilder with an existing ItemStack.
+     *
+     * @param item The existing ItemStack to be customized.
+     */
     public ItemBuilder(ItemStack item) {
         this.item = item;
         this.meta = item.getItemMeta();
     }
 
+    /**
+     * Constructs an ItemBuilder with the default material (STONE).
+     */
     public ItemBuilder() {
         this.item = new ItemStack(Material.STONE);
         this.meta = item.getItemMeta();
@@ -37,7 +54,7 @@ public class ItemBuilder implements ItemBuilderInterface {
 
     @Override
     public int getAmount() {
-       return item.getAmount();
+        return item.getAmount();
     }
 
     @Override

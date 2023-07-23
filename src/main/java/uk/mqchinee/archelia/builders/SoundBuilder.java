@@ -7,6 +7,9 @@ import uk.mqchinee.archelia.impl.SoundBuilderInterface;
 
 import java.util.List;
 
+/**
+ * A builder class for creating and customizing sounds in a Bukkit environment.
+ */
 public class SoundBuilder implements SoundBuilderInterface {
 
     private Sound sound;
@@ -70,6 +73,9 @@ public class SoundBuilder implements SoundBuilderInterface {
         return this;
     }
 
+    /**
+     * Plays the sound based on the configured properties.
+     */
     @Override
     public void play() {
         if (playTo != null) {

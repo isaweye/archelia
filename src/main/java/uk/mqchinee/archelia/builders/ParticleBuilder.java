@@ -11,6 +11,9 @@ import uk.mqchinee.archelia.impl.ParticleBuilderInterface;
 
 import java.util.List;
 
+/**
+ * A builder class for creating and customizing particles in a Bukkit environment.
+ */
 public class ParticleBuilder implements ParticleBuilderInterface {
 
     private double offset_y = 0.1;

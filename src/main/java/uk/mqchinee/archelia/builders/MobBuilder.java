@@ -10,12 +10,21 @@ import uk.mqchinee.archelia.colors.Iridium;
 import uk.mqchinee.archelia.impl.MobBuilderInterface;
 import uk.mqchinee.archelia.utils.TextUtils;
 
+/**
+ * A builder class for creating and customizing mobs (entities) in a Bukkit environment.
+ */
 public class MobBuilder implements MobBuilderInterface {
 
     private final EntityType entityType;
     private final Location location;
     private final Mob mob;
 
+    /**
+     * Constructs a MobBuilder with the specified entity type and location.
+     *
+     * @param entityType The EntityType of the mob to be created.
+     * @param location   The location where the mob will be spawned.
+     */
     public MobBuilder(EntityType entityType, Location location) {
         this.entityType = entityType;
         this.location = location;

@@ -8,12 +8,21 @@ import org.bukkit.util.Vector;
 import uk.mqchinee.archelia.impl.EntityBuilderInterface;
 import uk.mqchinee.archelia.utils.TextUtils;
 
+/**
+ * A builder class for creating and configuring entities in a Bukkit environment.
+ */
 public class EntityBuilder implements EntityBuilderInterface {
 
     private final EntityType entityType;
     private final Location location;
     private Entity entity;
 
+    /**
+     * Constructs an EntityBuilder with the specified entity type and location.
+     *
+     * @param entityType The EntityType of the entity to be created.
+     * @param location   The location where the entity will be spawned.
+     */
     public EntityBuilder(EntityType entityType, Location location) {
         this.entityType = entityType;
         this.location = location;
@@ -109,9 +118,11 @@ public class EntityBuilder implements EntityBuilderInterface {
                 case BABY:
                     (ageable).setBaby();
                     this.entity = ageable;
+                    break;
                 case ADULT:
                     (ageable).setAdult();
                     this.entity = ageable;
+                    break;
             }
         }
         return this;

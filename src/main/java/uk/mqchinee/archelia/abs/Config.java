@@ -10,23 +10,42 @@ import java.io.File;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+/**
+ * Represents a configuration file.
+ */
 @SuppressWarnings("unused")
 public class Config implements ConfigInterface {
 
     private final FileConfiguration configuration;
     private final File file;
 
+    /**
+     * Constructs a new Config instance from the given path and config(file) name.
+     *
+     * @param path  The path to the folder.
+     * @param child The name of the child file.
+     */
     public Config(String path, String child) {
         File file = new File(path, child);
         this.configuration = YamlConfiguration.loadConfiguration(file);
         this.file = file;
     }
 
+    /**
+     * Constructs a new Config instance from the given file.
+     *
+     * @param file The configuration file.
+     */
     public Config(File file) {
         this.configuration = YamlConfiguration.loadConfiguration(file);
         this.file = file;
     }
 
+    /**
+     * Constructs a new Config instance from the given FileConfiguration.
+     *
+     * @param config The FileConfiguration to use.
+     */
     public Config(FileConfiguration config) {
         this.configuration = config;
         this.file = new File(config.getCurrentPath());

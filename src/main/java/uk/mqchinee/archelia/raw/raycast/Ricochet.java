@@ -22,6 +22,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Abstract class representing a ricochet projectile in the game world.
+ * This class provides methods to handle the behavior of the ricochet during its flight.
+ */
 public abstract class Ricochet {
 
     @Getter @Setter private List<Material> allowedMaterials = new ArrayList<>();
@@ -46,6 +50,17 @@ public abstract class Ricochet {
     @Getter @Setter private int now = 0;
     @Getter @Setter private List<Block> bl = new ArrayList<>();
 
+    /**
+     * Constructor for the Ricochet class.
+     *
+     * @param plugin The JavaPlugin instance associated with this ricochet.
+     * @param delay The delay in ticks between ricochet updates.
+     * @param type The time type for the delay (in ticks or seconds).
+     * @param step The distance step for each ricochet update.
+     * @param lifespan The maximum lifespan of the ricochet.
+     * @param location The starting location of the ricochet.
+     * @param direction The direction vector of the ricochet.
+     */
     public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, Location location, Vector direction) {
         this.type = type;
         this.lifespan = lifespan;
@@ -57,6 +72,16 @@ public abstract class Ricochet {
         else { this.delay = delay*20; }
     }
 
+    /**
+     * Constructor for the Ricochet class when launched from a living entity.
+     *
+     * @param plugin The JavaPlugin instance associated with this ricochet.
+     * @param delay The delay in ticks between ricochet updates.
+     * @param type The time type for the delay (in ticks or seconds).
+     * @param step The distance step for each ricochet update.
+     * @param lifespan The maximum lifespan of the ricochet.
+     * @param shooter The living entity that launched the ricochet.
+     */
     public Ricochet(JavaPlugin plugin, int delay, Time type, double step, int lifespan, LivingEntity shooter) {
         this.type = type;
         this.lifespan = lifespan;
@@ -70,50 +95,16 @@ public abstract class Ricochet {
         else { this.delay = delay*20; }
     }
 
-    private void ricochet(Location loc) {
-        BlockFace blockFace = face(loc);
-        if (blockFace != null) {
-            Vector dir = new Vector(blockFace.getModX(), blockFace.getModY(), blockFace.getModZ());
-            dir = dir.multiply(direction.dot(dir)).multiply(2.0D);
-            if (now != max) {
-                setDirection(direction.subtract(dir).normalize().multiply(1));
-                now++;
-            }
-            else { stop(); onDestroy(); }
-        }
-    }
-
-    private BlockFace face(Location loc) {
-        World world = loc.getWorld();
-        if (world == null)
-            return null;
-        Block block = loc.getBlock();
-        BlockIterator blockIterator = new BlockIterator(world, loc.toVector(), direction, 0.0D, 8);
-        Block previousBlock = block;
-        Block nextBlock = blockIterator.next();
-        while (blockIterator.hasNext() && (nextBlock.getType() == Material.AIR || nextBlock.isLiquid() || nextBlock.equals(block))) {
-            previousBlock = nextBlock;
-            nextBlock = blockIterator.next();
-        }
-        BlockFace blockFace = nextBlock.getFace(previousBlock);
-        return (blockFace == BlockFace.SELF) ? BlockFace.UP : blockFace;
-    }
-
-    private boolean isNegative(double v) {
-        return Double.doubleToRawLongBits(v) < 0;
-    }
-
-    private double flip(double coordinate) {
-        if (isNegative(coordinate)) {
-            return Math.abs(coordinate);
-        }
-        return -coordinate;
-    }
-
+    /**
+     * Stops the ricochet by canceling the associated BukkitRunnable task.
+     */
     public void stop() {
         Experiments.ignore(() -> task.cancel());
     }
 
+    /**
+     * Launches the ricochet.
+     */
     public void launch() {
         onLaunch();
         new BukkitRunnable() {
@@ -121,7 +112,8 @@ public abstract class Ricochet {
             public void run() {
                 task = this;
                 if(location.getY() < -70) {
-                    this.cancel(); onDestroy();
+                    this.cancel();
+                    onDestroy();
                 }
                 a = a + step;
                 if (a > lifespan) {
@@ -169,12 +161,80 @@ public abstract class Ricochet {
         }.runTaskTimer(plugin, delay, delay);
     }
 
+    /**
+     * Called when the ricochet is in motion during its flight.
+     * Implement this method to handle actions when the ricochet is moving.
+     */
     public abstract void onMove();
+
+    /**
+     * Called when the ricochet is destroyed or removed.
+     * Implement this method to handle cleanup or additional actions when the ricochet is destroyed.
+     */
     public abstract void onDestroy();
+
+    /**
+     * Called when the ricochet hits an obstacle and ricochets off it.
+     * Implement this method to handle actions when the ricochet ricochets off an obstacle.
+     */
     public abstract void onRicochet();
+
+    /**
+     * Called when the ricochet hits an entity.
+     * Implement this method to handle actions when the ricochet hits an entity.
+     */
     public abstract void onHitEntity();
+
+    /**
+     * Called when the ricochet is launched.
+     * Implement this method to handle actions when the ricochet is launched.
+     */
     public abstract void onLaunch();
+
+    /**
+     * Called when the ricochet penetrates an entity.
+     * Implement this method to handle actions when the ricochet penetrates an entity.
+     */
     public abstract void onPenetrateEntity();
 
+    private boolean isNegative(double v) {
+        return Double.doubleToRawLongBits(v) < 0;
+    }
+
+    private double flip(double coordinate) {
+        if (isNegative(coordinate)) {
+            return Math.abs(coordinate);
+        }
+        return -coordinate;
+    }
+
+    private void ricochet(Location loc) {
+        BlockFace blockFace = face(loc);
+        if (blockFace != null) {
+            Vector dir = new Vector(blockFace.getModX(), blockFace.getModY(), blockFace.getModZ());
+            dir = dir.multiply(direction.dot(dir)).multiply(2.0D);
+            if (now != max) {
+                setDirection(direction.subtract(dir).normalize().multiply(1));
+                now++;
+            }
+            else { stop(); onDestroy(); }
+        }
+    }
+
+    private BlockFace face(Location loc) {
+        World world = loc.getWorld();
+        if (world == null)
+            return null;
+        Block block = loc.getBlock();
+        BlockIterator blockIterator = new BlockIterator(world, loc.toVector(), direction, 0.0D, 8);
+        Block previousBlock = block;
+        Block nextBlock = blockIterator.next();
+        while (blockIterator.hasNext() && (nextBlock.getType() == Material.AIR || nextBlock.isLiquid() || nextBlock.equals(block))) {
+            previousBlock = nextBlock;
+            nextBlock = blockIterator.next();
+        }
+        BlockFace blockFace = nextBlock.getFace(previousBlock);
+        return (blockFace == BlockFace.SELF) ? BlockFace.UP : blockFace;
+    }
 
 }

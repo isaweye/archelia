@@ -18,6 +18,16 @@ import java.util.regex.Pattern;
 @SuppressWarnings("deprecation")
 public final class JsonMessageConverter {
 
+    /**
+     * Creates a new JsonMessageConverter with the specified options.
+     *
+     * @param hover          Whether hover events are enabled.
+     * @param run            Whether run events are enabled.
+     * @param suggest        Whether suggest events are enabled.
+     * @param link           Whether link events are enabled.
+     * @param translateCodes Whether color code translation is enabled.
+     * @param iridium        Whether Iridium color code processing is enabled.
+     */
     public JsonMessageConverter(boolean hover, boolean run, boolean suggest, boolean link, boolean translateCodes, boolean iridium) {
         this.hover = hover;
         this.run = run;
@@ -27,22 +37,27 @@ public final class JsonMessageConverter {
         this.iridium = iridium;
     }
 
+    /**
+     * A pre-configured JsonMessageConverter instance with all options enabled by default.
+     */
     public static final JsonMessageConverter DEFAULT = new JsonMessageConverter(true, true, true, true, true, true);
+
     private static final Pattern JMM_PATTERN = Pattern.compile("\\<(.+?)\\>\\<(.+?)\\>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
     private static final Pattern JMM_ARG_SPLIT_PATTERN = Pattern.compile(" | ", Pattern.CASE_INSENSITIVE | Pattern.LITERAL);
 
     private final boolean hover;
-
     private final boolean run;
-
     private final boolean iridium;
-
     private final boolean suggest;
-
     private final boolean link;
-
     private final boolean translateCodes;
 
+    /**
+     * Converts text to an array of BaseComponent.
+     *
+     * @param input The text message to convert.
+     * @return An array of BaseComponent representing the converted message.
+     */
     @NonNull
     public BaseComponent[] plainConvert(@NonNull String input) {
         input = input.replace("\\n", "\n");
@@ -101,6 +116,14 @@ public final class JsonMessageConverter {
         return components.toArray(new BaseComponent[0]);
     }
 
+    /**
+     * Converts messages with JSON-like syntax to an array of BaseComponent.
+     * The syntax consists of <arg1=val1 arg2=val2>text</arg1=val1>, where arg1 and arg2 are options
+     * like "hover," "suggest," "run," "link," etc.
+     *
+     * @param input The message with syntax to convert.
+     * @return An array of BaseComponent representing the converted message.
+     */
     @NonNull
     public BaseComponent[] convert(@NonNull String input) {
         input = input.replace("\\n", "\n");
@@ -159,6 +182,11 @@ public final class JsonMessageConverter {
         return components.toArray(new BaseComponent[0]);
     }
 
+    /**
+     * Provides a way to obtain a JsonMessageOptions instance for configuring conversion options.
+     *
+     * @return A new JsonMessageOptions instance.
+     */
     public static JsonMessageOptions options() {
         return new JsonMessageOptions();
     }
