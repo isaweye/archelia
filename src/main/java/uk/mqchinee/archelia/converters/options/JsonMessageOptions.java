@@ -81,9 +81,9 @@ public class JsonMessageOptions {
     }
 
     /**
-     * Sets whether the translate event should be enabled in the JSON message.
+     * Sets whether the "translate" event should be enabled in the JSON message.
      *
-     * @param translate True to enable the translate event, false to disable.
+     * @param translate True to enable the "translate" event, false to disable.
      * @return This {@link JsonMessageOptions} instance for method chaining.
      */
     public JsonMessageOptions translate(boolean translate) {

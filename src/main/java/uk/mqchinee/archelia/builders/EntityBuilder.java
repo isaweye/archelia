@@ -115,14 +115,14 @@ public class EntityBuilder implements EntityBuilderInterface {
     public EntityBuilder age(Age age) {
         if (this.entity instanceof Ageable ageable) {
             switch (age) {
-                case BABY:
+                case BABY -> {
                     (ageable).setBaby();
                     this.entity = ageable;
-                    break;
-                case ADULT:
+                }
+                case ADULT -> {
                     (ageable).setAdult();
                     this.entity = ageable;
-                    break;
+                }
             }
         }
         return this;
