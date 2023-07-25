@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import uk.mqchinee.archelia.net.GithubChecker;
+import uk.mqchinee.archelia.net.AsyncGithubChecker;
 import uk.mqchinee.archelia.plugin.Command;
 
 import java.util.ArrayList;
@@ -59,8 +59,8 @@ public final class Archelia extends JavaPlugin {
 
     }
 
-    private GithubChecker getChecker() {
-        GithubChecker checker = new GithubChecker("isaweye", "archelia", this);
+    private AsyncGithubChecker getChecker() {
+        AsyncGithubChecker checker = new AsyncGithubChecker("isaweye", "archelia", this);
         checker.setOnLatest(() -> getLogger().info("No updates available!"));
         checker.setOnFailure(() -> getLogger().warning("Unable to check for updates."));
         checker.setOnSuccess((latest) -> {

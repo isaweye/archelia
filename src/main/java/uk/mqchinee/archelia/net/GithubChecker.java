@@ -17,9 +17,10 @@ public class GithubChecker {
     @Getter @Setter private String user;
     @Getter @Setter private String repository;
     @Getter @Setter private String version;
-    @Getter @Setter Consumer<String> onSuccess;
-    @Getter @Setter Runnable onFailure;
-    @Getter @Setter Runnable onLatest;
+    @Getter @Setter private Consumer<String> onSuccess;
+    @Getter @Setter private Runnable onFailure;
+    @Getter @Setter private Runnable onLatest;
+
 
     public GithubChecker(String user, String repository, String current_version) {
         this.setUser(user);
