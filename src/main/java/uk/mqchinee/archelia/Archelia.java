@@ -6,7 +6,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import uk.mqchinee.archelia.plugin.ArcheliaConfig;
 import uk.mqchinee.archelia.plugin.Command;
+import uk.mqchinee.archelia.plugin.Metrics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,8 @@ public final class Archelia extends JavaPlugin {
      */
     public static List<Plugin> currentlyUsing = new ArrayList<>();
 
+    @Getter public static ArcheliaConfig archeliaConfig;
+
     @Getter
     private static Logger pluginLogger;
 
@@ -34,28 +38,31 @@ public final class Archelia extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        pluginLogger = this.getLogger();
+        setup();
+    }
 
-        // Check which plugins are using Archelia as a dependency or soft dependency and add them to the currentlyUsing list.
+    private void setup() {
+        saveDefaultConfig();
+        pluginLogger = this.getLogger();
+        archeliaConfig = new ArcheliaConfig();
+
+        new Command();
+        if (vault()) {
+            this.getLogger().info("Hooked into Vault!");
+            return;
+        }
+        this.getLogger().warning("Failed to hook into Vault!");
+
         for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
             if (plugin.getDescription().getDepend().contains("Archelia") || plugin.getDescription().getSoftDepend().contains("Archelia")) {
                 currentlyUsing.add(plugin);
             }
         }
 
-        // Register the custom command.
-        new Command();
-
-        // Attempt to hook into the Vault economy plugin.
-        log();
-    }
-
-    private void log() {
-        if (vault()) {
-            this.getLogger().info("Hooked into Vault!");
-            return;
+        if (archeliaConfig.metrics()) {
+            Metrics metrics = new Metrics(this,19238);
+            metrics.addCustomChart(new Metrics.SingleLineChart("ubc", () -> currentlyUsing.size()));
         }
-        this.getLogger().warning("Failed to hook into Vault!");
     }
 
     /**

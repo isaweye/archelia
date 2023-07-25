@@ -5,7 +5,6 @@ author: mqchinee
 api-version: 1.18
 softdepend:
   - Vault
-  - PlaceholderAPI
 permissions:
   archelia.info:
     default: op
