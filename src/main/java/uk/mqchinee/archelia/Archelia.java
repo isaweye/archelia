@@ -8,6 +8,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import uk.mqchinee.archelia.net.AsyncGithubChecker;
 import uk.mqchinee.archelia.plugin.Command;
+import uk.mqchinee.archelia.utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,16 +65,10 @@ public final class Archelia extends JavaPlugin {
         checker.setOnLatest(() -> getLogger().info("No updates available!"));
         checker.setOnFailure(() -> getLogger().warning("Unable to check for updates."));
         checker.setOnSuccess((latest) -> {
-            getLogger().info("""
-                    .-------------------------------------.
-                            An update has been found!
-                    '-------------------------------------'""");
-            getLogger().info("""
-                    Current version: %1
-                    Latest version: %2
-
-                    Download here: %3
-                    """.replace("%1", checker.getVersion()).replace("%2", latest).replace("%3", checker.getLink()));
+            getLogger().info("An update has been found!");
+            TextUtils.console(TextUtils.colorize("[Archelia] &eCurrent version: &f"+ checker.getVersion()));
+            TextUtils.console(TextUtils.colorize("[Archelia] &aLatest version: &f"+ latest + " &o("+ checker.getCommitMessage() +")"));
+            getLogger().warning("Download here: "+ checker.getLink());
         });
         return checker;
     }

@@ -23,6 +23,7 @@ public class GithubChecker {
     @Getter @Setter private Consumer<String> onSuccess;
     @Getter @Setter private Runnable onFailure;
     @Getter @Setter private Runnable onLatest;
+    @Getter @Setter private String commitMessage;
 
     /**
      * Constructs a GithubChecker instance with the given user, repository, and current_version.
@@ -69,6 +70,7 @@ public class GithubChecker {
         try {
             JsonObject json = JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
             tag = json.get("tag_name").getAsString();
+            setCommitMessage(json.get("body").getAsString());
         } catch (IOException e) {
             e.printStackTrace();
         }

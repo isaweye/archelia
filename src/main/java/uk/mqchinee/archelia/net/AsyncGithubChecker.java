@@ -24,6 +24,7 @@ public class AsyncGithubChecker {
     @Getter @Setter private Consumer<String> onSuccess;
     @Getter @Setter private Runnable onFailure;
     @Getter @Setter private Runnable onLatest;
+    @Getter @Setter private String commitMessage;
 
     /**
      * Constructs an instance of AsyncGithubChecker with the specified GitHub user, repository, and current version.
@@ -64,13 +65,14 @@ public class AsyncGithubChecker {
         return connection;
     }
 
-    private void getLatestVersion(Consumer<String> result) {
+    private void getData(Consumer<String> result) {
         RunUtils.async(() -> {
             URLConnection connection = getConnection();
             String tag = null;
             try {
                 JsonObject json = JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
                 tag = json.get("tag_name").getAsString();
+                setCommitMessage(json.get("body").getAsString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -100,7 +102,7 @@ public class AsyncGithubChecker {
      * If a newer version is found, the onSuccess callback will be executed with the latest version.
      */
     public void check() {
-        getLatestVersion((latest) -> {
+        getData((latest) -> {
             if (latest == null) {
                 runIfSet(getOnFailure());
                 return;
