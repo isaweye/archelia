@@ -12,6 +12,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.function.Consumer;
 
+/**
+ * Utility class to check for updates of a plugin on GitHub.
+ */
 public class GithubChecker {
 
     @Getter @Setter private String user;
@@ -21,13 +24,26 @@ public class GithubChecker {
     @Getter @Setter private Runnable onFailure;
     @Getter @Setter private Runnable onLatest;
 
-
+    /**
+     * Constructs a GithubChecker instance with the given user, repository, and current_version.
+     *
+     * @param user            The GitHub user/organization name.
+     * @param repository      The GitHub repository name.
+     * @param current_version The current version of the plugin.
+     */
     public GithubChecker(String user, String repository, String current_version) {
         this.setUser(user);
         this.setRepository(repository);
         this.setVersion(current_version);
     }
 
+    /**
+     * Constructs a GithubChecker instance with the given user, repository, and plugin's version.
+     *
+     * @param user       The GitHub user/organization name.
+     * @param repository The GitHub repository name.
+     * @param plugin     The JavaPlugin instance to get the version from.
+     */
     public GithubChecker(String user, String repository, JavaPlugin plugin) {
         this.setUser(user);
         this.setRepository(repository);
@@ -63,10 +79,21 @@ public class GithubChecker {
         if (runnable != null) { runnable.run(); }
     }
 
+    /**
+     * Gets the link to the latest release of the GitHub repository.
+     *
+     * @return The link to the latest release.
+     */
     public String getLink() {
         return String.format("https://github.com/%s/%s/releases/latest", getUser(), getRepository());
     }
 
+    /**
+     * Checks for updates of the plugin on GitHub and runs appropriate actions based on the result.
+     * If a newer version is found, the onSuccess callback will be executed with the latest version.
+     * If there's an error fetching the latest version, the onFailure runnable will be executed.
+     * If the plugin is up-to-date, the onLatest runnable will be executed.
+     */
     public void check() {
         String latest = getLatestVersion();
         if (latest == null) {
@@ -79,5 +106,4 @@ public class GithubChecker {
         }
         if (getOnSuccess() != null) getOnSuccess().accept(latest);
     }
-
 }
