@@ -53,7 +53,6 @@ public interface ConfigInterface {
     /**
      * Saves the configuration to its associated file.
      *
-     * @throws java.io.IOException If an error occurs while saving the configuration.
      */
     @SneakyThrows
     void save();
