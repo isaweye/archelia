@@ -18,8 +18,8 @@ public class GithubChecker {
     @Getter @Setter private String repository;
     @Getter @Setter private String version;
     @Getter @Setter Consumer<String> onSuccess;
-    @Getter @Setter Consumer onFailure;
-    @Getter @Setter Consumer onLatest;
+    @Getter @Setter Runnable onFailure;
+    @Getter @Setter Runnable onLatest;
 
     public GithubChecker(String user, String repository, String current_version) {
         this.setUser(user);
@@ -58,18 +58,22 @@ public class GithubChecker {
         return tag;
     }
 
-    private void acceptIfSet(Consumer consumer) {
-        if (consumer != null) { consumer.accept(null); }
+    private void runIfSet(Runnable runnable) {
+        if (runnable != null) { runnable.run(); }
+    }
+
+    public String getLink() {
+        return String.format("https://github.com/%s/%s/releases/latest", getUser(), getRepository());
     }
 
     public void check() {
         String latest = getLatestVersion();
         if (latest == null) {
-            acceptIfSet(getOnFailure());
+            runIfSet(getOnFailure());
             return;
         }
         if (latest.equals(getVersion())) {
-            acceptIfSet(getOnLatest());
+            runIfSet(getOnLatest());
             return;
         }
         if (getOnSuccess() != null) getOnSuccess().accept(latest);
