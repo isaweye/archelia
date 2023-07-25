@@ -38,7 +38,6 @@ public final class Archelia extends JavaPlugin {
     }
 
     private void setup() {
-        saveDefaultConfig();
         pluginLogger = this.getLogger();
 
         new Command();
@@ -53,6 +52,9 @@ public final class Archelia extends JavaPlugin {
                 currentlyUsing.add(plugin);
             }
         }
+
+        getLogger().info("");
+
     }
 
     /**
