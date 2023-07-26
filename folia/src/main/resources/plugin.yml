@@ -1,0 +1,12 @@
+name: Archelia
+version: '${project.version}'
+main: uk.mqchinee.archelia.Archelia
+author: mqchinee
+api-version: 1.18
+softdepend:
+  - Vault
+permissions:
+  archelia.info:
+    default: op
+commands:
+  archelia: {}
