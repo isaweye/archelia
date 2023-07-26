@@ -16,6 +16,7 @@ uk.mqchinee.archelia.gui.utils
 uk.mqchinee.archelia.impl
 uk.mqchinee.archelia.managers
 uk.mqchinee.archelia.managers.utils
+uk.mqchinee.archelia.net
 uk.mqchinee.archelia.plugin
 uk.mqchinee.archelia.raw.projectile
 uk.mqchinee.archelia.raw.raycast
