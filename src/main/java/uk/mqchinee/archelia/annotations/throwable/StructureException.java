@@ -7,6 +7,7 @@ public class StructureException extends RuntimeException {
 
     /**
      * Constructs a new empty StructureException.
+     * @since 1.0
      */
     public StructureException() {}
 

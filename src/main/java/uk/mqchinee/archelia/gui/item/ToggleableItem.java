@@ -15,6 +15,7 @@ import java.util.function.Consumer;
  * to update the state of the item and allows setting custom ItemStacks for both enabled and disabled states. The class also
  * supports automatically toggling the item's state on click, depending on the specified configuration.
  * </p>
+ * @since 1.0
  */
 public class ToggleableItem extends MenuItem {
 

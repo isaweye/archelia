@@ -33,6 +33,7 @@ import java.util.function.Consumer;
  * This class provides methods to add, remove, and update menu items, as well as handle events related to the GUI menu.
  * It represents a GUI menu that can be displayed to players and interacted with through inventory click events.
  * </p>
+ * @since 1.0
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 @Accessors(chain = true)

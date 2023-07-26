@@ -10,6 +10,7 @@ import uk.mqchinee.archelia.utils.TextUtils;
 
 /**
  * A builder class for creating and configuring entities in a Bukkit environment.
+ * @since 1.0
  */
 public class EntityBuilder implements EntityBuilderInterface {
 

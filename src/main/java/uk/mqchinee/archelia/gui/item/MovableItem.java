@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
  * moved through a sequence of slots defined by the user or based on a structure string provided by the user. The class also
  * allows setting a background item that replaces the current item slot during the movement.
  * </p>
+ * @since 1.0
  */
 public class MovableItem extends MenuItem {
 

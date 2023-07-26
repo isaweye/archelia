@@ -5,6 +5,7 @@ import uk.mqchinee.archelia.converters.JsonMessageConverter;
 /**
  * An options builder for configuring the behavior of a {@link JsonMessageConverter}.
  * This class allows enabling or disabling specific features of the JSON message.
+ * @since 1.0
  */
 public class JsonMessageOptions {
 

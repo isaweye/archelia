@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation used to define the structure of an inventory.
+ * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

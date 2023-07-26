@@ -17,6 +17,7 @@ import java.util.*;
 
 /**
  * An abstract base class for defining custom commands in a Bukkit plugin.
+ * @since 1.0
  */
 public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
 

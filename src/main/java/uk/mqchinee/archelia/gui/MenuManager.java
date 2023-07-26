@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * The MenuManager class is a utility class that provides methods for creating different types of Chest Menus and registering their listeners.
+ * @since 1.0
  */
 public final class MenuManager {
 

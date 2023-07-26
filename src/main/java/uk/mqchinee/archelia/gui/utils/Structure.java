@@ -19,6 +19,7 @@ import java.util.Map;
  * to corresponding menu items. It also supports parsing the structure and adding the mapped menu items to the associated
  * GUI menu.
  * </p>
+ * @since 1.0
  */
 public class Structure implements StructureInterface {
 

@@ -11,6 +11,7 @@ import uk.mqchinee.archelia.gui.ChestMenu;
  * This class extends the {@link MenuItem} class and represents an item in a GUI that can change dynamically over time.
  * It provides methods to replace the item with another item after a specified number of ticks.
  * </p>
+ * @since 1.0
  */
 public class DynamicItem extends MenuItem {
 

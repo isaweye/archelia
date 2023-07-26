@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * A builder class for creating and customizing sounds in a Bukkit environment.
+ * @since 1.0
  */
 public class SoundBuilder implements SoundBuilderInterface {
 

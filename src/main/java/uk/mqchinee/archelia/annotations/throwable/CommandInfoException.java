@@ -2,6 +2,7 @@ package uk.mqchinee.archelia.annotations.throwable;
 
 /**
  * Exception class used for signaling errors related to command information.
+ * @since 1.0
  */
 public class CommandInfoException extends RuntimeException {
 

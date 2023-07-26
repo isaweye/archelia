@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * A builder class for creating and customizing particles in a Bukkit environment.
+ * @since 1.0
  */
 public class ParticleBuilder implements ParticleBuilderInterface {
 

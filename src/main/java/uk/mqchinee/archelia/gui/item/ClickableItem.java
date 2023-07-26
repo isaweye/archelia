@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
  * This class extends the {@link MenuItem} class and represents an item that can be clicked in a GUI.
  * It provides additional functionality for handling click events on the item.
  * </p>
+ * @since 1.0
  */
 public class ClickableItem extends MenuItem {
 

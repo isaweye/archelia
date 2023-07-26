@@ -12,6 +12,8 @@ import java.util.function.Consumer;
 
 /**
  * Represents a configuration file.
+ * @since 1.0
+ * @see uk.mqchinee.archelia.impl.ConfigInterface
  */
 @SuppressWarnings("unused")
 public class Config implements ConfigInterface {

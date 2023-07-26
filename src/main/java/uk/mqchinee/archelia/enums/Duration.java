@@ -5,6 +5,7 @@ package uk.mqchinee.archelia.enums;
  * <p>
  * This enum provides options for different time durations and associates each duration with a specific integer value.
  * </p>
+ * @since 1.0
  */
 public enum Duration {
     /**

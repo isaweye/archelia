@@ -14,6 +14,7 @@ import java.util.function.Consumer;
  * different click actions on the item. The class also has a method to update the item and a method to create a copy of the
  * item with the same properties.
  * </p>
+ * @since 1.0
  */
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @Accessors(chain = true)

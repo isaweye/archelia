@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
  * {@link ItemStack} objects and change its appearance after a certain number of ticks. The item will update itself
  * automatically and call a provided {@link Consumer} on each update.
  * </p>
+ * @since 1.0
  */
 public class LoopableItem extends MenuItem {
 

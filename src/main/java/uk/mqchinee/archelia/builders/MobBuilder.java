@@ -12,6 +12,7 @@ import uk.mqchinee.archelia.utils.TextUtils;
 
 /**
  * A builder class for creating and customizing mobs (entities) in a Bukkit environment.
+ * @since 1.0
  */
 public class MobBuilder implements MobBuilderInterface {
 

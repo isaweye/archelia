@@ -12,6 +12,7 @@ import java.util.Objects;
 
 /**
  * An abstract base class for defining subcommands within a Bukkit plugin's command structure.
+ * @since 1.0
  */
 public abstract class AbstractSubcommand {
 

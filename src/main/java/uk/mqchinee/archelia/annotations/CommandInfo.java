@@ -9,13 +9,14 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation used to provide additional information related to commands.
+ * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface CommandInfo {
 
     /**
-     * The permission required to execute the annotated command.
+     * The permission required to execute the annotated command.*
      *
      * @return The permission string.
      */

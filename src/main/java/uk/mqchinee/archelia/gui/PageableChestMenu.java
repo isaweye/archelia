@@ -19,6 +19,7 @@ import java.util.function.Consumer;
 /**
  * The PageableChestMenu class represents a specialized type of ChestMenu that allows paging through its items.
  * It is an extension of the ChestMenu class, providing additional functionality for managing pageable items.
+ * @since 1.0
  */
 public class PageableChestMenu extends ChestMenu {
 

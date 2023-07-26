@@ -5,6 +5,7 @@ package uk.mqchinee.archelia.enums;
  * <p>
  * This enum is used in various contexts to specify the attribute by which elements should be compared.
  * </p>
+ * @since 1.0
  */
 public enum ComparingBy {
     /**

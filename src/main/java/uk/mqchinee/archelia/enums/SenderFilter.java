@@ -5,6 +5,7 @@ package uk.mqchinee.archelia.enums;
  * <p>
  * This enum provides options to filter commands based on whether they can be executed by the console, players, or both.
  * </p>
+ * @since 1.0
  */
 public enum SenderFilter {
     /**

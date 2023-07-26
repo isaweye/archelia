@@ -12,6 +12,7 @@ import java.util.*;
 
 /**
  * A builder class for creating and customizing ItemStack objects in a Bukkit environment.
+ * @since 1.0
  */
 public class ItemBuilder implements ItemBuilderInterface {
 

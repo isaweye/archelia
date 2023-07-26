@@ -5,6 +5,7 @@ package uk.mqchinee.archelia.enums;
  * <p>
  * This enum provides options to represent time in either seconds or ticks.
  * </p>
+ * @since 1.0
  */
 public enum Time {
     /**

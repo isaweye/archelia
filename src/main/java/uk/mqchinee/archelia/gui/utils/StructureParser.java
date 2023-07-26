@@ -17,6 +17,7 @@ import java.util.Map;
  * ChestMenu and PageableChestMenu. It processes the structure and places the corresponding menu items in their respective
  * positions in the menu.
  * </p>
+ * @since 1.0
  */
 public class StructureParser implements StructureParserInterface {
 
