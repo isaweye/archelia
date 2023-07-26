@@ -5,7 +5,10 @@ import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
+import uk.mqchinee.archelia.Archelia;
 import uk.mqchinee.archelia.annotations.CommandInfo;
+import uk.mqchinee.archelia.annotations.Subcommand;
+import uk.mqchinee.archelia.annotations.SubcommandContainer;
 import uk.mqchinee.archelia.annotations.throwable.CommandInfoException;
 import uk.mqchinee.archelia.enums.SenderFilter;
 import uk.mqchinee.archelia.utils.TextUtils;
@@ -18,9 +21,9 @@ import java.util.*;
 public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
 
     @Getter
-    private Map<String, SubCommand> subCommands;
+    private final Map<String, AbstractSubcommand> subcommands;
     @Getter
-    private CommandInfo info;
+    private final CommandInfo info;
 
     /**
      * Constructor for the AbstractCommand class.
@@ -34,12 +37,18 @@ public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
             pluginCommand.setExecutor(this);
             pluginCommand.setTabCompleter(this);
         }
-        this.subCommands = new HashMap<>();
+        this.subcommands = new HashMap<>();
         if (this.getClass().isAnnotationPresent(CommandInfo.class)) {
             this.info = this.getClass().getAnnotation(CommandInfo.class);
         } else {
             throw new CommandInfoException("CommandInfo annotation is missing for the command.");
         }
+
+        if (this.getClass().isAnnotationPresent(SubcommandContainer.class)) {
+           List<Subcommand> n = List.of(this.getClass().getAnnotation(SubcommandContainer.class).value());
+           n.forEach((name) -> subcommand(Archelia.getSubcommands().get(name.value())));
+        }
+
     }
 
     /**
@@ -50,14 +59,6 @@ public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
      * @return A list of possible tab completions for the command.
      */
     public abstract List<String> complete(CommandSender sender, String[] args);
-
-    /**
-     * Subcommand handling method.
-     *
-     * @param sender The CommandSender who issued the subcommand.
-     * @param args   The arguments passed for the subcommand.
-     */
-    public abstract void sub(CommandSender sender, String[] args);
 
     /**
      * Main command execution method.
@@ -71,10 +72,14 @@ public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
     /**
      * Adds a subcommand to the command.
      *
-     * @param subCommand The SubCommand to be added.
+     * @param subcommand The subcommand to be added.
      */
-    public void subCommand(SubCommand subCommand) {
-        this.subCommands.put(subCommand.getName(), subCommand);
+    public void subcommand(AbstractSubcommand subcommand) {
+        this.subcommands.put(subcommand.getName(), subcommand);
+    }
+
+    private void registerSubcommands(CommandSender sender, String[] args) {
+        getSubcommands().forEach((name, clazz) -> clazz.register(sender, args));
     }
 
     /**
@@ -87,7 +92,7 @@ public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
      * @return true if the command was handled successfully, false otherwise.
      */
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        sub(sender, args);
+        registerSubcommands(sender, args);
         if (!(getInfo().filter() == SenderFilter.BOTH)) {
             if (getInfo().filter() == SenderFilter.CONSOLE) {
                 if (sender instanceof Player) {
@@ -107,11 +112,11 @@ public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (args.length < 1 || (subCommands.get(args[0]) == null)) {
+        if (args.length < 1 || (subcommands.get(args[0]) == null)) {
             execute(sender, label, args);
             return true;
         }
-        subCommands.get(args[0]).prepare();
+        subcommands.get(args[0]).prepare();
         return true;
     }
 

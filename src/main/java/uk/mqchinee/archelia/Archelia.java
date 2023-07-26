@@ -6,12 +6,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import uk.mqchinee.archelia.net.AsyncGithubChecker;
+import uk.mqchinee.archelia.commands.AbstractSubcommand;
+import uk.mqchinee.archelia.impl.UpdateChecker;
+import uk.mqchinee.archelia.net.GHUpdateChecker;
 import uk.mqchinee.archelia.plugin.Command;
 import uk.mqchinee.archelia.utils.TextUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -30,6 +34,8 @@ public final class Archelia extends JavaPlugin {
     @Getter
     private static Archelia instance;
 
+    @Getter private static Map<String, AbstractSubcommand> subcommands;
+
     @Getter
     private static Economy economy = null;
 
@@ -41,6 +47,7 @@ public final class Archelia extends JavaPlugin {
 
     private void setup() {
         pluginLogger = this.getLogger();
+        subcommands = new HashMap<>();
 
         new Command();
         if (vault()) {
@@ -57,18 +64,33 @@ public final class Archelia extends JavaPlugin {
 
         getLogger().info("Checking for updates...");
         getChecker().check();
-
     }
 
-    private AsyncGithubChecker getChecker() {
-        AsyncGithubChecker checker = new AsyncGithubChecker("isaweye", "archelia", this);
+    public static void registerSubcommand(AbstractSubcommand subcommand) {
+        if (subcommands.containsKey(subcommand.getName())) {
+            subcommands.replace(subcommand.getName(), subcommand);
+            return;
+        }
+        subcommands.put(subcommand.getName(), subcommand);
+    }
+
+    public static void registerSubcommands(AbstractSubcommand... subcommand) {
+        for (AbstractSubcommand sbc : subcommand) {
+            registerSubcommand(sbc);
+        }
+    }
+
+    private UpdateChecker getChecker() {
+        GHUpdateChecker checker = new GHUpdateChecker("isaweye", "archelia", this);
         checker.setOnLatest(() -> getLogger().info("No updates available!"));
         checker.setOnFailure(() -> getLogger().warning("Unable to check for updates."));
         checker.setOnSuccess((latest) -> {
             getLogger().info("An update has been found!");
             TextUtils.console(TextUtils.colorize("[Archelia] &eCurrent version: &f"+ checker.getVersion()));
-            TextUtils.console(TextUtils.colorize("[Archelia] &aLatest version: &f"+ latest + " &o("+ checker.getCommitMessage() +")"));
-            getLogger().warning("Download here: "+ checker.getLink());
+            TextUtils.console(TextUtils.colorize("[Archelia] &aLatest version: &f"+ latest));
+            TextUtils.console(TextUtils.colorize("[Archelia] &fChangelog: "));
+            checker.getDescription().forEach((line) -> getLogger().info(line));
+            getLogger().info("Download here: "+ checker.getLink());
         });
         return checker;
     }

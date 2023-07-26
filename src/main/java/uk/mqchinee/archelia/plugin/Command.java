@@ -52,9 +52,6 @@ public class Command extends AbstractCommand {
     }
 
     @Override
-    public void sub(CommandSender sender, String[] args) { }
-
-    @Override
     public void execute(CommandSender sender, String label, String[] args) {
         // Display information about the Archelia plugin to the sender
         String cu = (Archelia.currentlyUsing.size() > 0) ? "&7Currently used by these plugins: \n&8&l- " + get() : "";

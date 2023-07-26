@@ -5,18 +5,21 @@ import com.google.gson.JsonParser;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.plugin.java.JavaPlugin;
+import uk.mqchinee.archelia.impl.UpdateChecker;
 import uk.mqchinee.archelia.utils.RunUtils;
+import uk.mqchinee.archelia.utils.TextUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * A utility class to check the latest version of a GitHub repository asynchronously.
+ * A utility class to check for updates on GitHub repositories.
  */
-public class AsyncGithubChecker {
+public class GHUpdateChecker implements UpdateChecker {
 
     @Getter @Setter private String user;
     @Getter @Setter private String repository;
@@ -24,29 +27,30 @@ public class AsyncGithubChecker {
     @Getter @Setter private Consumer<String> onSuccess;
     @Getter @Setter private Runnable onFailure;
     @Getter @Setter private Runnable onLatest;
-    @Getter @Setter private String commitMessage;
+    @Getter @Setter private List<String> description;
 
     /**
-     * Constructs an instance of AsyncGithubChecker with the specified GitHub user, repository, and current version.
+     * Constructs a new GHUpdateChecker with the provided user, repository, and current version.
      *
-     * @param user            The GitHub user or organization owning the repository.
-     * @param repository      The name of the repository to check for updates.
-     * @param current_version The current version of the repository.
+     * @param user            The GitHub user or organization name.
+     * @param repository      The GitHub repository name.
+     * @param current_version The current version of the plugin.
      */
-    public AsyncGithubChecker(String user, String repository, String current_version) {
+    public GHUpdateChecker(String user, String repository, String current_version) {
         this.setUser(user);
         this.setRepository(repository);
         this.setVersion(current_version);
     }
 
     /**
-     * Constructs an instance of AsyncGithubChecker with the specified GitHub user, repository, and plugin's version.
+     * Constructs a new GHUpdateChecker with the provided user, repository, and plugin.
+     * The current version is obtained from the plugin's description.
      *
-     * @param user       The GitHub user or organization owning the repository.
-     * @param repository The name of the repository to check for updates.
-     * @param plugin     The JavaPlugin instance whose version will be used as the current version.
+     * @param user       The GitHub user or organization name.
+     * @param repository The GitHub repository name.
+     * @param plugin     The JavaPlugin instance representing the plugin to check for updates.
      */
-    public AsyncGithubChecker(String user, String repository, JavaPlugin plugin) {
+    public GHUpdateChecker(String user, String repository, JavaPlugin plugin) {
         this.setUser(user);
         this.setRepository(repository);
         this.setVersion(plugin.getDescription().getVersion());
@@ -65,6 +69,12 @@ public class AsyncGithubChecker {
         return connection;
     }
 
+    private void runIfSet(Runnable runnable) {
+        if (runnable != null) {
+            runnable.run();
+        }
+    }
+
     private void getData(Consumer<String> result) {
         RunUtils.async(() -> {
             URLConnection connection = getConnection();
@@ -72,7 +82,7 @@ public class AsyncGithubChecker {
             try {
                 JsonObject json = JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
                 tag = json.get("tag_name").getAsString();
-                setCommitMessage(json.get("body").getAsString());
+                setDescription(TextUtils.fromString(json.get("body").getAsString().replace("**", "").replace("__", "")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -80,27 +90,16 @@ public class AsyncGithubChecker {
         });
     }
 
-    private void runIfSet(Runnable runnable) {
-        if (runnable != null) {
-            runnable.run();
-        }
-    }
-
     /**
-     * Gets the link to the latest release of the GitHub repository.
+     * Gets the URL link to the latest release on GitHub.
      *
-     * @return The link to the latest release of the repository.
+     * @return The URL link to the latest release on GitHub.
      */
     public String getLink() {
         return String.format("https://github.com/%s/%s/releases/latest", getUser(), getRepository());
     }
 
-    /**
-     * Checks for updates of the GitHub repository asynchronously and invokes the corresponding callbacks.
-     * If the latest version cannot be retrieved, the onFailure runnable will be executed.
-     * If the repository is up-to-date, the onLatest runnable will be executed.
-     * If a newer version is found, the onSuccess callback will be executed with the latest version.
-     */
+    @Override
     public void check() {
         getData((latest) -> {
             if (latest == null) {

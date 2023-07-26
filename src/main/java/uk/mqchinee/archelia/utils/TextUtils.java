@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,15 +32,9 @@ public class TextUtils {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
-    /**
-     * Convert a comma-separated string to a list of strings.
-     *
-     * @param data The comma-separated string.
-     * @return The list of strings.
-     */
     public static List<String> fromString(String data) {
-        data = data.replace("[", "").replace("]", "");
-        return Arrays.asList(data.split(",", -1));
+        String[] strings = data.split("\n");
+        return List.of(strings);
     }
 
     /**

@@ -3,7 +3,7 @@ package uk.mqchinee.archelia.commands;
 import lombok.Getter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import uk.mqchinee.archelia.annotations.SubCommandInfo;
+import uk.mqchinee.archelia.annotations.SubcommandInfo;
 import uk.mqchinee.archelia.annotations.throwable.CommandInfoException;
 import uk.mqchinee.archelia.enums.SenderFilter;
 import uk.mqchinee.archelia.utils.TextUtils;
@@ -13,33 +13,28 @@ import java.util.Objects;
 /**
  * An abstract base class for defining subcommands within a Bukkit plugin's command structure.
  */
-public abstract class SubCommand {
+public abstract class AbstractSubcommand {
 
     @Getter
     private CommandSender sender;
     @Getter
     private String[] args;
     @Getter
-    private SubCommandInfo info;
+    private final SubcommandInfo info;
     private final boolean hasArgs;
 
-    /**
-     * Constructor for the SubCommand class.
-     *
-     * @param sender   The CommandSender who issued the subcommand.
-     * @param args     The arguments passed for the subcommand.
-     * @param hasArgs  Whether the subcommand requires additional arguments.
-     */
-    public SubCommand(CommandSender sender, String[] args, boolean hasArgs) {
-        this.sender = sender;
-        this.args = args;
+    public AbstractSubcommand(boolean hasArgs) {
         this.hasArgs = hasArgs;
 
-        if (this.getClass().isAnnotationPresent(SubCommandInfo.class)) {
-            this.info = this.getClass().getAnnotation(SubCommandInfo.class);
+        if (this.getClass().isAnnotationPresent(SubcommandInfo.class)) {
+            this.info = this.getClass().getAnnotation(SubcommandInfo.class);
         } else {
             throw new CommandInfoException("SubCommandInfo annotation is missing for the subcommand.");
         }
+    }
+
+    public void register(CommandSender sender, String[] args) {
+        this.sender = sender; this.args = args;
     }
 
     /**
