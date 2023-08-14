@@ -4,7 +4,6 @@ import uk.mqchinee.archelia.gui.ChestMenu;
 import uk.mqchinee.archelia.gui.PageableChestMenu;
 import uk.mqchinee.archelia.gui.item.ClickableItem;
 import uk.mqchinee.archelia.gui.item.MenuItem;
-import uk.mqchinee.archelia.impl.StructureParserInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.Map;
  * </p>
  * @since 1.0
  */
-public class StructureParser implements StructureParserInterface {
+public class StructureParser {
 
     /**
      * Parse the structure and add mapped menu items to the associated ChestMenu.
@@ -32,7 +31,6 @@ public class StructureParser implements StructureParserInterface {
      * @param structure The structure of the GUI menu.
      * @param map       The mapping of characters to menu items.
      */
-    @Override
     public void parse(ChestMenu menu, String[] structure, Map<Character, MenuItem> map) {
         int char_no = 0;
         for (int i = 0; i < menu.getRows(); i++) {
@@ -57,7 +55,6 @@ public class StructureParser implements StructureParserInterface {
      * @param structure The structure of the GUI menu.
      * @param map       The mapping of characters to menu items.
      */
-    @Override
     public void parse(PageableChestMenu menu, String[] structure, Map<Character, MenuItem> map) {
         int char_no = 0;
         List<Integer> pageSlots = new ArrayList<>();

@@ -17,7 +17,7 @@ public class DateUtils {
      * @param offset The offset in hours to apply to the current timestamp.
      * @return The current timestamp with the specified offset.
      */
-    public long now(int offset) {
+    public static long now(int offset) {
         Date date = new Date();
         date.setTime(date.getTime() + TimeUnit.HOURS.toMillis(offset));
         return date.getTime() / 1000;
@@ -31,8 +31,12 @@ public class DateUtils {
      * @param locale The locale for formatting the date.
      * @return The formatted date string.
      */
-    public String fromEpoch(long epoch, String format, String locale) {
+    public static String fromEpoch(long epoch, String format, String locale) {
         DateFormat frm = new SimpleDateFormat(format, Locale.forLanguageTag(locale));
         return frm.format(new Date(epoch * 1000));
+    }
+
+    public static String getTime(int seconds) {
+        return String.format(Locale.US, "%02d:%02d:%02d", seconds/3600, (seconds%3600)/60, seconds%60);
     }
 }

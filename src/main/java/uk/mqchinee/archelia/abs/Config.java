@@ -3,7 +3,6 @@ package uk.mqchinee.archelia.abs;
 import lombok.SneakyThrows;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import uk.mqchinee.archelia.impl.ConfigInterface;
 import uk.mqchinee.archelia.utils.RunUtils;
 
 import java.io.File;
@@ -13,10 +12,9 @@ import java.util.function.Consumer;
 /**
  * Represents a configuration file.
  * @since 1.0
- * @see uk.mqchinee.archelia.impl.ConfigInterface
  */
 @SuppressWarnings("unused")
-public class Config implements ConfigInterface {
+public class Config {
 
     private final FileConfiguration configuration;
     private final File file;
@@ -53,17 +51,14 @@ public class Config implements ConfigInterface {
         this.file = new File(config.getCurrentPath());
     }
 
-    @Override
     public int hashCode() {
         return Objects.hash(configuration);
     }
 
-    @Override
     public FileConfiguration getConfig() {
         return configuration;
     }
 
-    @Override
     public Config set(String path, Object value, boolean async) {
         if (!async) {
             this.configuration.set(path, value);
@@ -77,7 +72,6 @@ public class Config implements ConfigInterface {
         return this;
     }
 
-    @Override
     public Config set(String path, Object value) {
         RunUtils.async(() -> {
             this.configuration.set(path, value);
@@ -86,18 +80,15 @@ public class Config implements ConfigInterface {
         return this;
     }
 
-    @Override
     public void get(String path, Consumer<Object> value) {
         RunUtils.async(() -> value.accept(this.configuration.get(path)));
     }
 
-    @Override
     @SneakyThrows
     public void save() {
         this.configuration.save(file);
     }
 
-    @Override
     public File getFile() {
         return file;
     }

@@ -7,7 +7,6 @@ import uk.mqchinee.archelia.annotations.throwable.StructureException;
 import uk.mqchinee.archelia.gui.ChestMenu;
 import uk.mqchinee.archelia.gui.PageableChestMenu;
 import uk.mqchinee.archelia.gui.item.MenuItem;
-import uk.mqchinee.archelia.impl.StructureInterface;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +20,7 @@ import java.util.Map;
  * </p>
  * @since 1.0
  */
-public class Structure implements StructureInterface {
+public class Structure {
 
     @Getter
     @Setter
@@ -78,7 +77,6 @@ public class Structure implements StructureInterface {
      * @param item  The menu item to be placed in the specified position.
      * @return The Structure instance with the updated mapping.
      */
-    @Override
     public Structure set(char _char, MenuItem item) {
         map.put(_char, item);
         return this;
@@ -93,7 +91,7 @@ public class Structure implements StructureInterface {
      *
      * @param menu The PageableChestMenu to which the mapped menu items will be added.
      */
-    @Override
+
     public void process(PageableChestMenu menu) {
         parser.parse(menu, getStructure(), getMap());
     }
@@ -107,7 +105,7 @@ public class Structure implements StructureInterface {
      *
      * @param menu The ChestMenu to which the mapped menu items will be added.
      */
-    @Override
+
     public void process(ChestMenu menu) {
         parser.parse(menu, getStructure(), getMap());
     }
