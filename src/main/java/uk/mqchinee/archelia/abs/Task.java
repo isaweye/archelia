@@ -1,3 +1,7 @@
 package uk.mqchinee.archelia.abs;
 
-public record Task(int ticks, Runnable runnable) {}
+/**
+ * Represents a task to be executed after a specified number of ticks.
+ */
+public record Task(int ticks, Runnable runnable) {
+}

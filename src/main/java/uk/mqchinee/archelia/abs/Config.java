@@ -11,9 +11,9 @@ import java.util.function.Consumer;
 
 /**
  * Represents a configuration file.
+ *
  * @since 1.0
  */
-@SuppressWarnings("unused")
 public class Config {
 
     private final FileConfiguration configuration;
@@ -51,14 +51,32 @@ public class Config {
         this.file = new File(config.getCurrentPath());
     }
 
+    /**
+     * Returns the hash code for this Config.
+     *
+     * @return The hash code for this Config.
+     */
     public int hashCode() {
         return Objects.hash(configuration);
     }
 
+    /**
+     * Retrieves the underlying FileConfiguration of this Config.
+     *
+     * @return The FileConfiguration of this Config.
+     */
     public FileConfiguration getConfig() {
         return configuration;
     }
 
+    /**
+     * Sets a configuration value at the specified path, optionally saving the configuration synchronously.
+     *
+     * @param path   The path to set the value at.
+     * @param value  The value to set.
+     * @param async  Whether to save the configuration asynchronously.
+     * @return The Config instance.
+     */
     public Config set(String path, Object value, boolean async) {
         if (!async) {
             this.configuration.set(path, value);
@@ -72,6 +90,13 @@ public class Config {
         return this;
     }
 
+    /**
+     * Sets a configuration value at the specified path, saving the configuration asynchronously.
+     *
+     * @param path  The path to set the value at.
+     * @param value The value to set.
+     * @return The Config instance.
+     */
     public Config set(String path, Object value) {
         RunUtils.async(() -> {
             this.configuration.set(path, value);
@@ -80,15 +105,29 @@ public class Config {
         return this;
     }
 
+    /**
+     * Retrieves a configuration value from the specified path asynchronously and passes it to a consumer.
+     *
+     * @param path  The path to retrieve the value from.
+     * @param value The consumer to receive the retrieved value.
+     */
     public void get(String path, Consumer<Object> value) {
         RunUtils.async(() -> value.accept(this.configuration.get(path)));
     }
 
+    /**
+     * Saves the configuration to the underlying file.
+     */
     @SneakyThrows
     public void save() {
         this.configuration.save(file);
     }
 
+    /**
+     * Retrieves the file associated with this Config.
+     *
+     * @return The file associated with this Config.
+     */
     public File getFile() {
         return file;
     }
