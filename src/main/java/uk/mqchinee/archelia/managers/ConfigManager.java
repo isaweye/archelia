@@ -17,7 +17,6 @@ public class ConfigManager {
      *
      * @param file The file to create the Config object from.
      * @return The Config object representing the file's configuration.
-     * @throws IOException If an I/O error occurs while creating the file.
      */
     @SneakyThrows
     public static Config create(File file) {
@@ -33,7 +32,6 @@ public class ConfigManager {
      * @param path  The path of the file.
      * @param child The child filename of the file.
      * @return The Config object representing the file's configuration.
-     * @throws IOException If an I/O error occurs while creating the file.
      */
     @SneakyThrows
     public static Config create(String path, String child) {
@@ -51,7 +49,6 @@ public class ConfigManager {
      * @param child    The child filename of the file.
      * @param resource The InputStream of the resource to write to the file if it doesn't exist.
      * @return The Config object representing the file's configuration.
-     * @throws IOException If an I/O error occurs while creating the file.
      */
     @SneakyThrows
     public static Config create(String path, String child, InputStream resource) {
@@ -75,7 +72,6 @@ public class ConfigManager {
      * @param filename The filename of the file.
      * @param resource The InputStream of the resource to write to the file.
      * @return The File object representing the file where the resource was written.
-     * @throws IOException If an I/O error occurs while writing the file.
      */
     public static File write(String path, String filename, InputStream resource) {
         File file = new File(path, filename);

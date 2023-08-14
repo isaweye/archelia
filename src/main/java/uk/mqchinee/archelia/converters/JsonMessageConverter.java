@@ -118,8 +118,6 @@ public final class JsonMessageConverter {
 
     /**
      * Converts messages with JSON-like syntax to an array of BaseComponent.
-     * The syntax consists of <arg1=val1 arg2=val2>text</arg1=val1>, where arg1 and arg2 are options
-     * like "hover," "suggest," "run," "link," etc.
      *
      * @param input The message with syntax to convert.
      * @return An array of BaseComponent representing the converted message.

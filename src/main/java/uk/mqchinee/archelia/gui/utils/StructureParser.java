@@ -48,7 +48,7 @@ public class StructureParser {
      * <p>
      * This method parses the structure and adds the mapped menu items to the associated PageableChestMenu. It processes
      * the structure row by row, placing the corresponding menu items in their respective positions in the menu. It also
-     * sets the previous and next page items based on the mapped menu items with '%' and '<', '>' characters, respectively.
+     * sets the previous and next page items based on the mapped menu items with '%' and 'left', 'right' characters, respectively.
      * </p>
      *
      * @param menu      The PageableChestMenu to which the mapped menu items will be added.
