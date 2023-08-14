@@ -5,4 +5,4 @@
 [![](https://jitpack.io/v/isaweye/archelia.svg)](https://jitpack.io/#isaweye/archelia)
 
 
-[![web](docs/repository/button-modified-q.png)](https://isaweye.github.io/archelia)
+[Documentation](https://isaweye.github.io/archelia)
