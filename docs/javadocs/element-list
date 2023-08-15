@@ -9,6 +9,8 @@ uk.mqchinee.archelia.commands
 uk.mqchinee.archelia.converters
 uk.mqchinee.archelia.converters.options
 uk.mqchinee.archelia.enums
+uk.mqchinee.archelia.events
+uk.mqchinee.archelia.events.tasks
 uk.mqchinee.archelia.gui
 uk.mqchinee.archelia.gui.item
 uk.mqchinee.archelia.gui.tests
