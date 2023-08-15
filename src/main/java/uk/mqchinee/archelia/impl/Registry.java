@@ -6,10 +6,10 @@ import java.util.function.Consumer;
 /**
  * A generic registry interface for mapping keys to values.
  *
- * @param <T>  The type of the keys in the registry.
- * @param <T2> The type of the values in the registry.
+ * @param <K> The type of the keys in the registry.
+ * @param <V> The type of the values in the registry.
  */
-public interface Registry<T, T2> {
+public interface Registry<K, V> {
 
     /**
      * Registers a key-value pair in the registry.
@@ -17,7 +17,7 @@ public interface Registry<T, T2> {
      * @param key   The key to be registered.
      * @param value The value to be associated with the key.
      */
-    void register(T key, T2 value);
+    void register(K key, V value);
 
     /**
      * Retrieves the value associated with a given key from the registry.
@@ -25,7 +25,7 @@ public interface Registry<T, T2> {
      * @param key The key for which to retrieve the value.
      * @return The value associated with the given key, or null if not found.
      */
-    T2 get(T key);
+    V get(K key);
 
     /**
      * Checks if the registry contains a mapping for the given key.
@@ -33,7 +33,7 @@ public interface Registry<T, T2> {
      * @param key The key to check for existence in the registry.
      * @return True if a mapping exists for the given key, false otherwise.
      */
-    boolean contains(T key);
+    boolean contains(K key);
 
     /**
      * Replaces the value associated with a given key in the registry.
@@ -41,19 +41,19 @@ public interface Registry<T, T2> {
      * @param key   The key for which to replace the value.
      * @param value The new value to associate with the key.
      */
-    void replace(T key, T2 value);
+    void replace(K key, V value);
 
     /**
      * Removes the mapping for a given key from the registry.
      *
      * @param key The key for which to remove the mapping.
      */
-    void remove(T key);
+    void remove(K key);
 
     /**
      * Applies the given consumer function to each entry in the registry.
      *
      * @param entryConsumer The consumer function to apply to each entry.
      */
-    void forEach(Consumer<Map.Entry<T, T2>> entryConsumer);
+    void forEach(Consumer<Map.Entry<K, V>> entryConsumer);
 }

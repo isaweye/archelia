@@ -12,6 +12,7 @@ public class Experiments {
      *
      * @param runnable The task to run.
      */
+    @Deprecated
     public static void ignore(Runnable runnable) {
         try {
             runnable.run();
