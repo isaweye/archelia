@@ -3,18 +3,16 @@ package uk.mqchinee.archelia;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import uk.mqchinee.archelia.annotations.ArcheliaAddon;
 import uk.mqchinee.archelia.commands.AbstractSubcommand;
 import uk.mqchinee.archelia.impl.UpdateChecker;
 import uk.mqchinee.archelia.net.GHUpdateChecker;
 import uk.mqchinee.archelia.plugin.Command;
 import uk.mqchinee.archelia.utils.TextUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -23,13 +21,10 @@ import java.util.logging.Logger;
  */
 public final class Archelia extends JavaPlugin {
 
-    /**
-     * A list of plugins that are currently using the Archelia plugin as a dependency or soft dependency.
-     */
-    public static List<Plugin> currentlyUsing = new ArrayList<>();
-
     @Getter
     private static Logger pluginLogger;
+
+    @Getter private static Map<String, Addon> addons;
 
     @Getter
     private static Archelia instance;
@@ -48,6 +43,7 @@ public final class Archelia extends JavaPlugin {
     private void setup() {
         pluginLogger = this.getLogger();
         subcommands = new HashMap<>();
+        addons = new HashMap<>();
 
         new Command();
         if (vault()) {
@@ -56,14 +52,19 @@ public final class Archelia extends JavaPlugin {
         }
         this.getLogger().warning("Failed to hook into Vault!");
 
-        for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
-            if (plugin.getDescription().getDepend().contains("Archelia") || plugin.getDescription().getSoftDepend().contains("Archelia")) {
-                currentlyUsing.add(plugin);
-            }
-        }
-
         getLogger().info("Checking for updates...");
         getChecker().check();
+    }
+
+    public static void registerAddon(JavaPlugin plugin) {
+        if (!plugin.getClass().isAnnotationPresent(ArcheliaAddon.class)) {
+            throw new NullPointerException("null");
+        }
+        if (getAddons().containsKey(plugin.getName())) {
+            return;
+        }
+        ArcheliaAddon addon = plugin.getClass().getAnnotation(ArcheliaAddon.class);
+        addons.put(plugin.getName(), new Addon(plugin.getName(), addon.description(), plugin));
     }
 
     public static void registerSubcommand(AbstractSubcommand subcommand) {
