@@ -75,7 +75,7 @@ public class Command extends AbstractCommand {
         sender.sendMessage(TextUtils.colorize("&7Author: &fmqchinee (isaweye)"));
         sender.sendMessage(TextUtils.colorize("&7Version: &f" + Archelia.getInstance().getDescription().getVersion()));
         sender.sendMessage(TextUtils.colorize("&7API version: &f" + Archelia.getInstance().getDescription().getAPIVersion()));
-        sender.sendMessage(TextUtils.colorize(cu));
-        sender.sendMessage(TextUtils.colorize(ar));
+        if (!cu.equals("")) { sender.sendMessage(TextUtils.colorize(cu)); }
+        if (!ar.equals("")) { sender.sendMessage(TextUtils.colorize(ar)); }
     }
 }
