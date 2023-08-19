@@ -73,7 +73,7 @@ public class ChestMenu {
      * Constructs a ChestMenu with the given title, number of rows, and JavaPlugin instance.
      *
      * @param title       The title of the ChestMenu.
-     * @param rows        The number of rows for the ChestMenu (must be >= 1 && <= 6).
+     * @param rows        The number of rows for the ChestMenu (1 to 6).
      * @param plugin      The JavaPlugin instance associated with this ChestMenu.
      * @param isConcurrent Allows you to choose between HashMap (recommended) and ConcurrentHashMap.
      *                    If you want to get rid of ConcurrentModificationException (occurs when using MovableItem), use ConcurrentHashMap.
