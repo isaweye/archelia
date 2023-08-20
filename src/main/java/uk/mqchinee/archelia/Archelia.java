@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import uk.mqchinee.archelia.annotations.ArcheliaAddon;
-import uk.mqchinee.archelia.commands.AbstractSubcommand;
+import uk.mqchinee.archelia.commands.AbstractArcheliaSubcommand;
 import uk.mqchinee.archelia.impl.UpdateChecker;
 import uk.mqchinee.archelia.net.GHUpdateChecker;
 import uk.mqchinee.archelia.plugin.Command;
@@ -29,7 +29,7 @@ public final class Archelia extends JavaPlugin {
     @Getter
     private static Archelia instance;
 
-    @Getter private static Map<String, AbstractSubcommand> subcommands;
+    @Getter private static Map<String, AbstractArcheliaSubcommand> subcommands;
 
     @Getter
     private static Economy economy = null;
@@ -67,7 +67,7 @@ public final class Archelia extends JavaPlugin {
         addons.put(plugin.getName(), new Addon(plugin.getName(), addon.description(), plugin));
     }
 
-    public static void registerSubcommand(AbstractSubcommand subcommand) {
+    public static void registerSubcommand(AbstractArcheliaSubcommand subcommand) {
         if (subcommands.containsKey(subcommand.getName())) {
             subcommands.replace(subcommand.getName(), subcommand);
             return;
@@ -75,8 +75,8 @@ public final class Archelia extends JavaPlugin {
         subcommands.put(subcommand.getName(), subcommand);
     }
 
-    public static void registerSubcommands(AbstractSubcommand... subcommand) {
-        for (AbstractSubcommand sbc : subcommand) {
+    public static void registerSubcommands(AbstractArcheliaSubcommand... subcommand) {
+        for (AbstractArcheliaSubcommand sbc : subcommand) {
             registerSubcommand(sbc);
         }
     }

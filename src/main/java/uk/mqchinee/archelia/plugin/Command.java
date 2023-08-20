@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import uk.mqchinee.archelia.Archelia;
 import uk.mqchinee.archelia.annotations.CommandInfo;
-import uk.mqchinee.archelia.commands.AbstractCommand;
+import uk.mqchinee.archelia.commands.AbstractArcheliaCommand;
 import uk.mqchinee.archelia.utils.TextUtils;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
         permission = "archelia.info",
         permission_message = "&cI'm sorry, but you do not have permission to perform this command."
 )
-public class Command extends AbstractCommand {
+public class Command extends AbstractArcheliaCommand {
 
     private List<Plugin> list;
 

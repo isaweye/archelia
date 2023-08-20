@@ -10,3 +10,6 @@ permissions:
     default: op
 commands:
   archelia: {}
+  testConsole: {}
+  testPlayer: {}
+  test: {}
