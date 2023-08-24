@@ -20,7 +20,8 @@ public class ArcheliaCommand implements CommandExecutor, TabCompleter {
     private final Map<String, ArcheliaSubcommand> subcommands;
 
     private BiConsumer<CommandSender, String[]> consumer = null;
-    private List<String> complete = null;
+    private BiConsumer<CommandSender, String[]> complete = null;
+    private List<String> completeList = null;
     private SenderFilter send_filter = SenderFilter.BOTH;
     private String send_filter_message = null;
     private String permission = null;
@@ -63,8 +64,13 @@ public class ArcheliaCommand implements CommandExecutor, TabCompleter {
      * @param list The list of tab completion suggestions.
      * @return This ArcheliaCommand instance.
      */
-    public ArcheliaCommand tabComplete(List<String> list) {
-        this.complete = list;
+    public ArcheliaCommand setList(List<String> list) {
+        this.completeList = list;
+        return this;
+    }
+
+    public ArcheliaCommand tabComplete(BiConsumer<CommandSender, String[]> tab) {
+        this.complete = tab;
         return this;
     }
 
@@ -178,7 +184,8 @@ public class ArcheliaCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return filter(this.complete, args);
+        this.complete.accept(sender, args);
+        return filter(this.completeList, args);
     }
 
     private List<String> filter(List<String> list, String[] args) {
