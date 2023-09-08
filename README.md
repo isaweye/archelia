@@ -1,10 +1,8 @@
-<p align="left">
-  <img src="docs/repository/banner.png"/>
-</p>
+# Archelia
 
 [![](https://jitpack.io/v/isaweye/archelia.svg)](https://jitpack.io/#isaweye/archelia)
 
-- **Maven**
+## Maven
 ```xml
 <repositories>
     <repository>
@@ -25,7 +23,7 @@
 ```
 
 
-- **Gradle**
+## Gradle
 ```groovy
 repositories {
     maven { url 'https://jitpack.io' }
