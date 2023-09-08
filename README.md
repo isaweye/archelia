@@ -12,7 +12,8 @@ Maven:
         <url>https://jitpack.io</url>
     </repository>
 </repositories>
-
+```
+```xml
 <dependencies>
     <dependency>
         <groupId>com.github.isaweye</groupId>
@@ -28,6 +29,8 @@ Gradle:
 repositories {
     maven { url 'https://jitpack.io' }
 }
+```
+```groovy
 dependencies {
     compileOnly "com.github.isaweye:archelia:{version}"
 }
