@@ -184,7 +184,9 @@ public class ArcheliaCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        this.complete.accept(sender, args);
+        if (this.complete != null) {
+            this.complete.accept(sender, args);
+        }
         return filter(this.completeList, args);
     }
 
