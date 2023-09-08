@@ -1,6 +1,6 @@
 # Archelia
 
-[![](https://jitpack.io/v/isaweye/archelia.svg)](https://jitpack.io/#isaweye/archelia)
+[![](https://jitpack.io/v/isaweye/archelia.svg)](https://jitpack.io/#isaweye/archelia) [![Archelia - Javadoc](https://img.shields.io/badge/Archelia-Javadoc-2ea44f)](https://jitpack.io/com/github/isaweye/archelia/latest/javadoc/)
 
 ## Maven
 ```xml
