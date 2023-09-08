@@ -4,7 +4,7 @@
 
 [![](https://jitpack.io/v/isaweye/archelia.svg)](https://jitpack.io/#isaweye/archelia)
 
-Maven:
+- **Maven**
 ```xml
 <repositories>
     <repository>
@@ -24,7 +24,7 @@ Maven:
 </dependencies>
 ```
 
-Gradle:
+- **Gradle**
 ```groovy
 repositories {
     maven { url 'https://jitpack.io' }
