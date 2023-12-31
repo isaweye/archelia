@@ -30,6 +30,12 @@ public class ItemBuilder implements Builder<ItemStack> {
         this.meta = item.getItemMeta();
     }
 
+    public ItemBuilder(Material material, int data) {
+        this.item = new ItemStack(material);
+        this.meta = item.getItemMeta();
+        meta.setCustomModelData(data);
+    }
+
     /**
      * Constructs an ItemBuilder with an existing ItemStack.
      *
@@ -56,6 +62,11 @@ public class ItemBuilder implements Builder<ItemStack> {
      */
     public ItemBuilder amount(int amount) {
         item.setAmount(amount);
+        return this;
+    }
+
+    public ItemBuilder data(int data) {
+        meta.setCustomModelData(data);
         return this;
     }
 
