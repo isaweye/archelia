@@ -44,7 +44,7 @@ public class SQLHandler {
 		}
 		if (rs != null)
 			return rs;
-		throw new IllegalStateException("Result set can not be null! SQLite API");
+		throw new IllegalStateException("Result set can not be null!");
 	}
 
 	public static void sqlUpdate(final String sql) {

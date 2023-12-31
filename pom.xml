@@ -6,7 +6,7 @@
 
     <groupId>uk.mqchinee</groupId>
     <artifactId>Archelia</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <packaging>jar</packaging>
 
     <name>Archelia</name>
