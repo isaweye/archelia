@@ -82,7 +82,7 @@ public class ScoreHelper {
         }
     }
 
-    private void setTabPrefixInternal(Player player, String prefix) {
+    public void setTabPrefixInternal(Player player, String prefix) {
         Team team = scoreboard.getTeam(player.getName());
         if (team == null) {
             team = scoreboard.registerNewTeam(player.getName());
@@ -103,7 +103,7 @@ public class ScoreHelper {
         }
     }
 
-    private void removeTabPrefixInternal(Player player) {
+    public void removeTabPrefixInternal(Player player) {
         Team team = scoreboard.getTeam(player.getName());
         if (team == null)
             return;
@@ -127,7 +127,7 @@ public class ScoreHelper {
         }
     }
 
-    private void setTabSuffixInternal(Player player, String suffix) {
+    public void setTabSuffixInternal(Player player, String suffix) {
         Team team = scoreboard.getTeam(player.getName());
         if (team == null) {
             team = scoreboard.registerNewTeam(player.getName());
@@ -148,7 +148,7 @@ public class ScoreHelper {
         }
     }
 
-    private void removeTabSuffixInternal(Player player) {
+    public void removeTabSuffixInternal(Player player) {
         Team team = scoreboard.getTeam(player.getName());
         if (team == null)
             return;

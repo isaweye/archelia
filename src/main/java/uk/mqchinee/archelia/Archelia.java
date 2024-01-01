@@ -3,6 +3,7 @@ package uk.mqchinee.archelia;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import uk.mqchinee.archelia.annotations.ArcheliaAddon;
@@ -10,6 +11,7 @@ import uk.mqchinee.archelia.commands.AbstractArcheliaSubcommand;
 import uk.mqchinee.archelia.impl.UpdateChecker;
 import uk.mqchinee.archelia.net.GHUpdateChecker;
 import uk.mqchinee.archelia.plugin.Command;
+import uk.mqchinee.archelia.scoreboard.tag.TagData;
 import uk.mqchinee.archelia.utils.TextUtils;
 
 import java.util.HashMap;
@@ -34,6 +36,9 @@ public final class Archelia extends JavaPlugin {
     @Getter
     private static Economy economy = null;
 
+    @Getter
+    private static HashMap<Player, TagData> tagData;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -44,6 +49,7 @@ public final class Archelia extends JavaPlugin {
         pluginLogger = this.getLogger();
         subcommands = new HashMap<>();
         addons = new HashMap<>();
+        tagData = new HashMap<>();
 
         new Command();
         if (vault()) {
