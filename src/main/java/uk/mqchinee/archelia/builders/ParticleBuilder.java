@@ -1,5 +1,6 @@
 package uk.mqchinee.archelia.builders;
 
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -15,6 +16,7 @@ import java.util.List;
  * A builder class for creating and customizing particles in a Bukkit environment.
  * @since 1.0
  */
+@Getter
 public class ParticleBuilder implements Builder<Integer> {
 
     private double offset_y = 0.1;
@@ -60,17 +62,9 @@ public class ParticleBuilder implements Builder<Integer> {
         return this;
     }
 
-    public Material getMaterialData() {
-        return materialData;
-    }
-
     public ParticleBuilder materialData(Material materialData) {
         this.materialData = materialData;
         return this;
-    }
-
-    public Particle.DustOptions getDustOptions() {
-        return dustOptions;
     }
 
     public ParticleBuilder dustOptions(Particle.DustOptions dustOptions) {
@@ -78,17 +72,9 @@ public class ParticleBuilder implements Builder<Integer> {
         return this;
     }
 
-    public double getSpeed() {
-        return speed;
-    }
-
     public ParticleBuilder speed(double speed) {
         this.speed = speed;
         return this;
-    }
-
-    public List<Player> getShowTo() {
-        return showTo;
     }
 
     public ParticleBuilder showTo(List<Player> showTo) {
@@ -96,21 +82,9 @@ public class ParticleBuilder implements Builder<Integer> {
         return this;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
     public ParticleBuilder location(Location location) {
         this.location = location;
         return this;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public Particle getParticle() {
-        return particle;
     }
 
     public ParticleBuilder particle(Particle particle) {
@@ -164,12 +138,15 @@ public class ParticleBuilder implements Builder<Integer> {
         switch (type) {
             case DUST:
                 dust(particle, location, count, offset_x, offset_y, offset_z, speed, dustOptions);
+                return 0;
             case ITEM:
                 ItemStack itemData = new ItemStack(materialData);
                 item(particle, location, count, offset_x, offset_y, offset_z, speed, itemData);
+                return 0;
             case BLOCK:
                 BlockData blockData = materialData.createBlockData();
                 block(particle, location, count, offset_x, offset_y, offset_z, speed, blockData);
+                return 0;
             case DEFAULT:
                 spawn(particle, location, count, offset_x, offset_y, offset_z, speed);
         }
