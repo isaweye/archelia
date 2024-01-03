@@ -16,6 +16,7 @@ public class TagData {
     private String prefix = null;
     private String suffix = null;
     private String weight = null;
+    private String color = null;
 
     public TagData(Player player) {
         this.player = player;
