@@ -211,15 +211,20 @@ public abstract class Ricochet {
     private void ricochet(Location loc) {
         BlockFace blockFace = face(loc);
         if (blockFace != null) {
-            Vector dir = new Vector(blockFace.getModX(), blockFace.getModY(), blockFace.getModZ());
-            dir = dir.multiply(direction.dot(dir)).multiply(2.0D);
+            Vector surfaceNormal = new Vector(blockFace.getModX(), blockFace.getModY(), blockFace.getModZ()).normalize();
+
+            Vector reflectedDirection = direction.subtract(surfaceNormal.multiply(2 * direction.dot(surfaceNormal))).normalize();
+
             if (now != max) {
-                setDirection(direction.subtract(dir).normalize().multiply(1));
+                setDirection(reflectedDirection);
                 now++;
+            } else {
+                stop();
+                onDestroy();
             }
-            else { stop(); onDestroy(); }
         }
     }
+
 
     private BlockFace face(Location loc) {
         World world = loc.getWorld();
