@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import uk.mqchinee.archelia.Archelia;
+import uk.mqchinee.archelia.utils.TextUtils;
 
 @Getter @Setter
 public class TagData {
@@ -27,8 +28,8 @@ public class TagData {
             scoreboard.getTeam(weight+player.getName()).unregister();
         }
         Team team = scoreboard.registerNewTeam(weight+player.getName());
-        if (prefix != null) { team.setPrefix(prefix); }
-        if (suffix != null) { team.setPrefix(suffix); }
+        if (prefix != null) { team.setPrefix(TextUtils.colorize(prefix)); }
+        if (suffix != null) { team.setSuffix(TextUtils.colorize(suffix)); }
         team.addEntry(player.getName());
     }
 
