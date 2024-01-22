@@ -1,5 +1,7 @@
 package uk.mqchinee.archelia.utils;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Consumer;
 import uk.mqchinee.archelia.enums.ComparingBy;
 
@@ -21,8 +23,8 @@ public class MapSorter {
      * @param comparator  The comparator to use for custom sorting of keys or values (optional).
      * @param entry       The action to be performed on each sorted Map.Entry.
      */
-    public void sort(Map map, int skip, int limit, ComparingBy comparingBy, Comparator comparator, Consumer<Map.Entry> entry) {
-        RunUtils.async(() -> {
+    public void sort(Map map, int skip, int limit, ComparingBy comparingBy, Comparator comparator, Consumer<Map.Entry> entry, Plugin plugin) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             switch (comparingBy) {
                 case KEY:
                     map.entrySet()
@@ -54,8 +56,8 @@ public class MapSorter {
      * @param comparingBy The Enum value indicating whether to sort by keys or values.
      * @param entry       The action to be performed on each sorted Map.Entry.
      */
-    public void sort(Map map, int skip, int limit, ComparingBy comparingBy, Consumer<Map.Entry> entry) {
-        RunUtils.async(() -> {
+    public void sort(Map map, int skip, int limit, ComparingBy comparingBy, Consumer<Map.Entry> entry, Plugin plugin) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             switch (comparingBy) {
                 case KEY:
                     map.entrySet()

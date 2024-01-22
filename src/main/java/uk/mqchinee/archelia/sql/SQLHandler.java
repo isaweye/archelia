@@ -1,12 +1,13 @@
 package uk.mqchinee.archelia.sql;
 
-import uk.mqchinee.archelia.Archelia;
+import lombok.Getter;
 
 import java.io.File;
 import java.sql.*;
 
 public class SQLHandler {
 
+	@Getter
 	private static Connection connection = null;
 	private static boolean debug = false;
 	private final String filePath;
@@ -22,22 +23,11 @@ public class SQLHandler {
 	}
 
 
-	public static Connection getConnection() {
-		return connection;
-	}
-
 	public static ResultSet sqlQuery(final String sql) {
-		if (debug)
-			Archelia.getPluginLogger().info("SQL QUERY: " + sql);
-
 		ResultSet rs = null;
 		try {
 			final Statement statement = connection.createStatement();
-			if (debug)
-				Archelia.getPluginLogger().info("EXECUTING: " + sql);
 			rs = statement.executeQuery(sql);
-			if (debug)
-				Archelia.getPluginLogger().info("SUCCESS: " + sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -48,14 +38,10 @@ public class SQLHandler {
 	}
 
 	public static void sqlUpdate(final String sql) {
-		if (debug)
-			Archelia.getPluginLogger().info("SQL UPDATE: " + sql);
 		try {
 			final PreparedStatement pstmt = SQLHandler.getConnection().prepareStatement(sql);
 			pstmt.executeUpdate();
 			pstmt.close();
-			if (debug)
-				Archelia.getPluginLogger().info("SUCCESS: " + sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

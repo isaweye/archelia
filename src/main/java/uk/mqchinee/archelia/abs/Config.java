@@ -1,9 +1,11 @@
 package uk.mqchinee.archelia.abs;
 
+import lombok.Getter;
 import lombok.SneakyThrows;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import uk.mqchinee.archelia.utils.RunUtils;
+import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.util.Objects;
@@ -17,6 +19,13 @@ import java.util.function.Consumer;
 public class Config {
 
     private final FileConfiguration configuration;
+    /**
+     * -- GETTER --
+     *  Retrieves the file associated with this Config.
+     *
+     * @return The file associated with this Config.
+     */
+    @Getter
     private final File file;
 
     /**
@@ -74,34 +83,11 @@ public class Config {
      *
      * @param path   The path to set the value at.
      * @param value  The value to set.
-     * @param async  Whether to save the configuration asynchronously.
-     * @return The Config instance.
-     */
-    public Config set(String path, Object value, boolean async) {
-        if (!async) {
-            this.configuration.set(path, value);
-            save();
-            return this;
-        }
-        RunUtils.async(() -> {
-            this.configuration.set(path, value);
-            save();
-        });
-        return this;
-    }
-
-    /**
-     * Sets a configuration value at the specified path, saving the configuration asynchronously.
-     *
-     * @param path  The path to set the value at.
-     * @param value The value to set.
      * @return The Config instance.
      */
     public Config set(String path, Object value) {
-        RunUtils.async(() -> {
-            this.configuration.set(path, value);
-            save();
-        });
+        this.configuration.set(path, value);
+        save();
         return this;
     }
 
@@ -111,8 +97,8 @@ public class Config {
      * @param path  The path to retrieve the value from.
      * @param value The consumer to receive the retrieved value.
      */
-    public void get(String path, Consumer<Object> value) {
-        RunUtils.async(() -> value.accept(this.configuration.get(path)));
+    public void get(Plugin plugin, String path, Consumer<Object> value) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> value.accept(this.configuration.get(path)));
     }
 
     /**
@@ -123,12 +109,4 @@ public class Config {
         this.configuration.save(file);
     }
 
-    /**
-     * Retrieves the file associated with this Config.
-     *
-     * @return The file associated with this Config.
-     */
-    public File getFile() {
-        return file;
-    }
 }

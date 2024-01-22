@@ -5,7 +5,6 @@ import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
-import uk.mqchinee.archelia.Archelia;
 import uk.mqchinee.archelia.annotations.CommandInfo;
 import uk.mqchinee.archelia.annotations.Subcommand;
 import uk.mqchinee.archelia.annotations.SubcommandContainer;
@@ -47,7 +46,7 @@ public abstract class AbstractArcheliaCommand implements CommandExecutor, TabCom
 
         if (this.getClass().isAnnotationPresent(SubcommandContainer.class)) {
            List<Subcommand> n = List.of(this.getClass().getAnnotation(SubcommandContainer.class).value());
-           n.forEach((name) -> subcommand(Archelia.getSubcommands().get(name.value())));
+           n.forEach((name) -> subcommand(SubcommandManager.getSubcommands().get(name.value())));
         }
 
     }

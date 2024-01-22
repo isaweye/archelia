@@ -4,9 +4,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import uk.mqchinee.archelia.impl.UpdateChecker;
-import uk.mqchinee.archelia.utils.RunUtils;
 import uk.mqchinee.archelia.utils.TextUtils;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class GHUpdateChecker implements UpdateChecker {
     @Getter @Setter private Runnable onFailure;
     @Getter @Setter private Runnable onLatest;
     @Getter @Setter private List<String> description;
+    @Getter @Setter private Plugin plugin;
 
     /**
      * Constructs a new GHUpdateChecker with the provided user, repository, and current version.
@@ -54,6 +56,7 @@ public class GHUpdateChecker implements UpdateChecker {
         this.setUser(user);
         this.setRepository(repository);
         this.setVersion(plugin.getDescription().getVersion());
+        this.setPlugin(plugin);
     }
 
     private URLConnection getConnection() {
@@ -76,7 +79,7 @@ public class GHUpdateChecker implements UpdateChecker {
     }
 
     private void getData(Consumer<String> result) {
-        RunUtils.async(() -> {
+        Bukkit.getScheduler().runTaskAsynchronously(getPlugin(), () -> {
             URLConnection connection = getConnection();
             String tag = null;
             try {

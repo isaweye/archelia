@@ -73,6 +73,29 @@ public class Cooldown {
     }
 
     /**
+     * Retrieves the time left in milliseconds for the given UUID's cooldown on the specified cooldown name.
+     *
+     * @param id           The UUID for which to retrieve the cooldown time left.
+     * @param cooldownName The name of the cooldown to retrieve.
+     * @return An array where index 0 is the time left in milliseconds and index 1 is the total duration in milliseconds.
+     *         If not in cooldown, both indices will be -1.
+     */
+    public static long[] getTimeLeftInMilliseconds(UUID id, String cooldownName) {
+        Cooldown cooldown = getCooldown(id, cooldownName);
+        long[] result = {-1, -1};
+        if (cooldown != null) {
+            long now = System.currentTimeMillis();
+            long cooldownTime = cooldown.start;
+            int totalTime = cooldown.timeInSeconds * 1000;
+            long elapsedTime = now - cooldownTime;
+            long timeLeft = Math.max(totalTime - elapsedTime, 0);
+            result[0] = timeLeft;
+            result[1] = totalTime;
+        }
+        return result;
+    }
+
+    /**
      * Starts the cooldown for the associated UUID and cooldown name.
      */
     public void start() {

@@ -1,8 +1,8 @@
 package uk.mqchinee.archelia.abs;
 
 import lombok.Getter;
-import uk.mqchinee.archelia.enums.Time;
-import uk.mqchinee.archelia.utils.RunUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * Represents a chain of tasks to be executed with specified delays.
  */
+@Getter
 public class TaskChain {
 
-    @Getter
     private final List<Task> tasks = new ArrayList<>();
 
     /**
@@ -28,9 +28,9 @@ public class TaskChain {
     /**
      * Starts the task chain, executing each task with its specified delay.
      */
-    public void start() {
-        tasks.forEach(task ->
-                RunUtils.runLater(task.runnable(), task.ticks(), Time.IN_TICKS)
-        );
+    public void start(Plugin plugin) {
+        tasks.forEach(task -> {
+            Bukkit.getScheduler().runTaskLater(plugin, task.runnable(), task.ticks());
+        });
     }
 }
