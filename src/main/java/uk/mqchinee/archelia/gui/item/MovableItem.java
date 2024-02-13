@@ -72,8 +72,8 @@ public class MovableItem extends MenuItem {
      * </p>
      */
     public void parse(boolean path) {
+        int char_no = 0;
         if (!path) {
-            int char_no = 0;
             for (int i = 0; i < menu.getRows(); i++) {
                 for (char ch : getStructure()[i].replace(" ", "").toCharArray()) {
                     if (ch == '%') {
@@ -84,7 +84,6 @@ public class MovableItem extends MenuItem {
             }
             this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
         } else {
-            int char_no = 0;
             for (int i = 0; i < menu.getRows(); i++) {
                 for (String str : getStructure()[i].split(" ")) {
                     if (!Objects.equals(str, "#")) {
