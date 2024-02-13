@@ -8,6 +8,7 @@ import uk.mqchinee.archelia.gui.ChestMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
@@ -56,11 +57,11 @@ public class MovableItem extends MenuItem {
         this.reverse = reverse;
     }
 
-    private MovableItem(@NonNull ItemStack item, int speed, ChestMenu menu, boolean reverse, String... structure) {
+    private MovableItem(@NonNull ItemStack item, int speed, ChestMenu menu, boolean reverse, boolean path, String... structure) {
         super(item);
         this.menu = menu;
         this.structure = structure;
-        parse();
+        parse(path);
         this.current = this.slots[0];
         this.speed = speed;
         this.reverse = reverse;
@@ -75,17 +76,28 @@ public class MovableItem extends MenuItem {
      * placed. The method calculates the slots based on the structure and stores them in the slots array.
      * </p>
      */
-    public void parse() {
-        int char_no = 0;
-        for (int i = 0; i < menu.getRows(); i++) {
-            for (char ch : getStructure()[i].replace(" ", "").toCharArray()) {
-                if (ch == '%') {
-                    structureSlots.add(char_no);
+    public void parse(boolean path) {
+        if (!path) {
+            int char_no = 0;
+            for (int i = 0; i < menu.getRows(); i++) {
+                for (char ch : getStructure()[i].replace(" ", "").toCharArray()) {
+                    if (ch == '%') {
+                        structureSlots.add(char_no);
+                    }
+                    char_no++;
                 }
-                char_no++;
+            }
+            this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
+        } else {
+            for (int i = 0; i < menu.getRows(); i++) {
+                for (String str : getStructure()[i].split(" ")) {
+                    if (!Objects.equals(str, "#")) {
+                        this.slots[Integer.parseInt(str)] = Integer.parseInt(str);
+                    }
+                }
             }
         }
-        this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
+
     }
 
     @Override
@@ -150,8 +162,8 @@ public class MovableItem extends MenuItem {
      * @param structure The structure string representing the grid-based layout of the GUI.
      * @return The created MovableItem instance.
      */
-    public static MovableItem create(@NonNull ItemStack item, int speed, ChestMenu menu, boolean reverse, String... structure) {
-        return new MovableItem(item, speed, menu, reverse, structure);
+    public static MovableItem create(@NonNull ItemStack item, int speed, ChestMenu menu, boolean reverse, boolean path, String... structure) {
+        return new MovableItem(item, speed, menu, reverse, path, structure);
     }
 
     @Override
