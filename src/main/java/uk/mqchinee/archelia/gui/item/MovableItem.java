@@ -87,18 +87,16 @@ public class MovableItem extends MenuItem {
                     char_no++;
                 }
             }
-            this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
         } else {
-            this.slots = new int[]{};
             for (int i = 0; i < menu.getRows(); i++) {
                 for (String str : getStructure()[i].split(" ")) {
                     if (!Objects.equals(str, "#")) {
-                        this.slots[Integer.parseInt(str)] = Integer.parseInt(str);
+                        structureSlots.add(Integer.parseInt(str));
                     }
                 }
             }
         }
-
+        this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
     }
 
     @Override
