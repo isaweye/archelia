@@ -89,6 +89,7 @@ public class MovableItem extends MenuItem {
             }
             this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
         } else {
+            this.slots = new int[]{};
             for (int i = 0; i < menu.getRows(); i++) {
                 for (String str : getStructure()[i].split(" ")) {
                     if (!Objects.equals(str, "#")) {
