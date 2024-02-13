@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import uk.mqchinee.archelia.gui.ChestMenu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -41,30 +42,24 @@ public class MovableItem extends MenuItem {
     @Setter
     private MenuItem background = null;
     @Getter
-    private String[] structure;
+    private final String[] structure;
+    private final HashMap<Integer, Integer> pathMap = new HashMap<>();
     private final List<Integer> structureSlots = new ArrayList<>();
     private final boolean reverse;
     @Getter
     @Setter
     private Consumer<MovableItem> onReverse;
-
-    private MovableItem(@NonNull ItemStack item, int[] slots, int speed, ChestMenu menu, boolean reverse) {
-        super(item);
-        this.menu = menu;
-        this.slots = slots;
-        this.current = slots[0];
-        this.speed = speed;
-        this.reverse = reverse;
-    }
+    private final boolean path;
 
     private MovableItem(@NonNull ItemStack item, int speed, ChestMenu menu, boolean reverse, boolean path, String... structure) {
         super(item);
         this.menu = menu;
         this.structure = structure;
         parse(path);
-        this.current = this.slots[0];
+        this.current = 0;
         this.speed = speed;
         this.reverse = reverse;
+        this.path = path;
     }
 
     /**
@@ -87,62 +82,64 @@ public class MovableItem extends MenuItem {
                     char_no++;
                 }
             }
+            this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
         } else {
+            int char_no = 0;
             for (int i = 0; i < menu.getRows(); i++) {
                 for (String str : getStructure()[i].split(" ")) {
                     if (!Objects.equals(str, "#")) {
-                        structureSlots.add(Integer.parseInt(str));
+                        pathMap.put(Integer.parseInt(str), char_no);
                     }
+                    char_no++;
                 }
             }
+            this.slots = new int[]{};
         }
-        this.slots = (structureSlots.stream().mapToInt(Integer::intValue).toArray());
     }
 
     @Override
     public boolean update() {
         total--;
-        if (total <= 0) {
-            n++;
-            if (getBackground() == null) {
-                menu.removeItem(current);
-            } else {
-                menu.setItem(background, current);
-            }
-            if (n == slots.length) {
-                if (reverse) {
-                    this.slots = IntStream.rangeClosed(1, slots.length).map(i -> slots[slots.length - i]).toArray();
-                    if (getOnReverse() != null) {
-                        onReverse.accept(this);
-                    }
+        if (!path) {
+            if (total <= 0) {
+                n++;
+                if (getBackground() == null) {
+                    menu.removeItem(current);
+                } else {
+                    menu.setItem(background, current);
                 }
-                n = 0;
+                if (n == slots.length) {
+                    if (reverse) {
+                        this.slots = IntStream.rangeClosed(1, slots.length).map(i -> slots[slots.length - i]).toArray();
+                        if (getOnReverse() != null) {
+                            onReverse.accept(this);
+                        }
+                    }
+                    n = 0;
+                }
+                current = slots[n];
+                menu.setItem(this, current);
+                total = speed;
+                return true;
             }
-            current = slots[n];
-            menu.setItem(this, current);
-            total = speed;
-            return true;
+        } else {
+            if (total <= 0) {
+                n++;
+                if (getBackground() == null) {
+                    menu.removeItem(current);
+                } else {
+                    menu.setItem(background, current);
+                }
+                if (n == pathMap.size()) {
+                    n = 0;
+                }
+                current = pathMap.get(n);
+                menu.setItem(this, current);
+                total = speed;
+                return true;
+            }
         }
         return false;
-    }
-
-    /**
-     * Create a movable item with custom slots and movement speed.
-     * <p>
-     * This method creates a movable item with custom slots and movement speed. The item will move through the provided slots
-     * in the order specified by the array. The movement speed determines the rate at which the item updates its position in
-     * the GUI.
-     * </p>
-     *
-     * @param item   The ItemStack representing the item.
-     * @param slots  An array of slots representing the movement sequence of the item.
-     * @param speed  The movement speed of the item.
-     * @param menu   The ChestMenu containing the item.
-     * @param reverse Whether the item's movement should be reversed after completing one cycle.
-     * @return The created MovableItem instance.
-     */
-    public static MovableItem create(@NonNull ItemStack item, int[] slots, int speed, ChestMenu menu, boolean reverse) {
-        return new MovableItem(item, slots, speed, menu, reverse);
     }
 
     /**
@@ -167,7 +164,7 @@ public class MovableItem extends MenuItem {
 
     @Override
     public MenuItem copy() {
-        return create(this.getItem().clone(), getSlots(), getSpeed(), getMenu(), this.reverse)
+        return create(this.getItem().clone(), getSpeed(), getMenu(), this.reverse, this.path, this.structure)
                 .setOnPrimary(this.getOnPrimary())
                 .setOnMiddle(this.getOnMiddle())
                 .setOnSecondary(this.getOnSecondary())
